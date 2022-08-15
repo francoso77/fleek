@@ -1,0 +1,41 @@
+iniciar um projeto novo
+
+crie a pasta 
+
+dentro dela
+
+npm init -y   ----> para criar o packge.json
+
+tsc --init    ----> para criar o tsconfig.json
+
+para configurar esses 2 arquivos use o vscode
+
+code .        ----> abre o vscode na pasta em q vc estiver
+
+tsconfig
+{
+    "compilerOptions": {
+       "target": "ES6",
+       "module": "commonjs", //ou module para usar o export e import
+       //"check": true,   para checar o javaescript
+       "outDir": "dist",
+       "esModuleInterop": true,
+       "forceConsistentCasingInFileNames": true,
+       "strict": true,
+       "skipLibCheck": true,
+       "sourceMap": true
+    },
+    "include": [
+        "src/**/*.ts", "src/**/*.json"
+    ],
+    "exclude": [
+        "src/**/node_modules", "node_modules"
+    ]
+ }
+
+vai criar uma pasta para trabalho
+copie os arquivo packge.json e tsconfig 
+pelo prompt entre na nova pasta
+e digite
+npm i
+
