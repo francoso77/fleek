@@ -15,6 +15,8 @@
     "luxon": "^3.0.1"
   },
   "devDependencies": {
-    "@types/node": "^18.7.6"
+    "@types/line-reader": "^0.0.34",
+    "@types/node": "^18.7.6",
+    "line-reader": "^0.4.0"
   }
 }
