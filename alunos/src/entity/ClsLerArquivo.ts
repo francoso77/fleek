@@ -6,19 +6,22 @@ const MEDIA_APROVACAO: number = 7
 
 
 export default class ClsLeituraArquivo {
-    constructor(private nomeArquivo: string) { }
+    //constructor(private nomeArquivo: string) { }
 
-    private rsAlunos: Array<AlunoInterface> = []
+    public rsAlunos: Array<AlunoInterface> = []
 
-    public lerArquivo(): boolean {
+    public lerArquivo(nomeArquivo: string): Promise<boolean> {
 
-        fs.readFile(this.nomeArquivo).then((conteudo) => {
+        return fs.readFile(nomeArquivo).then((conteudo) => {
 
             let tmpConteudo: Array<string> = conteudo.toString().split(SEPARADOR_DE_REGISTRO)
             this.divideColuna(tmpConteudo)
-
+            return true
         })
-        return true
+        .catch (err => {
+            return false
+        })
+        
     }
 
     private divideColuna(dadosGeral: Array<string>): void {
@@ -30,23 +33,24 @@ export default class ClsLeituraArquivo {
         })
     }
 
-    private populaBoletim(ArrayDados: Array<string>): void {
-
-        for (let i: number = 0; ArrayDados.length > i; i++) {
+    private populaBoletim(arrayDados: Array<string>): void {
+        
+        for (let i: number = 0; arrayDados.length > i; i++) {
             let tmpBoletim: AlunoInterface = {
-                matricula: parseInt(ArrayDados[0]),
-                nomeAluno: ArrayDados[1],
-                nota1: parseFloat(ArrayDados[2]),
-                nota2: parseFloat(ArrayDados[3]),
-                nota3: parseFloat(ArrayDados[4]),
-                notaFinal: this.caclulaMedia(parseFloat(ArrayDados[2]), parseFloat(ArrayDados[3]), parseFloat(ArrayDados[4])),
+                matricula: parseInt(arrayDados[0]),
+                nomeAluno: arrayDados[1],
+                nota1: parseFloat(arrayDados[2]),
+                nota2: parseFloat(arrayDados[3]),
+                nota3: parseFloat(arrayDados[4]),
+                notaFinal: this.caclulaMedia(parseFloat(arrayDados[2]), parseFloat(arrayDados[3]), parseFloat(arrayDados[4])),
                 status: ''
             }
 
             tmpBoletim.status = tmpBoletim.notaFinal >= MEDIA_APROVACAO ? 'Aprovado' : 'Reprovado'
             this.rsAlunos.push(tmpBoletim)
+            this.rsAlunos.sort()
+        
         }
-        console.log(this.rsAlunos)
     }
 
     private caclulaMedia(n1: number, n2: number, n3: number): number {
@@ -54,6 +58,4 @@ export default class ClsLeituraArquivo {
         return parseFloat(((n1 + n2 + n3) / 3).toFixed(2))
 
     }
-
-
 }
