@@ -1,6 +1,6 @@
 export interface AlunoInterface
 {
-    matricula: string
+    matricula: number
     nomeAluno: string
     nota1: number
     nota2: number
