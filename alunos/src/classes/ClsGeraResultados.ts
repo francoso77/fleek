@@ -45,7 +45,7 @@ export default class clsGeraResultados
         console.log('*****************************************************\n\n')
         console.log('Quantidade Total de Alunos: ', totalAlunosAprovados + totalAlunosReprovados)
         console.log('Quantidade de Alunos Apravodos: ', totalAlunosAprovados)
-        console.log('Quantidade de Alunos Repravodos: ', totalAlunosReprovados)
+        console.log('Quantidade de Alunos Reprovodos: ', totalAlunosReprovados)
         console.log('Maior Média de notas: ', NOTAS[NOTAS.length-2])
         console.log('Menor Média de notas: ', NOTAS[0])
         console.log('\n\n*****************************************************')
