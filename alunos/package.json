@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@types/line-reader": "^0.0.34",
-    "@types/node": "^18.7.6",
+    "@types/node": "^18.7.8",
     "line-reader": "^0.4.0"
   }
 }

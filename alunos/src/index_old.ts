@@ -1,4 +1,4 @@
-import ClsLeituraArquivo from "./entity/ClsLerArquivo";
+import ClsLeituraArquivo from "./classes/ClsLerArquivo";
 import { AlunoInterface } from "./interfaces/AlunoInterfaces";
 
 
