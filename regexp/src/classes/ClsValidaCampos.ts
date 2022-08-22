@@ -4,6 +4,7 @@ const expCPF: RegExp = new RegExp('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$', 'g')
 const expCNPJ: RegExp = new RegExp('^[0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2}$', 'g')
 const expSEXO: RegExp = new RegExp('^[a -z]{1}$', 'gi')
 const expEMAIL: RegExp = new RegExp(/\S+@\S+\.\S+/, 'gi')
+const expINTEIRO: RegExp = new RegExp('^\d+(,\d{1,2})?$')
 const arrSEXO: Array<string> = ['m', 'f', 'i']
 
 
@@ -74,6 +75,12 @@ export default class ClsValidaCampo {
     {
 
         return expEMAIL.test(_eEMAIL) ? true : false
+    }
+
+    public eINTEIRO(_eINTEIRO: string): boolean
+    {
+        return expINTEIRO.test(_eINTEIRO)? true : false
+
     }
     
     private validaCPF(tmp_eCPF: string): boolean {
