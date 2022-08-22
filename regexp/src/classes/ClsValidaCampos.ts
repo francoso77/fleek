@@ -4,7 +4,8 @@ const expCPF: RegExp = new RegExp('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$', 'g')
 const expCNPJ: RegExp = new RegExp('^[0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2}$', 'g')
 const expSEXO: RegExp = new RegExp('^[a -z]{1}$', 'gi')
 const expEMAIL: RegExp = new RegExp(/\S+@\S+\.\S+/, 'gi')
-const expINTEIRO: RegExp = new RegExp('^\d+(,\d{1,2})?$')
+const expINTEIRO: RegExp = new RegExp(/^\d+(,\d{1,3})?$/)
+const expPERCENTUAL: RegExp = new RegExp(/^[0-9]*(,\d{1,3})?%$/)
 const arrSEXO: Array<string> = ['m', 'f', 'i']
 
 
@@ -37,52 +38,158 @@ const arrUF: Array<string> = [
     'SE',
     'TO',
 ]
+/**
+ * Valida os campos de acordo com seus formatos em Regex
+ */
 export default class ClsValidaCampo {
-    public eCEP(_eCEP: string): boolean {
-        return expCEP.test(_eCEP) ? true : false
-    }
+    /**
+     * Valida o campo CEP
+     * @param _eCEP string
+     * @returns Retorna se o campo CEP está correto 
+     */
 
-    public eUF(_eUF: string): boolean {
-        let aux_uf: string = _eUF.toUpperCase()
-        if (!arrUF.includes(aux_uf) || expUF.test(_eUF) == false) {
+    public eCEP(_eCEP: string): boolean {
+
+        if (this.campoVazio(_eCEP) == true) {
             return false
         }
         else {
-            return true
+            return expCEP.test(_eCEP) ? true : false
         }
     }
 
-    public eCPF(_eCPF: string): boolean {
-        return this.validaCPF(_eCPF) && expCPF.test(_eCPF) ? true : false
-    }
-
-    public eCNPJ(_eCNPJ: string): boolean {
-        return this.validarCNPJ(_eCNPJ) && expCNPJ.test(_eCNPJ) ? true : false
-    }
-
-    public eSEXO(_eSEXO: string): boolean {
-        if (!arrSEXO.includes(_eSEXO) || expSEXO.test(_eSEXO) == false)
+    /**
+     * Valida o campo UF
+     * @param _eUF string
+     * @returns Retorna se o campo UF está correto
+     */
+    public eUF(_eUF: string): boolean {
+        if (this.campoVazio(_eUF) == true)
         {
             return false
         }
         else
         {
-            return true
+            let aux_uf: string = _eUF.toUpperCase()
+            if (!arrUF.includes(aux_uf) || expUF.test(_eUF) == false) {
+                return false
+            }
+            else {
+                return true
+            }
         }
     }
 
-    public eEMAIL(_eEMAIL: string): boolean
-    {
-
-        return expEMAIL.test(_eEMAIL) ? true : false
+    /**
+     * Valida o campo CPF e verifica se é um CPF válido
+     * @param _eCPF string
+     * @returns Retorna se o campo CPF está correto
+     */
+    public eCPF(_eCPF: string): boolean {
+        if (this.campoVazio(_eCPF) == true)
+        {
+            return false
+        }
+        else
+        {
+            return this.validaCPF(_eCPF) && expCPF.test(_eCPF) ? true : false
+        }
     }
 
-    public eINTEIRO(_eINTEIRO: string): boolean
-    {
-        return expINTEIRO.test(_eINTEIRO)? true : false
+    /**
+     * Valida o campo CNPJ e verifica se é um CNPJ válido
+     * @param _eCNPJ string
+     * @returns Retorna se o campo CNPJ está correto
+     */
+    public eCNPJ(_eCNPJ: string): boolean {
+        if (this.campoVazio(_eCNPJ) == true)
+        {
+            return false
+        }
+        else
+        {
+            return this.validarCNPJ(_eCNPJ) && expCNPJ.test(_eCNPJ) ? true : false
+        }
+    }
+
+    /**
+     * Valida o campo SEXO
+     * @param _eSEXO string
+     * @returns Retorna se o campo SEXO está correto
+     */
+    public eSEXO(_eSEXO: string): boolean {
+        if (this.campoVazio(_eSEXO) == true)
+        {
+            return false
+        }
+        else
+        {
+            if (!arrSEXO.includes(_eSEXO) || expSEXO.test(_eSEXO) == false) {
+                return false
+            }
+            else {
+                return true
+            }
+        }
+    }
+
+    /**
+     * Valida o campo E-mail 
+     * @param _eEMAIL string
+     * @returns Retorna se o campo tem um E-mail correto
+     */
+    public eEMAIL(_eEMAIL: string): boolean {
+
+        if (this.campoVazio(_eEMAIL) == true)
+        {
+            return false
+        }
+        else
+        {
+            return expEMAIL.test(_eEMAIL) ? true : false
+        }
+    }
+
+    /**
+     * Valida se o campo é um número inteiro ou decimal
+     * @param _eINTEIRO string
+     * @returns Retorna se é um número inteiro ou decimal correto
+     */
+    public eINTEIRO(_eINTEIRO: string): boolean {
+        if (this.campoVazio(_eINTEIRO) == true)
+        {
+            return false
+        }
+        else
+        {
+            return expINTEIRO.test(_eINTEIRO) ? true : false
+        }
 
     }
-    
+
+    /**
+     * Valida se o campo tem um valor PERCENTUAL
+     * @param _ePERCENTUAL string
+     * @returns Retorna se o campo tem um PERCENTUAL correto
+     */
+    public ePERCENTUAL(_ePERCENTUAL: string): boolean {
+
+        if (this.campoVazio(_ePERCENTUAL) == true)
+        {
+            return false
+        }
+        else
+        {
+            return expPERCENTUAL.test(_ePERCENTUAL) ? true : false
+        }
+    }
+
+    /*
+     * Faz um verifricação de um CPF
+     * @param tmp_eCPF string
+     * @returns Retorna se o CPF é válido
+     */
+
     private validaCPF(tmp_eCPF: string): boolean {
         let cpf: string = tmp_eCPF.trim()
         cpf = cpf.replace(/\./g, '')
@@ -127,6 +234,11 @@ export default class ClsValidaCampo {
         }
     }
 
+    /**
+     * Faz a verificação de um CNPJ
+     * @param tmp_eCNPJ string
+     * @returns Retorna se o CNPJ é Válido
+     */
     private validarCNPJ(tmp_eCNPJ: string): boolean {
 
         var cnpj: string = tmp_eCNPJ.trim()
@@ -162,6 +274,19 @@ export default class ClsValidaCampo {
         else {
             v1 = 0
             v2 = 0
+            return false
+        }
+    }
+    /**
+     * Verificar se o campo está vazio
+     * @param tmpValor string
+     * @returns Retorna true ou false 
+     */
+    private campoVazio(tmpValor: string): boolean {
+        if (tmpValor == '' || tmpValor == null || tmpValor == undefined) {
+            return true
+        }
+        else {
             return false
         }
     }
