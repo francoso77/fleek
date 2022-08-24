@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html ling="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Canvas</title>
+        <script type="application/javascript">
+            function drawTriangulo() {
+                var canvas = document.getElementById('triangulo');
+                if (canvas.getContext){
+                  var ctx = canvas.getContext('2d');
+              
+                  ctx.beginPath();
+                  ctx.moveTo(37.5,25);
+                  ctx.lineTo(50,37.5);
+                  ctx.lineTo(50,12.5);
+                  ctx.fill();
+                }
+            }
+            
+            function drawRetangulo() {
+                var canvas = document.getElementById('retangulo');
+                if (canvas.getContext) {
+                  var ctx = canvas.getContext('2d');
+              
+                  ctx.fillRect(12.5, 12.5, 50, 50);
+                  ctx.clearRect(22.5, 22.5, 30, 30);
+                  ctx.strokeRect(25, 25, 25, 25);
+                }
+            } 
+            
+            function drawEspelhado() {
+                var canvas = document.getElementById('espelhado');
+                if (canvas.getContext){
+                  var ctx = canvas.getContext('2d');
+              
+                  // Filled triangle
+                  ctx.beginPath();
+                  ctx.moveTo(12.5,12.5);
+                  ctx.lineTo(52.5,12.5);
+                  ctx.lineTo(12.5,52.5);
+                  ctx.fill();
+              
+                  // Stroked triangle
+                  ctx.beginPath();
+                  ctx.moveTo(62.5,62.5);
+                  ctx.lineTo(62.5,22.5);
+                  ctx.lineTo(22.5,62.5);
+                  ctx.closePath();
+                  ctx.stroke();
+                }
+            }
+            
+            function drawCoracao() {
+                var canvas = document.getElementById('coracao');
+                if (canvas.getContext){
+                  var ctx = canvas.getContext('2d');
+              
+                  // Exemplo de curvas de Bézier cúbicas
+                  ctx.beginPath();
+                  ctx.moveTo(37.5,20);
+                  ctx.bezierCurveTo(37.5,18.5,35,12.5,25,12.5);
+                  ctx.bezierCurveTo(10,12.5,10,31.25,10,31.25);
+                  ctx.bezierCurveTo(10,40,20,51,37.5,60);
+                  ctx.bezierCurveTo(55,51,65,40,60,31.25);
+                  ctx.bezierCurveTo(65,31.25,65,12.5,50,12.5);
+                  ctx.bezierCurveTo(42.5,12.5,37.5,18.5,37.5,20);
+                  ctx.fill();
+                }
+            }
+            
+            function drawCicrulo() {
+                var canvas = document.getElementById('circulo');
+                if (canvas.getContext){
+                  var ctx = canvas.getContext('2d');
+              
+                  for(var i=0;i<4;i++){
+                    for(var j=0;j<3;j++){
+                      ctx.beginPath();
+                      var x              = 12.5+j*25;               // coordenada x
+                      var y              = 12.5+i*25;               // coordenada y
+                      var radius         = 10;                    // Raio do Arco
+                      var startAngle     = 0;                     // Ponto inicial no círculo
+                      var endAngle       = Math.PI+(Math.PI*j)/2; // Ponto final no círculo
+                      var anticlockwise  = i%2==0 ? false : true; // horário ou anti-horário
+              
+                      ctx.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+              
+                      if (i>1){
+                        ctx.fill();
+                      } else {
+                        ctx.stroke();
+                      }
+                    }
+                  }
+                }
+            }
+        </script>
+    </head>
+    <body onload="drawTriangulo(), drawRetangulo(), drawEspelhado(), drawCoracao(), drawCirculo();">
+        <canvas id="tringulo" width="150" height="150"></canvas>
+        <canvas id="espelhado" width="150" height="150"></canvas>
+        <canvas id="retangulo" width="150" height="150"></canvas>
+        <canvas id="coracao" width="150" height="150"></canvas>
+        <canvas id="circulo" width="150" height="150"></canvas>
+
+    </body>
+</html>
+
+

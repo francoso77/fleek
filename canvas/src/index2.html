@@ -1,65 +1,73 @@
 <!DOCTYPE html>
 <html>
  <head>
-  <script type="application/javascript">
-    /*function draw() {
-      var canvas = document.getElementById("canvas");
-      if (canvas.getContext) {
-        var ctx = canvas.getContext("2d");
+  <title>Usando canvas para fazer e movimentar figuras</title>
+  <!--<script src="./scripts.js" type="application/javascript"></script>-->
+  <link href="./estilos.css" rel="stylesheet">
+  </head>
 
-        ctx.fillStyle = "rgb(200,0,0)";
-        ctx.fillRect (10, 10, 55, 50);
-
-        ctx.fillStyle = "rgba(0, 0, 200, 0.5)";
-        ctx.fillRect (30, 30, 55, 50);
-      }
-    }*/
-    function draw1() {
-        var canvas = document.getElementById('canvas1');
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-
-        ctx.fillRect(25, 25, 100, 100);
-        ctx.clearRect(45, 45, 60, 60);
-        ctx.strokeRect(50, 50, 50, 50);
-        }
-    }
-
-    function draw2() {
-        var canvas = document.getElementById('canvas2');
-        if (canvas.getContext){
-            var ctx = canvas.getContext('2d');
-
-        ctx.beginPath();
-        ctx.moveTo(75,50);
-        ctx.lineTo(120,75);
-        ctx.lineTo(100,25);
-        ctx.fill();
-        }
-    }
-    function draw3() {
-        var canvas = document.getElementById('canvas3');
-        if (canvas.getContext) {
-            var ctx = canvas.getContext('2d');
-
-        ctx.beginPath();
-        ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Círculo exterior
-        ctx.moveTo(110, 75);
-        ctx.arc(75, 65, 25, 0, Math.PI, false);  // Boca (sentido horário)
-        ctx.moveTo(65, 65);
-        ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Olho esquerdo
-        ctx.moveTo(95, 65);
-        ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Olho direito
-        ctx.stroke();
-        }
-    }
-
+ <body onload="loop()">
+  <div name="areaDesenho">
+    <canvas class="telaFundo" id="tela" width="600" height="400" style="cursor: -webkit-grab; cursor: -moz-grab;"></canvas>
+    <canvas class="barraFerramentas" id="barra" width="100" height="400"></canvas>
+  </div> 
+  <script>
+    
+    var retangulo = {
+      x: 10,
+      y: 10,
+      a: 50,
+      l: 50,
+      held: false,
+      area: retangulo.a * retangulo.l
+  }
+  
+  var bola = {
+      radius: 20,
+      vx: 0,
+      vy: 0,
+      x: 30,
+      y: 30,
+      color: 'red',
+      held: false
+  }
+  
+  var catX = catY = hyp = 0
+  const UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39
+  var cnvTelaPrincipal = document.getElementById('tela')
+  var cnvBarraFerramentas = document.getElementById('barra')
+  var ctxTela = cnvTelaPrincipal.getContext('2d')
+  var ctxBarra = cnvBarraFerramentas.getContext('2d')
+  
+  function loop()
+  {
+      window.requestAnimationFrame(loop);
+      update();
+      render();
+  }
+  
+  function update()
+  {
+  
+  }
+  
+  function render()
+  {
+      ctxTela.clearRect(0,0,cnvTelaPrincipal.width, cnvTelaPrincipal.height)
+      ctxBarra.clearRect(0,0,cnvBarraFerramentas.width, cnvBarraFerramentas.height)
+      ctxBarra.fillStyle = bola.color
+      ctxBarra.beginPath()
+      ctxBarra.arc(bola.x, bola.y, bola.radius, 0, Math.PI*2)
+      ctxBarra.closePath()
+      ctxBarra.stroke()
+      ctxBarra.fillRect(retangulo.x, retangulo.y, retangulo.a, retangulo.l)
+  
+  }
+  
+  loop()
 
   </script>
- </head>
- <body onload="draw1(),draw2(), draw3();">
-   <canvas id="canvas1" width="150" height="150"></canvas>
-   <canvas id="canvas2" width="150" height="150"></canvas>
-   <canvas id="canvas3" width="150" height="150"></canvas>
+  
  </body>
+ 
 </html>

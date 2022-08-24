@@ -1,16 +1,84 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8" />
+<html lang="pt-br">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
     <title>Canvas</title>
-</head>
-<body>
-    <div>
-        <canvas id="canvas" width="500" height="200">
-        Se você visualizar esse texto, seu browser não suporta a tag canvas.
-        </canvas>
-    </div>
-    <script type="text/javascript" src="desenhar_circulo.js"></script>
-</body>
-</html>
+    <link href="./estilos.css" rel="stylesheet">
+    <script>
+      function draw() {
+        var canvas = document.getElementById('retangulo');
+        if (canvas.getContext) {
+          var ctx = canvas.getContext('2d');
+        
+          ctx.fillRect(25, 25, 100, 100);
+          ctx.clearRect(45, 45, 60, 60);
+          ctx.strokeRect(50, 50, 50, 50);
+        }
+        var canvas = document.getElementById('emoji');
+        if (canvas.getContext) {
+          var ctx = canvas.getContext('2d');
+        
+          ctx.beginPath();
+          ctx.arc(75, 75, 50, 0, Math.PI * 2, true); // Círculo exterior
+          ctx.moveTo(110, 75);
+          ctx.arc(75, 75, 35, 0, Math.PI, false);  // Boca (sentido horário)
+          ctx.moveTo(65, 65);
+          ctx.arc(60, 65, 5, 0, Math.PI * 2, true);  // Olho esquerdo
+          ctx.moveTo(95, 65);
+          ctx.arc(90, 65, 5, 0, Math.PI * 2, true);  // Olho direito
+          ctx.stroke();
+        
+          var canvas = document.getElementById('triangulo');
+          if (canvas.getContext){
+            var ctx = canvas.getContext('2d');
+        
+            // Filled triangle
+            ctx.beginPath();
+            ctx.moveTo(25,25);
+            ctx.lineTo(105,25);
+            ctx.lineTo(25,105);
+            ctx.fill();
+        
+            // Stroked triangle
+            ctx.beginPath();
+            ctx.moveTo(125,125);
+            ctx.lineTo(125,45);
+            ctx.lineTo(45,125);
+            ctx.closePath();
+            ctx.stroke();
+          }
+        }
+        
+      }
+        
+      function render() {
+        var canvas = document.getElementById('tela');
+        if (canvas.getContext) {
+          var ctx = canvas.getContext('2d');
+        
+          ctx.fillRect(5, 5, 20, 20);
+          //ctx.clearRect(45, 45, 60, 60);
+          //ctx.strokeRect(50, 50, 50, 50);
+         }
+      }
+      
+    </script>
 
+  </head>
+  <body onload="draw()">
+    <table class="pista" border="solid">
+      <tr>
+        
+        <td><canvas class="barra" id="triangulo" onclick="btClick(this)"></canvas></td>
+        <td rowspan="3"><canvas class= "tela" id="tela"></canvas></td>
+      </tr>
+      <tr>
+        <td><canvas class= "barra" id="retangulo" onclick="render()"></canvas></td>
+      </tr>
+      <tr>
+        <td><canvas class= "barra" id="emoji"></canvas></td>
+      </tr>
+    </table><br>
+    <canvas class= "barra" id="teste" border="solid" width="600" height="400"></canvas>
+  </body>
+</html>
