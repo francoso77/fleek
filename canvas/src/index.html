@@ -5,14 +5,14 @@
     <title>Canvas</title>
     <link href="./estilos.css" rel="stylesheet">
   </head>
-  <body>
+  <body onload="desenhaBarra('#figura1', 1), desenhaBarra('#figura2', 2)">
     <table class="pista" border="solid">
       <tr>
-        <td><canvas class="barra" id="figura1"></canvas></td>
+        <td><canvas class="barra1" id="figura1" onclick="desenhaBarra('#tela', 1)"></canvas></td>
         <td rowspan="3"><canvas class= "tela" id="tela"></canvas></td>
       </tr>
       <tr>
-        <td><canvas class= "barra" id="figura2"></canvas></td>
+        <td><canvas class= "barra2" id="figura2" onclick="desenhaBarra('#tela', 2)"></canvas></td>
       </tr>
       <tr>
         <td><canvas class= "barra" id="figura3"></canvas></td>
