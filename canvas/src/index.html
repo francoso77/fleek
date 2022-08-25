@@ -5,21 +5,19 @@
     <title>Canvas</title>
     <link href="./estilos.css" rel="stylesheet">
   </head>
-  <body onload="draw()">
+  <body>
     <table class="pista" border="solid">
       <tr>
-        
-        <td><canvas class="barra" id="triangulo" onclick="btClick(this)"></canvas></td>
+        <td><canvas class="barra" id="figura1"></canvas></td>
         <td rowspan="3"><canvas class= "tela" id="tela"></canvas></td>
       </tr>
       <tr>
-        <td><canvas class= "barra" id="retangulo" onclick="render()"></canvas></td>
+        <td><canvas class= "barra" id="figura2"></canvas></td>
       </tr>
       <tr>
-        <td><canvas class= "barra" id="emoji"></canvas></td>
+        <td><canvas class= "barra" id="figura3"></canvas></td>
       </tr>
-    </table><br>
-    <canvas class= "barra" id="teste" border="solid" width="600" height="400"></canvas>
+    </table>
   </body>
 </html>
 <script src="./scripts.js"></script>
