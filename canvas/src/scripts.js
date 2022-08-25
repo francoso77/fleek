@@ -7,36 +7,58 @@ var bola = {
     color: 'red',
     held: false
 }
+var retangulo = {
+    x: 5,
+    y: 5,
+    a: 20,
+    l: 20,
+    held: false
+}
+var triangulo = {
+    x: 25,
+    y: 105,
+    held: false
+}
 
 var catX = catY = hyp = 0
 const UP = 38, DOWN = 40, LEFT = 37, RIGHT = 39
 
-
-
-
-function btClick(objbt)
-{
-    alert(objbt.id)
-}
-
-function draw()
-{
-    var retangulo = {
-        x: 10,
-        y: 10,
-        a: 50,
-        l: 50,
-        held: false,
-        area: retangulo.a * retangulo.l
+function draw() {
+  var canvas = document.getElementById('retangulo')
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d')
+    ctx.fillRect(15,15, 65,65)
+  }
+  var canvas = document.getElementById('emoji')
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d')
+  
+    ctx.fillStyle = bola.color
+    ctx.beginPath();
+    ctx.arc(50, 50, 40, 0, Math.PI * 2)
+    ctx.fill()
+  
+    var canvas = document.getElementById('triangulo')
+    if (canvas.getContext){
+      var ctx = canvas.getContext('2d');
+  
+      ctx.beginPath();
+      ctx.moveTo(25,25);
+      ctx.lineTo(105,25);
+      ctx.lineTo(25,105);
+      ctx.fill();
     }
-    var cnvRetangulo = document.getElementById('tela')
-    if (cnvRetangulo.getContext){
-        var ctxRetangulo = cnvRetangulo.getContext('2d')
-    }
-    ctxRetangulo.clearRect(0,0,cnvRetangulo.width, cnvRetangulo.height)
-    ctxRetangulo.fillRect(retangulo.x, retangulo.y, retangulo.a, retangulo.l)
+  }
+  
 }
-
+  
+function render() {
+  var canvas = document.getElementById('tela');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    ctx.fillRect(retangulo.x, retangulo.y, retangulo.a,retangulo.l)
+   }
+}
 
 
 
