@@ -1,3 +1,7 @@
+tr td{
+    height: 80px;
+    width: 60px;
+}
 .pista{
     
     padding: 1px;
@@ -23,6 +27,13 @@
     padding-left: 55px;
 }
 .barra2{
+    height: 90%;
+    width: 70%;
+    text-align: center;
+    padding-left: 2px;
+    padding-top: 55px;
+}
+.barra3{
     height: 90%;
     width: 70%;
     text-align: center;

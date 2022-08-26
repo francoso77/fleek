@@ -1,7 +1,7 @@
 
 const FIGURA1_SRC = "imagens/agil-1t.png"
 const FIGURA2_SRC = "imagens/agil-2t.png"
-
+const FIGURA3_SRC = "imagens/agil9-t.png"
 
 function desenhaBarra(ferramenta, figura)
 {
@@ -13,9 +13,13 @@ function desenhaBarra(ferramenta, figura)
     {
         ImageBarra.src = FIGURA1_SRC
     }
-    else
+    else if(figura == 2)
     {
         ImageBarra.src = FIGURA2_SRC
+    }
+    else
+    {
+        ImageBarra.src = FIGURA3_SRC
     }
     if (ferramenta != "#tela")
     {
@@ -26,7 +30,7 @@ function desenhaBarra(ferramenta, figura)
     else
     {
         ImageBarra.addEventListener('load', () =>{
-            ctxBarra.drawImage(ImageBarra, 0,0,15,20)
+            ctxBarra.drawImage(ImageBarra, 0,0,50,50)
             })
     }
 }
