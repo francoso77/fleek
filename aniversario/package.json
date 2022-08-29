@@ -1,0 +1,21 @@
+{
+  "name": "primeiroprojetots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "compilar": "tsc && node dist/index.js",
+    "rodar": "ts-node src/index.ts",
+    "monitorar": "nodemon --watch \"src/**\" --ext \"ts, json\" --exec \"ts-node src/index.ts --delay -2.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "luxon": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.0.0"
+  }
+}
