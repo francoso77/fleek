@@ -1,9 +1,11 @@
-import QRCode from 'qrcode';
+import QRCode from 'qrcode'
 
-let qrcodeFleek = 'http://fleekcursos.com.br';
-
-QRCode.toDataURL(qrcodeFleek, function(err, url){
-    document.getElementById('qrcode').value = url
-    //console.log(url)
-});
-
+function gerarQrcode(URL)
+{
+    var tmpUrl = document.getElementById(URL).value
+    var canvas = document.getElementById('canvas')
+    QRCode.toCanvas(canvas, tmpUrl, function(err){
+        if(err) console.log(err)
+        console.log('funfou')
+    })   
+}
