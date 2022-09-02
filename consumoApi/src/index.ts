@@ -1,6 +1,6 @@
 import ClsValidaCampo from "./classes/ClsValidaCampos"
 
-let CEP: string = '35.500-155'
+let CEP: string = '35.501-506'
 let UF: string = 'hh'
 let CPF: string = '0s07.323.026-09'
 let CNPJ: string = '2g0.278.531/0001-58'

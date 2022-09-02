@@ -302,17 +302,31 @@ export default class ClsValidaCampo {
         let tmpURL = 'https://viacep.com.br/ws/'.concat(_eCEP).concat('/json/')
                
         axios.get(tmpURL).then(dados =>{
-            if (dados.status == 200)
+            
+            if (dados.statusText == 'OK')
             {
-                console.log(dados.data)
+                if (!dados.data.erro)
+                {
+                    console.log('O cep', dados.data.cep + ' está correto!')
+
+                    let auxDADOS: string = JSON.stringify(dados.data)
+                    let mapDados = new Map<number, string> ()
+                    mapDados.set(1, auxDADOS)
+                    console.log(auxDADOS)
+                    console.log(mapDados.entries())
+                }
+                else
+                {
+                    console.log('A conexão é feita, mas o CEP é Invalido')
+                }
             }
             else
             {
-                console.log('CEP Invalido')
+                console.log('sem conexão')
             }
             
         }).catch (err => {
-            console.log('Erro na leitura do CEP: ', err.code)
+            console.log('Erro na requisição do CEP: ', err.code)
         })
     }
 }
