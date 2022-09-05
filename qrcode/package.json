@@ -1,0 +1,22 @@
+{
+  "name": "primeiroprojetots",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "compilar": "tsc && node dist/index.js",
+    "rodar": "ts-node src/index.ts",
+    "monitorar": "nodemon --watch \"src/**\" --ext \"ts, json\" --exec \"ts-node src/index.ts --delay -2.5"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "luxon": "^3.0.1",
+    "qrcode": "^1.5.1"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.0"
+  }
+}

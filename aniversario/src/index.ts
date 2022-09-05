@@ -1,25 +1,10 @@
-import luxon, { DateTime } from "luxon"
-import ClsValidaCampo from "./classes/ClsValidaCampos"
+'use strict';
+import { DateTime } from "luxon"
+import ClsDatasExtenso from "./classes/ClsDatasExtenso"
 
-let CEP: string = '35.500-155'
-let UF: string = 'hh'
-let CPF: string = '0s07.323.026-09'
-let CNPJ: string = '2g0.278.531/0001-58'
-let EMAIL: string = 'zanatta@leekcursos.com'
-let INT_DEC: string = '8980fgh79,00'
-let PERCENTUAL: string = '11.5%'
-let testaCampo: ClsValidaCampo = new ClsValidaCampo()
-
-/*testaCampo.eCEP(CEP)? console.log('CEP - Válido - ', CEP) : console.log('CEP - Inválido - ', CEP)
-testaCampo.eUF(UF)? console.log('UF - Válido - ', UF) : console.log('UF - Inválido - ', UF)
-testaCampo.eCPF(CPF)? console.log('CPF - Válido - ', CPF) : console.log('CPF - Inválido - ', CPF)
-testaCampo.eCNPJ(CNPJ)? console.log('CNPJ - Válido - ', CNPJ) : console.log('CNPJ - Inválido - ', CNPJ)
-testaCampo.eEMAIL(EMAIL)? console.log('EMAIL - Válido - ', EMAIL) : console.log('EMAIL - Inválido - ', EMAIL)
-testaCampo.eINTEIRO(INT_DEC)? console.log('INTEIRO ou DECIMAL - Válido - ', INT_DEC) : console.log('INTEIRO OU DECIMAL - Inválido - ', INT_DEC)
-testaCampo.ePERCENTUAL(PERCENTUAL)? console.log('PERCENTUAL - Válido - ', PERCENTUAL) : console.log('PERCENTUAL - Inválido - ', PERCENTUAL)*/
-
-const dt1: DateTime = DateTime.local(7, 4, 7, 9,18,55)
-const dt2: DateTime = DateTime.now()
+/*
+const dt2: DateTime = DateTime.local(1977, 4, 7, 9,18,55)
+const dt1: DateTime = DateTime.now()
 
 console.log('dia', dt1.day)
 console.log('mês', dt1.month)
@@ -42,7 +27,25 @@ console.log('calender: ',dt1.outputCalendar)
 console.log('Horas: ',dt1.hour)
 console.log('Minutos: ',dt1.minute)
 console.log('Segundos: ',dt1.second)
-console.log('diferença entre dt2: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt2.diff(dt1, 'year').years).toFixed())
+console.log('diferença em ANOS: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'years').years.toLocaleString('pt-br')))
+console.log('diferença em DIAS: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'days').days.toLocaleString('pt-br')))
+console.log('diferença em MESES: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'months').months.toLocaleString('pt-br')))
+console.log('diferença em HORAS: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'hours').hours.toLocaleString('pt-br')))
+console.log('diferença em MINUTOS: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'minutes').minutes.toLocaleString('pt-br')))
+console.log('diferença em SEGUNDOS: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'seconds').seconds.toLocaleString('pt-br')))
 console.log('dt1 é uma data válida: ', dt1.isValid)
 console.log('dt1 é uma data válida: ', dt1.setLocale('pt-br').toFormat(" dd 'Dias do mês ' MMM ' do ano de ' yyyy"))
-console.log('diferença entre dt2: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt2.diff(dt1, 'year').years.toLocaleString('pt-br')))
+console.log('diferença entre dt2: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'year').years.toLocaleString('pt-br')))
+console.log('data 2 usando o diffnow: ', dt2.diffNow())*/
+
+try
+{
+    let dtAniversario: DateTime = DateTime.local(2022, 4, 7)
+    let apuraTempos: ClsDatasExtenso = new ClsDatasExtenso
+    apuraTempos.calcularIdade(dtAniversario)
+    apuraTempos.dataExtenso(dtAniversario)
+
+} catch (Erro)
+{
+    console.log ('Erro na exucução do programa', Erro)
+}
