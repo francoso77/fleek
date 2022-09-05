@@ -9,5 +9,5 @@ import Colaborador from './cadastros/Colaborador.vue';
   },
 })
 export default class App extends Vue {
-    
+
 }
