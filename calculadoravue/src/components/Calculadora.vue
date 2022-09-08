@@ -2,7 +2,7 @@
     <div class="montaCalculadora">
         <table class="corpoCalculadora">
             <tr>
-                <td colspan="4"><input type="text" value="" id="txtVisor" v-model="txtVisor"></td>
+                <td colspan="4"><input type="text" disabled value="" id="txtVisor" v-model="txtVisor"></td>
             </tr>
             <tr>
                 <td><input type="button" value='x²' id="btElevado" @click="enviaValor('x²')"></td>
@@ -30,10 +30,10 @@
             </tr>
             <tr>
                 <td><input type="button" value='C' id="btApagar" @click="enviaValor('C')"></td>
-                <td><input type="button" value='0 ' id="btZero" @click="enviaValor('0')"></td>                
-                <td><input type="button" value='.' id="btPonto" @click="enviaValor('.')"></td>
+                <td><input type="button" value='0 ' id="btZero" @click="enviaValor('0')"></td>
+                <td><input type="button" value=',' id="btVirgula" @click="enviaValor(',')"></td>
                 <td><input type="button" value='=' id="btResultado" @click="enviaValor('=')"></td>
-                
+
             </tr>
 
         </table>
@@ -51,25 +51,31 @@ export default CalculadoraCls
 tr td {
 
     border: solid 1px black;
-    border-radius: 5px;
-    text-align: center;
-}
-.corpoCalculadora
-{
-    border: solid 3px black;
     border-radius: 1px;
-    text-align: center; 
-    
-}
-#txtVisor
-{
-    text-align: right;
+    text-align: center;
+    height: 60px;
+    width: 70px;
 }
 
-input
-{
+.corpoCalculadora {
+    border: solid 3px black;
+    border-radius: 1px;
+    text-align: center;
+    
+}
+
+#txtVisor {
+    text-align: right;
+    font-size: xx-large;
+    color: black;
+}
+
+input {
     height: 100%;
     width: 95%;
     font-size: large;
+    border-radius: 1px;
 }
+
+
 </style>
