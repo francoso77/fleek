@@ -10,6 +10,10 @@ export default class CalculadoraCls extends Vue {
     public txtVisor: string = '0'
     private temVirgula: boolean = false
 
+    /**
+     * Recebe o botão clicado e registra o valor no visor da calculadora
+     * @param bt string: valor do botão
+     */
     public enviaValor(bt: string): void {
         if (bt == ',') {
             this.temVirgula = true
@@ -85,6 +89,12 @@ export default class CalculadoraCls extends Vue {
         }
     }
 
+    /**
+     * Realiza a operação matemática escolhida pelo usuário
+     * @param vr1 number: primeiro valor informado
+     * @param vr2 number: segundo valor informado
+     * @param op string: qual operação foi definida  
+     */
     public calcular(vr1: number, vr2: number, op: string): void {
 
         let resultado: number = 0
@@ -107,6 +117,9 @@ export default class CalculadoraCls extends Vue {
 
     }
 
+    /**
+     * Formato o valor do visor no padrão Português - Brasil
+     */
     public formatar(): void {
         this.limpaValor()
         const valor: number = parseFloat(this.txtVisor)
@@ -121,6 +134,10 @@ export default class CalculadoraCls extends Vue {
         }
 
     }
+    
+    /**
+     * Limpa o valor recebido, e tranforma em número para efeito de calculos  
+     */
     public limpaValor(): void {
         let vrString = this.txtVisor
         const tamanho: Array<string> = vrString.split('.')
@@ -132,9 +149,4 @@ export default class CalculadoraCls extends Vue {
         vrString = vrString.replace(',', '.')
         this.txtVisor = vrString
     }
-
-    public teclaValor() {
-        console.log('xuxu')
-    }
-
 }
