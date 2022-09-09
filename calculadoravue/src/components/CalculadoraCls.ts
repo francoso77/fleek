@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-inferrable-types */
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
 export default class CalculadoraCls extends Vue {
+
     private primeiroValor: number = 0
     private operadores: Array<string> = ['/', '*', '+', '-', 'C', '←', '=', '√', 'x²']
     private operador: string = ''
     public txtVisor: string = '0'
     private temVirgula: boolean = false
-
 
     public enviaValor(bt: string): void {
         if (bt == ',') {
@@ -108,7 +109,7 @@ export default class CalculadoraCls extends Vue {
 
     public formatar(): void {
         this.limpaValor()
-        let valor: number = parseFloat(this.txtVisor)
+        const valor: number = parseFloat(this.txtVisor)
 
         if (parseInt(this.txtVisor) != parseFloat(this.txtVisor)) {
             this.txtVisor = valor.toLocaleString('pt-br', { style: 'decimal', minimumFractionDigits: 0 })
@@ -119,11 +120,10 @@ export default class CalculadoraCls extends Vue {
             this.txtVisor = valor.toLocaleString('pt-br', { style: 'decimal', minimumFractionDigits: 0 })
         }
 
-
     }
     public limpaValor(): void {
         let vrString = this.txtVisor
-        let tamanho: Array<string> = vrString.split('.')
+        const tamanho: Array<string> = vrString.split('.')
         let x: number = 0
 
         for (x = 0; tamanho.length >= x; x++) {
@@ -131,6 +131,10 @@ export default class CalculadoraCls extends Vue {
         }
         vrString = vrString.replace(',', '.')
         this.txtVisor = vrString
+    }
+
+    public teclaValor() {
+        console.log('xuxu')
     }
 
 }

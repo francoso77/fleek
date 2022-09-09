@@ -1,4 +1,7 @@
 {
+  "vueCompilerOptions": {
+    "experimentalDisableTemplateSupport": true
+  },
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",

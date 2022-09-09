@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
       <h2>Calculadora VUE</h2>
       <calculadora></calculadora>
 
