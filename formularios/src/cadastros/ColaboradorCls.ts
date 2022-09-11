@@ -28,4 +28,22 @@ export default class ColaboradorCls extends Vue {
             { cargo: 'corretor', valor: 'C' },
             { cargo: 'vendedor', valor: 'D' }
         ]
+
+    public msgErro = {
+        nome: '',
+        endereco: ''
+    }
+
+    public validarFormulario() {
+        if (!this.rsColaborador.nome || this.rsColaborador.nome.length < 10) {
+            this.msgErro.nome = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
+        } else {
+            this.msgErro.nome = ''
+        }
+        if (!this.rsColaborador.endereco || this.rsColaborador.endereco.length < 10) {
+            this.msgErro.endereco = "O campo endereço é obrigatório e deve ter no mínimo 10 caractes."
+        } else {
+            this.msgErro.endereco = ''
+        }
+    }
 }
