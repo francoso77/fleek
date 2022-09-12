@@ -1,5 +1,12 @@
 import axios from "axios"
 
+interface dadosCepInterface{
+    cep: string,
+    logradouro: string,
+    bairro: string,
+    localidade: string,
+    uf: string
+}
 const expCEP: RegExp = new RegExp('^[0-9]{2}.[0-9]{3}-[0-9]{3}$', 'g')
 const expUF: RegExp = new RegExp('^([A-Z]){2}$', 'gi')
 const expCPF: RegExp = new RegExp('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$', 'g')
@@ -44,7 +51,14 @@ const arrUF: Array<string> = [
  */
 export default class ClsValidaCampo {
 
-    public tmp_eCEP: object = {}
+        
+    public tmp_eCEP: dadosCepInterface = {
+        cep: '',
+        logradouro: '',
+        bairro: '',
+        localidade: '',
+        uf: ''
+    }
     /**
      * Valida o campo CEP
      * @param _eCEP string
@@ -296,37 +310,39 @@ export default class ClsValidaCampo {
         }
     }
 
-    private verificaCEP(_eCEP: string): void {
+    public verificaCEP(_eCEP: string): Promise<boolean> {
         
         _eCEP = _eCEP.replace(/\-|\./g, '')
-        let tmpURL = 'https://viacep.com.br/ws/'.concat(_eCEP).concat('/json/')
+        const tmpURL = 'https://viacep.com.br/ws/'.concat(_eCEP).concat('/json/')
                
-        axios.get(tmpURL).then(dados =>{
+        return axios.get(tmpURL).then(dados =>{
             
             if (dados.statusText == 'OK')
             {
                 if (!dados.data.erro)
                 {
-                    console.log('O cep', dados.data.cep + ' está correto!')
-
-                    let auxDADOS: string = JSON.stringify(dados.data)
-                    let mapDados = new Map<number, string> ()
-                    mapDados.set(1, auxDADOS)
-                    console.log(auxDADOS)
-                    console.log(mapDados.entries())
+                    this.tmp_eCEP.cep = dados.data.cep
+                    this.tmp_eCEP.bairro = dados.data.bairro
+                    this.tmp_eCEP.logradouro = dados.data.logradouro
+                    this.tmp_eCEP.localidade = dados.data.localidade
+                    this.tmp_eCEP.uf = dados.data.uf
+                    return true     
                 }
                 else
                 {
                     console.log('A conexão é feita, mas o CEP é Invalido')
+                    return false
                 }
             }
             else
             {
                 console.log('sem conexão')
+                return false
             }
             
         }).catch (err => {
             console.log('Erro na requisição do CEP: ', err.code)
+            return false
         })
     }
 }

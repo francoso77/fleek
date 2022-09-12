@@ -62,9 +62,15 @@ label {
     bottom: 8px;
 }
 select{
-    width: 55%;
+    width: 75%;
     padding: 12px 30px;
     margin: 8px 0;
     box-sizing: border-box;
-    font-size: 12px;
+    font-size: 16px;
+}
+option{
+    width: 75%;
+
+    box-sizing: border-box;
+    font-size: 16px;
 }
