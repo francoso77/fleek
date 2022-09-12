@@ -48,7 +48,7 @@
         <span class="mensagemErro" v-show="msgErro.endereco">{{msgErro.endereco}}</span>
 
         <label for="txtNumero">Número:</label>
-        <input type="number" id="txtNumero" value="" v-model="rsColaborador.numero" @change="validarFormulario('txtNumero')"/>
+        <input type="text" id="txtNumero" value="" v-model="rsColaborador.numero" @change="validarFormulario('txtNumero')"/>
         <span class="mensagemErro" v-show="msgErro.numero">{{msgErro.numero}}</span>
 
         <label for="txtBairro">Bairro:</label>
@@ -56,7 +56,7 @@
         <span class="mensagemErro" v-show="msgErro.bairro">{{msgErro.bairro}}</span>
 
         <label for="txtUF">UF:</label>
-        <select v-model="rsColaborador.ufs" id="txtUF">
+        <select v-model="rsColaborador.uf" id="txtUF">
             <option v-for="uf in ufs">
                 {{ uf }}
 

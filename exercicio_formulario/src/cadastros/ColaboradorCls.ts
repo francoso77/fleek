@@ -5,7 +5,7 @@ interface CadastroColaboradorInterface {
     nome: string,
     endereco: string,
     cep: string,
-    numero: number,
+    numero: string,
     bairro: string,
     uf: string,
     cidade: string,
@@ -30,7 +30,7 @@ export default class ColaboradorCls extends Vue {
             nome: '',
             endereco: '',
             cep: '',
-            numero: 0,
+            numero: '',
             bairro: '',
             uf: '',
             cidade: '',
@@ -119,7 +119,7 @@ export default class ColaboradorCls extends Vue {
                     this.rsColaborador.endereco = validaCampos.tmp_eCEP.logradouro
                     this.rsColaborador.bairro = validaCampos.tmp_eCEP.bairro
                     this.rsColaborador.cidade = validaCampos.tmp_eCEP.localidade
-
+                    this.rsColaborador.uf = validaCampos.tmp_eCEP.uf
                 } else {
                     console.log('não tem cep')
                 }
@@ -157,7 +157,7 @@ export default class ColaboradorCls extends Vue {
             }
         }
         if (campo == 'txtNumero') {
-            if (this.rsColaborador.numero <= 0) {
+            if (!this.rsColaborador.numero) {
                 this.msgErro.numero = "Digite o número do endereço"
             } else {
                 this.msgErro.numero = ''
