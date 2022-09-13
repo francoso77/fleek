@@ -111,7 +111,7 @@ export default class ColaboradorCls extends Vue {
 
     public validarFormulario(campo: string): void {
         const validaCampos: ClsValidaCampo = new ClsValidaCampo()
-
+     
         if (campo == 'txtCEP') {
             validaCampos.verificaCEP(this.rsColaborador.cep).then(temCEP => {
                 if (temCEP) {
@@ -143,6 +143,7 @@ export default class ColaboradorCls extends Vue {
             }
         }
         if (campo == 'txtNome') {
+            
             if (!this.rsColaborador.nome || this.rsColaborador.nome.length < 10) {
                 this.msgErro.nome = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
             } else {

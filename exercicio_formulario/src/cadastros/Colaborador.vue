@@ -76,7 +76,7 @@
         <input type="number" id="txtQtdFilhos" value="" v-model="rsColaborador.qtdFilos">
 
         <label for="txtSalario">Salário:</label>
-        <input type="number" id="txtSalario" value="" v-model="rsColaborador.salario" v-money='money' @change="validarFormulario('txtSalario')"/>
+        <input type="number" id="txtSalario" value="" v-model="rsColaborador.salario" @change="validarFormulario('txtSalario')"/>
         <span class="mensagemErro" v-show="msgErro.salario">{{msgErro.salario}}</span>
 
         <label for="txtEmail">E-mail:</label>
