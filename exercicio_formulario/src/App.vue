@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <h4>Cadastro de Colaboradores</h4>
     <colaborador></colaborador>
   </div>
 </template>

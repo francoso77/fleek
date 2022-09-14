@@ -5,7 +5,7 @@ interface CadastroColaboradorInterface {
     nome: string,
     endereco: string,
     cep: string,
-    numero: string,
+    numero: number,
     bairro: string,
     uf: string,
     cidade: string,
@@ -25,12 +25,16 @@ interface CadastroColaboradorInterface {
 
 @Component
 export default class ColaboradorCls extends Vue {
+
+    public exibirDebug: boolean = false
+    public exibirQtdFilhos: boolean = false
+
     public rsColaborador: CadastroColaboradorInterface =
         {
             nome: '',
             endereco: '',
             cep: '',
-            numero: '',
+            numero: 0,
             bairro: '',
             uf: '',
             cidade: '',
@@ -106,12 +110,12 @@ export default class ColaboradorCls extends Vue {
         cpf: '',
         email: '',
         numero: '',
-        salario:''
+        salario: ''
     }
 
     public validarFormulario(campo: string): void {
         const validaCampos: ClsValidaCampo = new ClsValidaCampo()
-     
+
         if (campo == 'txtCEP') {
             validaCampos.verificaCEP(this.rsColaborador.cep).then(temCEP => {
                 if (temCEP) {
@@ -143,7 +147,7 @@ export default class ColaboradorCls extends Vue {
             }
         }
         if (campo == 'txtNome') {
-            
+
             if (!this.rsColaborador.nome || this.rsColaborador.nome.length < 10) {
                 this.msgErro.nome = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
             } else {
@@ -169,8 +173,24 @@ export default class ColaboradorCls extends Vue {
                 this.msgErro.salario = "O salário deve ser maior que 0."
             } else {
                 this.msgErro.salario = ''
-                this.rsColaborador.salario.toLocaleString('de-DE', {style: 'currency', currency: 'EUR'})
+                this.rsColaborador.salario.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' })
             }
+        }
+    }
+
+    public verificaLetra(e: KeyboardEvent) {
+        const eLetras: RegExp = new RegExp(/[a-z| |é|ã|á|í|ó]/, 'gim')
+        if (!eLetras.test(e.key)) {
+            e.preventDefault()
+        }
+    }
+
+    public temFilhos() {
+
+        if (this.rsColaborador.filhos) {
+            this.exibirQtdFilhos = true
+        } else {
+            this.exibirQtdFilhos = false
         }
     }
 }

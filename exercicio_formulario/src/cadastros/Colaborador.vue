@@ -1,9 +1,11 @@
 <template>
     <div class='formulario'>
+        <h4>Cadastro de Colaboradores</h4>
         <link href="estilo.css" rel="stylesheet">
 
         <label for="txtNome">Nome:</label>
-        <input type="text" id="txtNome" value="" v-model="rsColaborador.nome" @change="validarFormulario('txtNome')"/>
+        <input type="text" id="txtNome" value="" v-model="rsColaborador.nome" @keypress="verificaLetra"
+            @change="validarFormulario('txtNome')" />
         <span class="mensagemErro" v-show="msgErro.nome">{{msgErro.nome}}</span>
 
         <label for="txtNascimento">Nascimento:</label>
@@ -12,7 +14,7 @@
 
         <label for="txtCPF">CPF:</label>
         <input type="text" id="txtCPF" value="" v-model="rsColaborador.cpf" v-mask="'###.###.###-##'"
-            @change="validarFormulario('txtCPF')"/>
+            @change="validarFormulario('txtCPF')" />
         <span class="mensagemErro" v-show="msgErro.cpf">{{msgErro.cpf}}</span>
 
         <label for="txtRG">RG:</label>
@@ -30,7 +32,7 @@
         <span class="mensagemErro" v-show="msgErro.civil">{{msgErro.civil}}</span>
 
         <label for="txtEscolaridade">Escolaridade:</label>
-        <select v-model="rsColaborador.escolaridades" id="escolaridade">
+        <select v-model="rsColaborador.escolaridade" id="escolaridade">
             <option v-for="escola in escolaridades" v-bind:value="escola.valor">
                 {{ escola.nivel }}
 
@@ -40,15 +42,17 @@
 
         <label for="txtCEP">CEP:</label>
         <input type="text" id="txtCEP" value="" v-model="rsColaborador.cep" v-mask="'##.###-###'"
-            @change="validarFormulario('txtCEP')"/>
+            @change="validarFormulario('txtCEP')" />
         <span class="mensagemErro" v-show="msgErro.cep">{{msgErro.cep}}</span>
 
         <label for="txtEndereco">Endereço:</label>
-        <input type="text" id="txtEndereco" value="" v-model="rsColaborador.endereco" @change="validarFormulario('txtEndereco')"/>
+        <input type="text" id="txtEndereco" value="" v-model="rsColaborador.endereco"
+            @change="validarFormulario('txtEndereco')" />
         <span class="mensagemErro" v-show="msgErro.endereco">{{msgErro.endereco}}</span>
 
         <label for="txtNumero">Número:</label>
-        <input type="text" id="txtNumero" value="" v-model="rsColaborador.numero" @change="validarFormulario('txtNumero')"/>
+        <input type="number" id="txtNumero" value="" v-model="rsColaborador.numero"
+            @change="validarFormulario('txtNumero')" />
         <span class="mensagemErro" v-show="msgErro.numero">{{msgErro.numero}}</span>
 
         <label for="txtBairro">Bairro:</label>
@@ -70,38 +74,43 @@
 
         <label for="chkViagem">Disponibilidade para viagem:</label>
         <input type="checkbox" id="chkViagem" value="" v-model="rsColaborador.viagem">
-        <label for="chkFilhos">Filhos:</label>
-        <input type="checkbox" id="chkFilhos" value="" v-model="rsColaborador.filhos">
-        <label for="txtQtdFilhos">Quantos Filhos?</label>
-        <input type="number" id="txtQtdFilhos" value="" v-model="rsColaborador.qtdFilos">
-
+        <div class="filhos">
+            <label for="chkFilhos">Filhos:</label>
+            <input type="checkbox" id="chkFilhos" onclick="temFilhos" value="" v-model="rsColaborador.filhos">
+            <div class="qtdFilhos" v-if="exibirQtdFilhos">
+                <label for="txtQtdFilhos">Quantos Filhos?</label>
+                <input type="number" id="txtQtdFilhos" value="" v-model="rsColaborador.qtdFilos">
+            </div>
+        </div>
         <label for="txtSalario">Salário:</label>
-        <input type="number" id="txtSalario" value="" v-model="rsColaborador.salario" @change="validarFormulario('txtSalario')"/>
+        <input type="number" id="txtSalario" value="" v-model="rsColaborador.salario"
+            @change="validarFormulario('txtSalario')" />
         <span class="mensagemErro" v-show="msgErro.salario">{{msgErro.salario}}</span>
 
         <label for="txtEmail">E-mail:</label>
-        <input type="text" id="txtEmail" value="" v-model="rsColaborador.email" @change="validarFormulario('txtEmail')"/>
+        <input type="text" id="txtEmail" value="" v-model="rsColaborador.email"
+            @change="validarFormulario('txtEmail')" />
         <span class="mensagemErro" v-show="msgErro.email">{{msgErro.email}}</span>
 
         <label for="txtTel">Telefone:</label>
         <input type="tel" id="txtTelefone" value="" v-model="rsColaborador.telefone" v-mask="'(##)#####-####'"
             @change='validarFormulario()' />
         <span class="mensagemErro" v-show="msgErro.telefone">{{msgErro.telefone}}</span>
-
-        <label for="radJornada">Jornada de Trabalho:</label>
-        <input type="radio" id="radJor8" value="8Horas" v-model="rsColaborador.jornada">
-        <label for="radJor8">8 Horas</label>
-        <input type="radio" id="radJor12x36" value="12x36" v-model="rsColaborador.jornada">
-        <label for="radJor12x36">12 x 36</label>
-        <input type="radio" id="radJor1/2" value="1/2" v-model="rsColaborador.jornada">
-        <label for="radJor1/2">Meio Período</label>
-        <span class="mensagemErro" v-show="msgErro.jornada">{{msgErro.jornada}}</span>
-
+        <div class="jornada">
+            <label for="radJornada">Jornada de Trabalho:</label>
+            <label for="radJor8">8 Horas</label>
+            <input type="radio" id="radJor8" value="8Horas" v-model="rsColaborador.jornada">
+            <label for="radJor12x36">12 x 36</label>
+            <input type="radio" id="radJor12x36" value="12x36" v-model="rsColaborador.jornada">
+            <label for="radJor1/2">Meio Período</label>
+            <input type="radio" id="radJor1/2" value="1/2" v-model="rsColaborador.jornada">
+            <span class="mensagemErro" v-show="msgErro.jornada">{{msgErro.jornada}}</span>
+        </div>
         <br>
-        <input type="button" value="cadastrar" @click='validarFormulario()' />
+        <input type="button" value="Cadastrar" @click='validarFormulario()' />
 
 
-        <div class="debug">
+        <div class="debug" v-if="exibirDebug">
             {{ rsColaborador }}
         </div>
     </div>
