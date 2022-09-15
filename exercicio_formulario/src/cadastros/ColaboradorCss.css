@@ -13,6 +13,13 @@
 }
 
 
+.tabelaDados {
+    text-align: left;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 @media(min-width: 600px) {
     .formulario {
         width: 33%;
@@ -20,6 +27,11 @@
         margin-top: 100px;
     }
 
+    .tabelaDados {
+        width: 60%;
+        margin-left: 20%;
+        margin-top: 100px;
+    }
 }
 
 @media(max-width: 600px) {
@@ -29,6 +41,11 @@
         margin-top: 70px;
     }
 
+    .tabelaDados {
+        width: 90%;
+        margin-left: 5%;
+        margin-top: 70px;
+    }
 }
 
 input {
@@ -37,48 +54,32 @@ input {
     box-sizing: border-box;
     font-size: large;
     border-radius: 10px;
-}
-
-input[type=text] {
-    width: 100%;
-}
-
-input[type=number] {
-    width: 55%;
-}
-
-input[type=date] {
-    width: 70%;
-}
-
-input[type=tel] {
-    width: 70%;
+    width: 35%;
 }
 
 label {
     margin-top: 18px;
-    display:flex ;
+    display: flex;
 }
 
 .mensagemErro {
     color: red;
-    font-size: 14px;
+    font-size: 10px;
     position: relative;
     bottom: 8px;
 }
 
 select {
-    width: 75%;
-    padding: 12px 30px;
-    margin: 8px 0;
+    width: 55%;
+    padding: 5px 25px;
+    margin: 1px 0;
     box-sizing: border-box;
-    font-size: 16px;
+    font-size: 15px;
     border-radius: 10px;
 }
 
 option {
-    width: 75%;
-
+    width: 55%;
     box-sizing: border-box;
     font-size: 16px;
     border-radius: 10px;
@@ -90,9 +91,47 @@ option {
     padding: 10px;
     border-radius: 10px;
 }
+
 .filhos {
     text-align: left;
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
+}
+
+#txtNome,
+#txtEndereco,
+#txtBairro,
+#txtCidade,
+#txtEmail {
+    width: 100%;
+}
+
+#txtUF,
+#txtNumero {
+    width: 20%;
+}
+
+input[type=button],
+.botaoAcao {
+    background-color: cadetblue;
+    border-radius: 10px;
+    cursor: default;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+}
+
+table th {
+    background-color: dodgerblue;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+}
+
+table td {
+    background-color: beige;
+    border-radius: 10px;
+    padding: 10px;
 }
