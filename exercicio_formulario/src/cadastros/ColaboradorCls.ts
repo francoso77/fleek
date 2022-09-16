@@ -5,7 +5,7 @@ interface CadastroColaboradorInterface {
     nome: string,
     endereco: string,
     cep: string,
-    numero: number,
+    numero: string,
     bairro: string,
     uf: string,
     cidade: string,
@@ -19,7 +19,7 @@ interface CadastroColaboradorInterface {
     telefone: string,
     nascimento: string,
     cpf: string,
-    rg: number,
+    rg: string,
     jornada: string
 }
 
@@ -54,7 +54,7 @@ export default class ColaboradorCls extends Vue {
             nome: '',
             endereco: '',
             cep: '',
-            numero: 0,
+            numero: '',
             bairro: '',
             uf: '',
             cidade: '',
@@ -68,7 +68,7 @@ export default class ColaboradorCls extends Vue {
             telefone: '',
             nascimento: '',
             cpf: '',
-            rg: 0,
+            rg: '',
             jornada: ''
         }
 
@@ -146,7 +146,7 @@ export default class ColaboradorCls extends Vue {
     public confirmarDados(): void {
 
         let dadosValidos: boolean = true
-
+        
 
         if (!this.rsColaborador.nome || this.rsColaborador.nome.length < 10) {
             this.msgErro.nome = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
@@ -156,13 +156,13 @@ export default class ColaboradorCls extends Vue {
         }
 
         if (!this.rsColaborador.nascimento) {
-            this.msgErro.nascimento = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
+            this.msgErro.nascimento = "informe a data de nascimento."
             dadosValidos = false
         } else {
             this.msgErro.nascimento = ''
         }
 
-        if (!this.validaCampos.eCPF(this.rsColaborador.cpf) || !this.rsColaborador.cpf) {
+        if (!this.validaCampos.eCPF(this.rsColaborador.cpf)) {
             this.msgErro.cpf = "CPF inválido, ou não informado."
             dadosValidos = false
         } else {
@@ -175,10 +175,10 @@ export default class ColaboradorCls extends Vue {
             this.msgErro.rg = ''
         }
         if (!this.rsColaborador.civil) {
-            this.msgErro.rg = "qual o estado cívil?"
+            this.msgErro.civil = "qual o estado cívil?"
             dadosValidos = false
         } else {
-            this.msgErro.rg = ''
+            this.msgErro.civil = ''
         }
         if (!this.rsColaborador.escolaridade) {
             this.msgErro.escolaridade = "escolha uma escolaridade."
@@ -193,12 +193,12 @@ export default class ColaboradorCls extends Vue {
             this.msgErro.cep = ''
         }
         if (!this.rsColaborador.endereco) {
-            this.msgErro.endereco = "O campo endereço é obrigatório e deve ter no mínimo 10 caractes."
+            this.msgErro.endereco = "O campo endereço é obrigatório."
             dadosValidos = false
         } else {
             this.msgErro.endereco = ''
         }
-        if (!this.rsColaborador.numero || this.rsColaborador.numero <= 0) {
+        if (!this.rsColaborador.numero) {
             this.msgErro.numero = "Digite o número do endereço"
             dadosValidos = false
         } else {
@@ -257,15 +257,18 @@ export default class ColaboradorCls extends Vue {
             }
 
             this.limparEForcar()
+
+
         }
     }
 
     private limparEForcar() {
+        
         this.rsColaborador = {
             nome: '',
             endereco: '',
             cep: '',
-            numero: 0,
+            numero: '',
             bairro: '',
             uf: '',
             cidade: '',
@@ -279,11 +282,13 @@ export default class ColaboradorCls extends Vue {
             telefone: '',
             nascimento: '',
             cpf: '',
-            rg: 0,
+            rg: '',
             jornada: ''
         }
             ; (<HTMLElement>this.$refs.txtNome).focus()
+
     }
+    
     public verificaLetra(e: KeyboardEvent) {
         const eLetras: RegExp = new RegExp(/[a-z| |é|ã|á|í|ó]/, 'gim')
         if (!eLetras.test(e.key)) {
@@ -300,11 +305,11 @@ export default class ColaboradorCls extends Vue {
         }
     }
 
-    private btExcluir(indice: number): void {
+    public btExcluir(indice: number): void {
         this.rsColaboradores.splice(indice, 1)
     }
 
-    private btAlterar(indice: number): void {
+    public btAlterar(indice: number): void {
         this.rsColaborador = { ...this.rsColaboradores[indice] }
         this.statusForm = statusFormEnum.ALTERANDO
         this.indiceRegistroAtual = indice

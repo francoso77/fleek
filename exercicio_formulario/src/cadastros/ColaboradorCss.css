@@ -48,20 +48,6 @@
     }
 }
 
-input {
-    padding: 10px 5px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    font-size: large;
-    border-radius: 10px;
-    width: 35%;
-}
-
-label {
-    margin-top: 18px;
-    display: flex;
-}
-
 .mensagemErro {
     color: red;
     font-size: 10px;
@@ -70,56 +56,76 @@ label {
 }
 
 select {
-    width: 55%;
-    padding: 5px 25px;
-    margin: 1px 0;
+    padding: 5px;
+    margin: 10px;
     box-sizing: border-box;
-    font-size: 15px;
-    border-radius: 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    border: 2px solid black;
 }
 
 option {
     width: 55%;
     box-sizing: border-box;
     font-size: 16px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .jornada {
     text-align: left;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 10px;
     border-radius: 10px;
 }
 
-.filhos {
+.viagemEfilhos {
     text-align: left;
-    border: 1px solid black;
+    border: 2px solid black;
     padding: 10px;
     border-radius: 10px;
 }
 
+input{
+    padding: 5px;
+    margin:10px ;
+    box-sizing: border-box;
+    font-size: 12px;
+    border-radius: 5px;
+    position: relative;
+    
+}
 #txtNome,
 #txtEndereco,
 #txtBairro,
 #txtCidade,
-#txtEmail {
-    width: 100%;
+#txtEmail{
+    width: 80%;
+    left: 15px;
+    margin-right: 50px;
+}
+#txtCEP{
+    width: 18%;
+}
+#txtCPF,
+#txtRG{
+    width: 30%;
+    left: 30px;
+    
+}
+#txtTelefone{
+    width: 25%;
 }
 
-#txtUF,
-#txtNumero {
-    width: 20%;
-}
 
 input[type=button],
 .botaoAcao {
     background-color: cadetblue;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: default;
     padding: 5px;
     margin-left: 10px;
     margin-right: 10px;
+    font-size: larger;
     
 }
 
@@ -135,3 +141,4 @@ table td {
     border-radius: 10px;
     padding: 10px;
 }
+

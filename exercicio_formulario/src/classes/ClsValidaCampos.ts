@@ -107,6 +107,7 @@ export default class ClsValidaCampo {
     public eCPF(_eCPF: string): boolean {
         if (this.campoVazio(_eCPF) == true)
         {
+            console.log('tem cpf?')
             return false
         }
         else
@@ -161,6 +162,7 @@ export default class ClsValidaCampo {
 
         if (this.campoVazio(_eEMAIL) == true)
         {
+            console.log('tem email?')
             return false
         }
         else
