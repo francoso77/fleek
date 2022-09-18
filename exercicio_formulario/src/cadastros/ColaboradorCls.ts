@@ -14,7 +14,7 @@ interface CadastroColaboradorInterface {
     viagem: boolean,
     filhos: boolean,
     qtdfilhos: number,
-    salario: number,
+    salario: string,
     email: string,
     telefone: string,
     nascimento: string,
@@ -31,10 +31,22 @@ enum statusFormEnum {
 @Component
 export default class ColaboradorCls extends Vue {
 
+    public habilitarCampo: boolean = false
+
     public statusForm: statusFormEnum = statusFormEnum.INCLUINDO
 
     public get statusFormEnum(): typeof statusFormEnum {
         return statusFormEnum
+    }
+    /**
+     * função para ativar o campo quantidade de filhos se o usuário informar que tem filhos
+     */
+    public ativarCampo(): void {
+        if(this.rsColaborador.filhos){
+            this.habilitarCampo = false
+        }else {
+            this.habilitarCampo = true
+        }
     }
 
     public indiceRegistroAtual: number = 0
@@ -63,7 +75,7 @@ export default class ColaboradorCls extends Vue {
             viagem: false,
             filhos: false,
             qtdfilhos: 0,
-            salario: 0,
+            salario: '',
             email: '',
             telefone: '',
             nascimento: '',
@@ -142,11 +154,13 @@ export default class ColaboradorCls extends Vue {
         telefone: '',
         jornada: ''
     }
-
+    /**
+     * função para validar os dados informados no formulário 
+     */
     public confirmarDados(): void {
 
         let dadosValidos: boolean = true
-        
+
 
         if (!this.rsColaborador.nome || this.rsColaborador.nome.length < 10) {
             this.msgErro.nome = "O campo nome é obrigatório e deve ter no mínimo 10 caractes."
@@ -222,13 +236,13 @@ export default class ColaboradorCls extends Vue {
         } else {
             this.msgErro.cidade = ''
         }
-        if (!this.rsColaborador.salario || this.rsColaborador.salario <= 0) {
+        if (!this.rsColaborador.salario) {
             this.msgErro.salario = "O salário deve ser maior que 0."
             dadosValidos = false
         } else {
             this.msgErro.salario = ''
         }
-        if (!this.validaCampos.eEMAIL(this.rsColaborador.email)) {
+        if (!this.verificarEmail(this.rsColaborador.email)) {
             this.msgErro.email = "E-mail inválido."
             dadosValidos = false
         } else {
@@ -246,24 +260,21 @@ export default class ColaboradorCls extends Vue {
         } else {
             this.msgErro.jornada = ''
         }
-
         if (dadosValidos) {
             if (this.statusForm == statusFormEnum.INCLUINDO) {
                 this.rsColaboradores.push({ ...this.rsColaborador })
-
             } else {
                 this.rsColaboradores[this.indiceRegistroAtual] = { ...this.rsColaborador }
                 this.statusForm = statusFormEnum.INCLUINDO
             }
-
             this.limparEForcar()
-
-
         }
     }
-
+    /**
+     * função para limpar o formulário e mandar o foco para o campo nome
+     */
     private limparEForcar() {
-        
+
         this.rsColaborador = {
             nome: '',
             endereco: '',
@@ -277,7 +288,7 @@ export default class ColaboradorCls extends Vue {
             viagem: false,
             filhos: false,
             qtdfilhos: 0,
-            salario: 0,
+            salario: '',
             email: '',
             telefone: '',
             nascimento: '',
@@ -288,33 +299,49 @@ export default class ColaboradorCls extends Vue {
             ; (<HTMLElement>this.$refs.txtNome).focus()
 
     }
-    
+    /**
+     * função que verifica se está sendo digitado apenas letra
+     * @param e keyboardEvent: evento enviado 
+     */
     public verificaLetra(e: KeyboardEvent) {
         const eLetras: RegExp = new RegExp(/[a-z| |é|ã|á|í|ó]/, 'gim')
         if (!eLetras.test(e.key)) {
             e.preventDefault()
         }
     }
+    /**
+     * função que verifica se o e-mail informado é válido
+     * @param tmp_Email string: e-mail informação pelo usuário
+     * @returns retorna true ou false para o e-mail informado
+     */
+    public verificarEmail(tmp_Email: string): boolean {
 
-    public temFilhos() {
+        const expEMAIL: RegExp = new RegExp(/^\b\S+@\w+\.[a-z0-9]{1,3}\.[a-z]{2}$|^\b\S+@\w+\.[a-z0-9]{1,3}$/, 'gim')
+        return expEMAIL.test(tmp_Email) ? true : false
 
-        if (this.rsColaborador.filhos) {
-            this.exibirQtdFilhos = true
-        } else {
-            this.exibirQtdFilhos = false
-        }
     }
-
+    /**
+     * função para excluir um registro no formulário
+     * @param indice number: número do indice a ser excluido
+     */
     public btExcluir(indice: number): void {
         this.rsColaboradores.splice(indice, 1)
+        ; (<HTMLElement>this.$refs.txtNome).focus()
     }
-
+    /**
+     * função para alterar um registro no formuário
+     * @param indice number: número do indice a ser alterado
+     */
     public btAlterar(indice: number): void {
         this.rsColaborador = { ...this.rsColaboradores[indice] }
         this.statusForm = statusFormEnum.ALTERANDO
         this.indiceRegistroAtual = indice
+            ; (<HTMLElement>this.$refs.txtNome).focus()
     }
-
+    /**
+     * 
+     * @param CEP Pesquisa o CEP informado no site da Viacep e retorna os dados como logradouro, bairro, cidade do cep informado
+     */
     public buscaCep(CEP: string): void {
         if (CEP == 'txtCEP') {
             this.validaCampos.verificaCEP(this.rsColaborador.cep).then(temCEP => {

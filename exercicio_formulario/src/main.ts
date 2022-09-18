@@ -4,6 +4,8 @@ import VueTheMask from 'vue-the-mask'
 import ClsValidaCampos from './classes/ClsValidaCampos'
 
 
+
+
 Vue.use(VueTheMask, ClsValidaCampos)
 Vue.config.productionTip = false
 
