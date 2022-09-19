@@ -38,16 +38,6 @@ export default class ColaboradorCls extends Vue {
     public get statusFormEnum(): typeof statusFormEnum {
         return statusFormEnum
     }
-    /**
-     * função para ativar o campo quantidade de filhos se o usuário informar que tem filhos
-     */
-    public ativarCampo(): void {
-        if(this.rsColaborador.filhos){
-            this.habilitarCampo = false
-        }else {
-            this.habilitarCampo = true
-        }
-    }
 
     public indiceRegistroAtual: number = 0
 
@@ -296,6 +286,8 @@ export default class ColaboradorCls extends Vue {
             rg: '',
             jornada: ''
         }
+
+        this.habilitarCampo = false
             ; (<HTMLElement>this.$refs.txtNome).focus()
 
     }
@@ -326,7 +318,7 @@ export default class ColaboradorCls extends Vue {
      */
     public btExcluir(indice: number): void {
         this.rsColaboradores.splice(indice, 1)
-        ; (<HTMLElement>this.$refs.txtNome).focus()
+            ; (<HTMLElement>this.$refs.txtNome).focus()
     }
     /**
      * função para alterar um registro no formuário
@@ -343,6 +335,7 @@ export default class ColaboradorCls extends Vue {
      * @param CEP Pesquisa o CEP informado no site da Viacep e retorna os dados como logradouro, bairro, cidade do cep informado
      */
     public buscaCep(CEP: string): void {
+
         if (CEP == 'txtCEP') {
             this.validaCampos.verificaCEP(this.rsColaborador.cep).then(temCEP => {
                 if (temCEP) {
@@ -350,13 +343,38 @@ export default class ColaboradorCls extends Vue {
                     this.rsColaborador.bairro = this.validaCampos.tmp_eCEP.bairro
                     this.rsColaborador.cidade = this.validaCampos.tmp_eCEP.localidade
                     this.rsColaborador.uf = this.validaCampos.tmp_eCEP.uf
-                    this.CEP_ATIVO = true
+                    this.CEP_ATIVO = this.validaCampos.tmp_eCEP.tem
+                    this.habilitarCampo = false
+
                 } else {
-                    this.CEP_ATIVO = false
+                    this.rsColaborador.endereco = ''
+                    this.rsColaborador.bairro = ''
+                    this.rsColaborador.cidade = ''
+                    this.rsColaborador.uf = ''
+                    this.CEP_ATIVO = this.validaCampos.tmp_eCEP.tem
+                    this.habilitarCampo = true;
+                    (<HTMLElement>this.$refs.txtEndereco).focus()
                 }
             }).catch(err => {
-                this.msgErro.endereco = err
+                this.msgErro.cep = err
+                this.CEP_ATIVO = this.validaCampos.tmp_eCEP.tem
+                this.habilitarCampo = true;
+                (<HTMLElement>this.$refs.txtEndereco).focus()
             })
         }
     }
+    /**
+     * função para ativar o campo quantidade de filhos se o usuário informar que tem filhos
+     */
+    public ativarCampo(): void {
+
+        const resposta: string = this.rsColaborador.filhos.toString()
+        if (resposta == "true" || resposta == "sim") {
+            this.habilitarCampo = false
+        } else {
+            this.habilitarCampo = true
+        }
+
+    }
+
 }

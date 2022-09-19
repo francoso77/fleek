@@ -51,7 +51,7 @@
                 <span class="mensagemErro" v-show="msgErro.cep">{{msgErro.cep}}</span>
                 <br>
                 <label for="txtEndereco" id="lblEndereco">Endereço:</label>
-                <input type="text" id="txtEndereco" value="" ref="txtEndereco" v-model="rsColaborador.endereco" />
+                <input type="text" id="txtEndereco" value="" ref="txtEndereco" :disabled="!habilitarCampo" v-model="rsColaborador.endereco" />
                 <br>
                 <span class="mensagemErro" v-show="msgErro.endereco">{{msgErro.endereco}}</span>
                 <br>
@@ -61,12 +61,12 @@
                 <span class="mensagemErro" v-show="msgErro.numero">{{msgErro.numero}}</span>
                 <br>
                 <label for="txtBairro" id="lblBairro">Bairro:</label>
-                <input type="text" id="txtBairro" value="" ref="txtBairro" v-model="rsColaborador.bairro" />
+                <input type="text" id="txtBairro" value="" ref="txtBairro" :disabled="!habilitarCampo" v-model="rsColaborador.bairro" />
                 <br>
                 <span class="mensagemErro" v-show="msgErro.bairro">{{msgErro.bairro}}</span>
                 <br>
                 <label for="txtUF" id="lblUF">UF:</label>
-                <select v-model="rsColaborador.uf" ref="txtUF" id="txtUF">
+                <select v-model="rsColaborador.uf" ref="txtUF" :disabled="!habilitarCampo" id="txtUF">
                     <option disabled value="">UF</option>
                     <option v-for="uf in ufs" :value="uf">{{ uf }}</option>
                 </select>
@@ -98,7 +98,7 @@
             </div>
             <div class="form2">
                 <label for="txtSalario" id="lblSalario">Salário:</label>
-                <input type="text" id="txtSalario" value="" v-model="rsColaborador.salario" @change="formatar" />
+                <input type="text" id="txtSalario" value="" v-model="rsColaborador.salario" />
 
                 <br>
                 <span class="mensagemErro" v-show="msgErro.salario">{{msgErro.salario}}</span>

@@ -5,7 +5,8 @@ interface dadosCepInterface {
     logradouro: string,
     bairro: string,
     localidade: string,
-    uf: string
+    uf: string,
+    tem: boolean
 }
 const expCEP: RegExp = new RegExp('^[0-9]{2}.[0-9]{3}-[0-9]{3}$', 'g')
 const expUF: RegExp = new RegExp('^([A-Z]){2}$', 'gi')
@@ -57,7 +58,8 @@ export default class ClsValidaCampo {
         logradouro: '',
         bairro: '',
         localidade: '',
-        uf: ''
+        uf: '',
+        tem:false
     }
     /**
      * Valida o campo CEP
@@ -307,6 +309,7 @@ export default class ClsValidaCampo {
                     this.tmp_eCEP.logradouro = dados.data.logradouro
                     this.tmp_eCEP.localidade = dados.data.localidade
                     this.tmp_eCEP.uf = dados.data.uf
+                    this.tmp_eCEP.tem = true
                     return true
                 }
                 else {

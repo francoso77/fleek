@@ -25,10 +25,13 @@
     margin-left: 5%;
 }
 .tabelaDados {
-    text-align: left;
+    text-align: center;
     border: 1px solid black;
     padding: 10px;
     border-radius: 10px;
+
+    margin-top: 10px;
+
 }
 
 @media(min-width: 600px) {
@@ -37,26 +40,21 @@
         margin-left: 33%;
         margin-top: 100px;
     }
-
     .tabelaDados {
-        width: 60%;
-        margin-left: 20%;
-        margin-top: 100px;
+        width: 150%;
     }
+
 }
 
 @media(max-width: 600px) {
     .formulario {
         width: 90%;
-        
         margin-top: 70px;
+    }
+    .tabelaDados {
+        width: 900%;
     }
 
-    .tabelaDados {
-        width: 90%;
-        
-        margin-top: 70px;
-    }
 }
 
 .mensagemErro {
