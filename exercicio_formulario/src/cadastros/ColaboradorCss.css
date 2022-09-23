@@ -116,18 +116,18 @@ input {
 }
 
 #txtCEP {
-    width: 18%;
+    width: 25%;
 }
 
 #txtCPF,
 #txtRG {
-    width: 30%;
+    width: 35%;
     left: 30px;
 
 }
 
 #txtTelefone {
-    width: 25%;
+    width: 30%;
 }
 
 

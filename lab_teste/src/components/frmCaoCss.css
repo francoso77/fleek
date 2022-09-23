@@ -1,0 +1,28 @@
+.frmCao{
+    text-align: center;
+    margin-top: 150px;
+    border: 2px solid black;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: medium;
+    padding-left: 10px;
+    padding-right: 10px;
+}   
+
+input{
+    display: block;
+    text-align: center;
+    border-radius: 15%;
+    width: 25%;
+    
+}
+label{
+    display: block;
+    padding-right: 200%;
+}
+
+select{
+    display: block;
+    text-align: center;
+    border-radius: 15%;
+    width: 25%;  
+}
