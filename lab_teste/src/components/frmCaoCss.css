@@ -1,28 +1,85 @@
-.frmCao{
-    text-align: center;
+.frmCao {
+    text-align: left;
     margin-top: 150px;
+    margin-right: 400px;
+    margin-left: 400px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    padding-left: 30px;
     border: 2px solid black;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: medium;
-    padding-left: 10px;
-    padding-right: 10px;
-}   
-
-input{
-    display: block;
-    text-align: center;
-    border-radius: 15%;
-    width: 25%;
+    border-radius: 10px;
+}
+.saude {
+    border: 2px solid black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    width: 85%;
+    margin-left: 15px;
+    text-align: left;
     
 }
-label{
-    display: block;
-    padding-right: 200%;
+
+#txtClinica,
+#chkVacina,
+#chkConsulta{
+    display: inline;
+    margin-left: 5%;
+    font-size: 15px;
 }
 
-select{
-    display: block;
-    text-align: center;
-    border-radius: 15%;
-    width: 25%;  
+input[type=checkbox]{
+    
+    font-size: medium;
+    margin-left: 150px;
+}
+
+input {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    text-align: left;
+    font-size: larger;
+    border-radius: 5px;
+    width: 85%;
+    border: 2px solid black;
+    margin-left: 15px;
+
+}
+
+label {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    display: flex;
+    margin-left: 15px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: x-large;
+    font-style: italic;
+}
+
+select {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    border-radius: 5px;
+    width: 85%;
+    border: 2px solid black;
+    margin-left: 15px;
+    font-size: larger;
+}
+
+.categoria {
+    border: 2px solid black;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    display: flex;
+    border-radius: 5px;
+    width: 75%;
+    margin-left: 15px;
+}
+
+.debug{
+    padding-top: 50px;
+    color: red;
 }
