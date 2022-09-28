@@ -1,8 +1,8 @@
 .frmCao {
     text-align: left;
     margin-top: 25px;
-    margin-right: 400px;
-    margin-left: 400px;
+    margin-right: 200px;
+    margin-left: 200px;
     padding-bottom: 20px;
     padding-top: 20px;
     padding-left: 30px;
@@ -50,6 +50,7 @@ input, select{
 #lblBranca,
 #lblAzul,
 #lblAmarela,
+#lblPreta,
 #lblVacina,
 #lblConsulta,
 input[type=radio],
@@ -61,4 +62,47 @@ input[type=checkbox]{
 #txtNome,
 #txtClinica{
     width: 85%;
+}
+input[type=buttoN]{
+    background-color: darkslategrey;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 35px;
+    padding: 10px 10px;
+}
+
+.mensagemErro{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    color: red;
+}
+input[type=button],
+.botaoAcao {
+    background-color: darkslategrey;
+    border-radius: 5px;
+    cursor: default;
+    padding: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: larger;
+
+}
+.tabelaDados {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+table th {
+    background-color: dodgerblue;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    align: center;
+}
+
+table td {
+    background-color: beige;
+    border-radius: 10px;
+    padding: 10px;
 }
