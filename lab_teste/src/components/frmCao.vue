@@ -3,61 +3,61 @@
 
         <h2>Perfil do cão</h2>
         <span>Qualquer alteração neste formulário irá afetar apenas eventos futuros</span>
-        <label for="lblCodigo">Código</label>
+        <label for="txtCodigo">Código</label>
         <input type="text" id="txtCodigo" v-model="rsCao.id" />
 
-        <label for="lblNome">Nome (curto)</label>
+        <label for="txtNome">Nome (curto)</label>
         <input type="text" autofocus placeholder="nome" id="txtNome" maxlength="35" v-model="rsCao.nome" />
 
-        <label for="lblGenero">Género</label>
-        <select v-model="rsCao.genero">
+        <label for="selGenero">Género</label>
+        <select v-model="rsCao.genero" id="selGenero">
             <option disabled selected>Género</option>
             <option>Femea</option>
             <option>Macho</option>
         </select>
 
-        <label for="lblAltura">Altura (cm)</label>
+        <label for="txtAltura">Altura (cm)</label>
         <input type="number" id="txtAltura" v-model="rsCao.altura" />
 
-        <label for="lblNascimento">Data de Nascimento</label>
+        <label for="txtNascimento">Data de Nascimento</label>
         <input type="date" id="txtNascimento" v-model="rsCao.nascimento" />
 
-        <label for="lblObito">Data de óbito</label>
+        <label for="txtObito">Data de óbito</label>
         <input type="date" id="txtObito" v-model="rsCao.obito" />
 
-        <label for="lblRaca">Raça</label>
-        <select v-model="rsCao.raca">
+        <label for="selRaca">Raça</label>
+        <select v-model="rsCao.raca" id="selRaca">
             <option disabled selected>Raças</option>
             <option v-for="raca in racas" :value="raca">{{raca}}</option>
         </select>
 
-        <label for="lblFederacao">Federações</label>
-        <select v-model="rsCao.federacao">
+        <label for="selFederacao">Federações</label>
+        <select v-model="rsCao.federacao" id="selFederacao">
             <option disabled selected>Federações</option>
             <option v-for="federacao in federacoes" :value="federacao">{{federacao}}</option>
         </select>
 
-        <label for="lblCategoria">Categorias</label>
+        <label for="">Categorias:</label>
         <div class="categoria">
 
-            <input type="radio" id="radCatBranca" value="Branca" v-model="rsCao.categoria" /><br>
-            <label for="radBranca">Branca</label>
-            <input type="radio" id="radCatAzul" value="Azul" v-model="rsCao.categoria" /><br>
-            <label for="radCatAzul">Azul</label>
-            <input type="radio" id="radCatAmarela" value="Amarela" v-model="rsCao.categoria" /><br>
-            <label for="radCatAmarela">Amarela</label>
+            <input type="radio" id="radCatBranca" value="Branca" v-model="rsCao.categoria" />
+            <label for="radCatBranca" id="lblBranca">Branca</label><br>
+            <input type="radio" id="radCatAzul" value="Azul" v-model="rsCao.categoria" />
+            <label for="radCatAzul" id="lblAzul">Azul</label><br>
+            <input type="radio" id="radCatAmarela" value="Amarela" v-model="rsCao.categoria" />
+            <label for="radCatAmarela" id="lblAmarela">Amarela</label>
         </div>
 
-        <label for="lblSaude">Saúde</label>
+        <label for="lblSaude">Saúde:</label>
         <div class="saude">
 
 
             <input type="checkbox" id="chkVacina" value="" true-value="sim" false-value="não" v-model="rsCao.vacina" />
-            <label for="chkVacina">Vacinação em dia?</label>
+            <label for="chkVacina" id="lblVacina">Vacinação em dia?</label><br>
             <input type="checkbox" id="chkConsulta" value="" true-value="sim" false-value="não"
                 v-model="rsCao.consulta" />
-            <label for="chkConsulta">Consultas em dia?</label>
-            <label for="txtClinica">Clínica Veterinária</label>
+            <label for="chkConsulta" id="lblConsulta">Consultas em dia?</label><br>
+            <label for="txtClinica" id="lblClinica">Clínica Veterinária</label>
             <input type="text" id="txtClinica" value="" maxlength="30" v-model="rsCao.clinica" />
 
 

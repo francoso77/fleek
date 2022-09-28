@@ -1,6 +1,6 @@
 .frmCao {
     text-align: left;
-    margin-top: 150px;
+    margin-top: 25px;
     margin-right: 400px;
     margin-left: 400px;
     padding-bottom: 20px;
@@ -14,4 +14,51 @@
 .debug{
     padding-top: 50px;
     color: red;
+}
+
+span{
+    display: block;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 35px;
+    font-size: 15px;
+}
+input, select{
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    padding: 2px 2px;
+    border-radius: 5px;
+    font-size: larger;
+    border: 2px solid black;
+    
+}
+
+
+.categoria,
+.saude{
+    border: 2px solid black;
+    border-radius: 5px;
+    margin-right: 150px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#lblBranca,
+#lblAzul,
+#lblAmarela,
+#lblVacina,
+#lblConsulta,
+input[type=radio],
+input[type=checkbox]{
+    display: inline-flex;
+    margin-bottom: 15px;   
+}
+#txtCodigo,
+#txtNome,
+#txtClinica{
+    width: 85%;
 }
