@@ -1,17 +1,29 @@
 <template>
   <div class="home">
-     <HelloWorld msg="Mensagem de boas vindas"/>
+    <HelloWorld :msg="mensagemBoasVindas" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import HelloWorld from '@/components/HelloWorld.vue' // @ is an alias to /src
+import store from '../store'
 
 @Component({
   components: {
     HelloWorld
   }
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+
+  public get mensagemBoasVindas(): string {
+    let mensagem: string = ''
+    if (store.state.logado) {
+      mensagem = "Seja bem vindo ao nosso APP ..."
+    } else {
+      mensagem = "Faça o login!"
+    }
+    return mensagem
+  }
+}
 </script>
