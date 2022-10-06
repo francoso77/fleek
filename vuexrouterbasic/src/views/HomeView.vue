@@ -18,7 +18,10 @@ export default class HomeView extends Vue {
 
   public get mensagemBoasVindas(): string {
     let mensagem: string = ''
-    if (store.state.logado) {
+    
+    //quando vc usa class essa é a sintaxe
+
+    if (store.state.LoginModule.logado) {
       mensagem = "Seja bem vindo ao nosso APP ..."
     } else {
       mensagem = "Faça o login!"
