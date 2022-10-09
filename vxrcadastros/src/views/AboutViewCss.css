@@ -1,0 +1,15 @@
+.about{
+    color: red;
+}
+input[type=button]{
+    display: block;
+    background-color: cadetblue;
+    align-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 650px;
+    font-size: medium;
+    padding: 10px 10px;
+    width: 80px;
+    font-weight: bold;
+}

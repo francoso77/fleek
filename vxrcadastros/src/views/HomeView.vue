@@ -8,3 +8,4 @@
 import x from './HomeViewCls'
 export default x
 </script>
+<style scoped src="./estilos.css">

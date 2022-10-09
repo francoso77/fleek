@@ -9,3 +9,8 @@
     <input type="tel" name="" id="txtTelefone">
   </div>
 </template>
+<script lang="ts">
+import x from './FornecedorViewCls'
+export default x
+</script>
+<style scoped src="./estilos.css">

@@ -9,3 +9,8 @@
     <input type="date" name="" id="txtNascimento">
   </div>
 </template>
+<script lang="ts">
+import x from './ClienteViewCls'
+export default x
+</script>
+<style scoped src="./estilos.css">

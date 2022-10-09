@@ -10,3 +10,5 @@
 import Login from '../views/AboutViewCls'
 export default Login
 </script>
+<style scoped src="./AboutViewCss.css">
+  

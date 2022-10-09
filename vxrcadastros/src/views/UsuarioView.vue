@@ -9,3 +9,9 @@
     <input type="password" name="" id="txtSenha">
   </div>
 </template>
+<script lang="ts">
+import x from './UsuarioViewCls'
+export default x
+</script>
+<style scoped src="./estilos.css">
+
