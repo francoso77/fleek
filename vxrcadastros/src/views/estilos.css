@@ -1,3 +1,65 @@
-label{
+.cliente, .fornecedor, .usuario {
+    text-align: left;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    align-items: center;
+    margin-left: 30%;
+    margin-right: 30%;
+    padding: 5% 5%;
+}
+.tabelaDados{
+    margin-left: 25%;
+    margin-right: 30%;
+    padding: 5% 5%;
+}
+@media(min-width: 600px) {
+    .formulario {
+        width: 33%;
+        margin-left: 33%;
+        margin-top: 100px;
+    }
+}
+
+@media(max-width: 600px) {
+    .formulario {
+        width: 90%;
+        margin-top: 70px;
+    }
+}
+
+label {
     display: block;
+}
+
+table th {
+    background-color: dodgerblue;
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    align: center;
+}
+
+table td {
+    background-color: beige;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+input[type=button]{
+    background-color: cadetblue;
+    border-radius: 5px;
+    cursor: default;
+    padding: 15px 15px;
+    margin-top: 25px;
+    margin-left: 25px;
+    margin-right: 10px;
+    font-size: larger;
+ 
+}
+.botaoAcao{
+    background-color: cadetblue;
+    border-radius: 5px;
+    cursor: default; 
+margin-right: 0px;
 }
