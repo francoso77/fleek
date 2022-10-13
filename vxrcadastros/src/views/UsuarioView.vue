@@ -8,10 +8,13 @@
       <input type="text" name="" id="txtUsuario" v-model="rsUsuario.usuario">
       <label for="txtSenha">Senha</label>
       <input type="password" name="" id="txtSenha" v-model="rsUsuario.senha"><br>
+      <input type="button" value="Login" @click="login()">
+      <input type="button" value="Logout" @click="logout()">
+      <!--
       <input type="button" :value="(statusForm==statusFormEnum.INCLUINDO)? 'Cadastrar' : 'Alterar'" id="btCadastrar"
         @click="confimarDados()">
       <input type="button" value="Cancelar" @click="cancelarDados()">
-
+      
     </div>
     <div class="tabelaDados">
 
@@ -35,6 +38,7 @@
     </div>
     <div class="debug" v-if="exibirDebug">
       {{ rsFornecedor }}
+    </div> -->
     </div>
   </div>
 </template>

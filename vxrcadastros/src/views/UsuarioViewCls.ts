@@ -1,3 +1,4 @@
+import store from '../store'
 import { Component, Vue } from 'vue-property-decorator'
 
 interface UsuarioInterface {
@@ -13,6 +14,18 @@ enum statusFormEnum {
 
 @Component
 export default class UsuarioViewCls extends Vue {
+
+    public login(): void {
+        if (store.state.LoginModule.nome == this.rsUsuario.usuario &&
+            store.state.LoginModule.senha == this.rsUsuario.senha) {
+            this.$store.dispatch('login')
+        }else {
+            alert('Usuário ou senha incorretos!')
+        }
+    }
+    public logout(): void {
+        store.dispatch('logout')
+    }
 
     public statusForm: statusFormEnum = statusFormEnum.INCLUINDO
 
@@ -49,7 +62,7 @@ export default class UsuarioViewCls extends Vue {
         this.limparEForcar()
     }
     public confimarDados(): void {
-        
+
         let dadosValidos: boolean = false
 
         if (this.rsUsuario.id != '') {

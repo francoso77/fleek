@@ -4,6 +4,7 @@ import HomeView from '../views/HomeView.vue'
 import ClienteView from '../views/ClienteView.vue'
 import FornecedorView from '../views/FornecedorView.vue'
 import UsuarioView from '../views/UsuarioView.vue'
+import store from '../store'
 
 Vue.use(VueRouter)
 
@@ -42,4 +43,16 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  //console.log(to)
+
+  if (to.name === 'usuario' && !store.state.LoginModule.logado) {
+    next()
+    
+  } else if (store.state.LoginModule.logado) {
+    next()
+  } else{
+    alert("Usuário Desconectado! Faça Login")
+  }
+})
 export default router

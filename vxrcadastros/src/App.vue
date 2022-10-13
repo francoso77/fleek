@@ -4,8 +4,8 @@
       <router-link to="/">Home |</router-link>
       <router-link to="/cliente">Cliente |</router-link>
       <router-link to="/fornecedor">Fornecedor |</router-link>
-      <router-link to="/usuario">Usuário |</router-link>
-      <router-link to="/about">About</router-link>
+      <router-link to="/usuario">Login </router-link>
+      <!--<router-link to="/about">About</router-link>-->
     </nav>
     <router-view/>
   </div>
