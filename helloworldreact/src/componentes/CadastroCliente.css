@@ -1,3 +1,10 @@
 .CadastroCliente{
     margin-top: 50px;
 }
+
+.CadastroCliente input, label, select{
+    margin-top: 5px;
+    margin-left: 33%;
+    display: block;
+    text-align: left;
+}

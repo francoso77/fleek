@@ -8,7 +8,7 @@ function App() {
 
   const CIDADES: Array<string> = ['Divinópolis', 'Campinas', 'Macaé', 'Balneário Camburio']
 
-  const mostrarDados: boolean = true
+  const mostrarDados: boolean = false
 
   const empresa: string = "Agility LAB"
 
@@ -31,23 +31,23 @@ function App() {
           <p>{rsClientes.tel}</p>
           <p>10 + 45 = {10 + 45} passando como ninja</p>
           <a href={rsClientes.site}>Site da JB TEXTIL</a>
+
           <CadastroCliente />
+
+          {UFS.map((uf, i) => <p key={i}>{uf}</p>)}
+          <CadastroCliente />
+
+          {CIDADES.map((cidade, i) => {
+
+            return <p key={i}>{cidade}</p>
+
+          })}
+          <select name="UF" id="">
+            <option disabled selected>UF</option>
+            {UFS.map((uf, i) => <option key={i}>{uf}</option>)}
+          </select>
         </div>}
-      <CadastroCliente />
-
-      {UFS.map((uf, i) => <p key={i}>{uf}</p>)}
-      <CadastroCliente />
-      
-      {CIDADES.map((cidade, i) => {
-
-        return <p key={i}>{cidade}</p>
-
-      })}
-      <select name="UF" id="">
-        <option disabled selected>UF</option>
-        {UFS.map((uf, i) => <option key={i}>{uf}</option>)}
-      </select>
-    
+        <CadastroCliente />
     </div>
   );
 }
