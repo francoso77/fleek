@@ -1,1 +1,86 @@
+criando um novo projeto
 npx create-react-app nomedoprojeto --template typescript
+
+instalando o router-dom - rotas e states
+npm i react-router-dom
+
+
+estrututa basica de um projeto
+
+na pasta SRC - no arquivo INDEX.TSX
+no root.render()
+
+no lugar o APP - vc irá colocar o 
+
+<RouterProvider router={router} />
+devendo neste momento importar - RouterProvider -> react-router-dom
+			       - router -> arquivo tsx Router
+
+Arquivo Router.tsx
+Aqui será definido todas as rotas que iremos utilizar em nosso APP
+importaremos então para isto:
+
+createBrowserRouter -> react-router-dom
+os componentes que iremos ultilizar na aplicação exemplo:
+casdatrocliente
+cadatrofornecedor
+login
+layout
+em seguida criares as rotas PAI e filhas definido:
+path: "/",
+element: <Layout />,
+children: [
+	{
+		path: "cadastrocliente",
+		element: <CadastroCliente />,
+	},
+	],
+
+Layout.tsx
+o componente layout (PAI) é o responsável pela estrutura básica da aplicação 
+e o demais componentes irá renderizar dentro dessa estrutura através da
+diretiva OUTLET onde ocorre as renderizações. Está diretiva é importada
+do (react-router-dom)
+
+o OUTLET para funcionar corretamente será utilizado dentro da sintaxe
+
+<LoginContexto.Provider value:{{ ...login, updateLogin: updateLogin}}>
+...
+..<Outlet />
+...
+</LoginContexto.Provider>
+
+e nos componentes FILHAS
+para isso é preciso importar o LoginContexto do PAI
+<LoginContexto.Consumer>
+..
+..
+..
+</LoginContexto.Consumer>
+
+O LoginContexto - é o controle necessário do STATE
+ele é criado atráves da sintaxe -> React.createContext({...loginContextoPadrao})
+loginContextoPadrao - é uma variável criada com os valores inicias do CONTEXTO.
+Este CONTEXTO será alterado pelo APP na medida que o usuário faz o login ou logout.
+
+Para fazer a mudança do STATE e a atualização do CONTEXTO é necessário usar o 
+USESTATE - > importado do React
+
+const [login setLogin] = useState({ logado:false, nome: ''})  - aqui com valores iniciais.
+
+const updateLogin = (logado: boolean, nome: string) => {
+	setLogin({ logado: logado, nome: nome})
+}
+
+este callback function ao ser invocado realiza a mudança do STATE.
+ele deve ser incorpotado ao CONTEXTO para as atualizações ao STATE prevalecer do 
+PAI para as FIHAS e vise e versa.
+estes valores de CONTEXTO é enviado atráves do LoginContexto.Provider.
+
+NavLink
+O navlink é a diretiva para criar os link das rotas.
+
+<NavLink to="/">Home</NavLink>
+<NavLink to="/cadastrofornecedor">Fornecedor</NavLink>
+geralmente utilizado para a criação do MENU
+
