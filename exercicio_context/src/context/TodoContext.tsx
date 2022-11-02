@@ -25,7 +25,7 @@ const TodoProvider = ({ children }: { children: any }) => {
     const [todos, SetTodos] = useState([
         { id: 1, title: 'Ir ao supermercado', done: false },
         { id: 2, title: 'Ir a farmácia', done: false },
-        { id: 3, title: 'Buscar documsentos cartório', done: false }
+        { id: 3, title: 'Buscar documentos cartório', done: false }
     ])
 
     const saveTodo = (title: string) => {
@@ -38,28 +38,21 @@ const TodoProvider = ({ children }: { children: any }) => {
 
         SetTodos([...todos, newTodo])
     }
-    const resetTodo = (id: number) => {
 
-        if (!todos.includes({
-            id: id,
-            title: '',
-            done: false
-        })) {
-            console.log('achou o item')
-            console.log(todos.indexOf({
-                id: id,
-                title:'',
-                done:false
-            }))
-            
-            //SetTodos([...todos])
-        } else {
-            console.log('não achou ')
-        }
-
-
-        //SetTodos([...todos, newTodo])
+    const resetTodo = (idRecebido: number) => {
+        
+        todos.forEach((todo, i) => {
+            if (todo.id === idRecebido) {
+                todos.splice(i,1)
+                SetTodos([...todos])
+            }else {
+                if(todo.id === idRecebido && todos.length === 1){
+                    SetTodos([])
+                }
+            }
+        })
     }
+
     return (
         <>
             <TodoContext.Provider

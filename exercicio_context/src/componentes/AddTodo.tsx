@@ -17,14 +17,17 @@ const AddTodo = () =>{
                 }
                 const handleFormReset = (e: any) => {
                     e.preventDefault()
-                    console.log(todoLocal)
                     resetTodo(parseInt(todoLocal))
                 }
                 const handleInputChange = (e: any) => {
                     setTodoLocal(e.target.value)
                 }
+
+                const feito= () =>{
+                    alert('feito ')
+                }
                 return (
-                    <form onSubmit={handleFormSubmit} onReset={handleFormReset}>
+                    <form onSubmit={handleFormSubmit} onReset={handleFormReset} onClick={feito}>
                         <input 
                             type="text" 
                             name="title" 
@@ -34,6 +37,7 @@ const AddTodo = () =>{
                         />
                         <button id="btAdicionar">ADICIONAR</button>
                         <button type="reset">EXCLUIR</button>
+                        <button id='btFeito'>FEITO</button>
                     </form>
                 )
             }
