@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import { redirect } from 'react-router-dom';
+import { createTextSpanFromBounds } from 'typescript';
 
 export interface TodoInterface {
     id: number,
@@ -9,13 +11,15 @@ export interface TodoInterface {
 export interface ContextTodoInterface {
     todo: Array<TodoInterface>,
     saveTodo: (title: string) => void,
-    resetTodo: (title: number) => void
+    resetTodo: (title: number) => void,
+    feitoTodo: (title: number) => void
 }
 
 const ContextTodo: ContextTodoInterface = {
     todo: [],
     saveTodo: (title) => { },
-    resetTodo: (id) => { }
+    resetTodo: (id) => { },
+    feitoTodo: (id) => { },
 }
 
 export const TodoContext = createContext({ ...ContextTodo })
@@ -53,15 +57,29 @@ const TodoProvider = ({ children }: { children: any }) => {
         })
     }
 
+    const feitoTodo = (idRecebido: number) => {
+        
+        todos.forEach((todo, i) => {
+            if (todo.id === idRecebido && todo.done === false) {
+                todo.done = true
+                todo.title = todo.title.toLowerCase()
+                SetTodos([...todos])
+            }
+        })
+
+    }
+
     return (
         <>
             <TodoContext.Provider
                 value={{
                     todo: [...todos],
                     saveTodo: saveTodo,
-                    resetTodo: resetTodo
+                    resetTodo: resetTodo,
+                    feitoTodo: feitoTodo
                 }}>
                 {children}
+               
             </TodoContext.Provider>
         </>
     );
