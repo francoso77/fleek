@@ -1,5 +1,6 @@
 import React from 'react'
 import { LoginContexto } from './Layout'
+import "./Footer.css"
 
 export default function Footer() {
     return (

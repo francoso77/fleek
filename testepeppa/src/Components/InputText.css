@@ -1,0 +1,12 @@
+.InputText, .spanValidacao, .labelInputText{
+    margin-top: 5px;
+    margin-left: 20%;
+    display: block;
+    text-align: left;
+
+}
+
+.spanValidacao {
+    font-size: 9px;
+    color: red;
+}

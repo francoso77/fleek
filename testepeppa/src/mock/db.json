@@ -1,0 +1,59 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "nome": "A",
+      "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
+      "categoria": "TIPO A",
+      "valor": "100"
+    },
+    {
+      "id": 2,
+      "nome": "B",
+      "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
+      "categoria": "TIPO B",
+      "valor": "100"
+    },
+    {
+      "id": 3,
+      "nome": "C",
+      "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
+      "categoria": "TIPO A",
+      "valor": "100"
+    },
+    {
+      "nome": "PEREIRA",
+      "descricao": "AFDJFHAJKFHJDKHFJKAHJKAHFKJADFHKJADFHJKASDFHKAJSHFAJKH",
+      "categoria": "TIPO A",
+      "valor": "200",
+      "id": 4
+    },
+    {
+      "nome": "ADFADFDSF",
+      "descricao": "AFDASFDSF",
+      "categoria": "ADFASDF",
+      "valor": "200",
+      "id": 5
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "usuario": "joao",
+      "senha": "123",
+      "logado": false
+    },
+    {
+      "id": 2,
+      "usuario": "frank",
+      "senha": "123",
+      "logado": false
+    },
+    {
+      "id": 3,
+      "usuario": "pedro",
+      "senha": "jacare",
+      "logado": false
+    }
+  ]
+}

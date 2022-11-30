@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import Login from '../Login/Login'
 
 import Footer from './Footer'
 import Header from './Header'
@@ -26,13 +27,24 @@ export default function Layout() {
     return (
         <>
             <LoginContexto.Provider value={{ ...login, updateLogin: updateLogin }}>
-                <Header />
-                <main>
-                    <Outlet />
 
-                </main>
+                <>
+                    {!login.logado ?
+                        <>
+                            <Login />
 
-                <Footer />
+                        </>
+                        :
+                        <>
+                            <Header />
+                            <main>
+                                <Outlet />
+
+                            </main>
+
+                            <Footer />
+                        </>}
+                </>
             </LoginContexto.Provider>
         </>
     )

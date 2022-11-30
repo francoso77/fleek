@@ -1,24 +1,16 @@
 .topnav, .lateralnav{
-    background-color: #007bff;
+    background-color: #0b427c;
     overflow: hidden;
 }
-.topnav a{
-    float: left;
-    color:white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    
-}
 
-.topnav a:hover, .lateralnav a:hover{
-    background-color: #EE7D00;
+
+.lateralnav a:hover{
+    background-color: #098ea0;
     color: black
 }
 
-.topnav a.active, .lateralnav a.active{
-    background-color: #EE7D00;
+.lateralnav a.active{
+    background-color: #098ea0;
     color: white;
 }
 
