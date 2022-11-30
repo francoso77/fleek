@@ -1,0 +1,23 @@
+html{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    position: relative;
+    min-height: 100%;
+
+}
+
+.footer{
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: #ccc;
+    font-weight: 100;
+    font-style: normal;
+    font-size: 14px;
+    padding: 5px;
+
+}
+main{
+    margin-left: 255px;
+}

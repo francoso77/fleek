@@ -1,0 +1,43 @@
+.topnav, .lateralnav{
+    background-color: #007bff;
+    overflow: hidden;
+}
+.topnav a{
+    float: left;
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    
+}
+
+.topnav a:hover, .lateralnav a:hover{
+    background-color: #EE7D00;
+    color: black
+}
+
+.topnav a.active, .lateralnav a.active{
+    background-color: #EE7D00;
+    color: white;
+}
+
+.lateralnav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    top: 62px;
+    left: 0;
+    z-index: 1;
+
+}
+
+.lateralnav a{
+    display: block;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none;
+    font-size: 17px;
+    color:white;
+    
+}
