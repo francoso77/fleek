@@ -7,7 +7,7 @@ const AddTodo = () =>{
 
     return (
         <TodoContext.Consumer>{
-            ({ saveTodo,resetTodo }) => {
+            ({ saveTodo, resetTodo, feitoTodo}) => {
 
                 
 
@@ -23,11 +23,12 @@ const AddTodo = () =>{
                     setTodoLocal(e.target.value)
                 }
 
-                const feito= () =>{
-                    alert('feito ')
+                const feito = (e: any) =>{
+                    e.preventDefault()
+                    feitoTodo(parseInt(todoLocal))
                 }
                 return (
-                    <form onSubmit={handleFormSubmit} onReset={handleFormReset} onClick={feito}>
+                    <form onSubmit={handleFormSubmit} onReset={handleFormReset}>
                         <input 
                             type="text" 
                             name="title" 
@@ -37,7 +38,7 @@ const AddTodo = () =>{
                         />
                         <button id="btAdicionar">ADICIONAR</button>
                         <button type="reset">EXCLUIR</button>
-                        <button id='btFeito'>FEITO</button>
+                        <input type="button" value="FEITO" onClick={feito} />
                     </form>
                 )
             }
