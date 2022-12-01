@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import InputText from '../Components/InputText'
 import { URL_SERVIDOR } from '../Config/Setup'
 import { ProdutosInterface } from '../Interfaces/ProdutosInterface'
@@ -14,28 +15,37 @@ export default function CadastroProduto() {
     })
 
     const isLogado = useContext(LoginContexto).logado
+    const irpara = useNavigate()
 
     const btSalvar = () => {
 
-        fetch(URL_SERVIDOR.concat('/produtos'), {
-            body: JSON.stringify(rsProdutos),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method: 'POST'
-        }).then(rs => {
-            if (rs.status == 201) {
+        if (rsProdutos.nome &&
+            rsProdutos.descricao &&
+            rsProdutos.categoria &&
+            rsProdutos.valor) {
 
-                alert("Produto Cadastrado!")
-                setRsProdutos({
-                    nome: '',
-                    descricao: '',
-                    categoria: '',
-                    valor: ''
-                })
-            }
 
-        })
+            fetch(URL_SERVIDOR.concat('/produtos'), {
+                body: JSON.stringify(rsProdutos),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST'
+            }).then(rs => {
+                if (rs.status === 201) {
+                    
+                    setRsProdutos({
+                        nome: '',
+                        descricao: '',
+                        categoria: '',
+                        valor: ''
+                    })
+                    irpara("/Mensagem")
+                }
+            })
+        } else {
+            alert('Os campos não podem ser vázio')
+        }
 
     }
 

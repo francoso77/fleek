@@ -30,6 +30,13 @@
     padding-bottom: 15px;
     text-decoration: none;
     font-size: 17px;
-    color:white;
+    color:white;   
+}
+
+.usuario{
+    display: inline-flex;
+    color: white;
+    font-size: larger;
+    margin-left: 80%;
     
 }

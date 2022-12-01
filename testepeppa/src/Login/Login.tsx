@@ -6,6 +6,8 @@ import './Login.css'
 
 export default function Login() {
 
+    const [validacao, setValidacao] = useState('')
+    
     const [usuarios, setUsuarios] = useState<LoginInterface>({
         usuario: '',
         senha: '',
@@ -28,16 +30,11 @@ export default function Login() {
 
                 updateLogin(true, dadosUsuarios[0].usuario)
 
-                console.log('usuario: ', dadosUsuarios[0].usuario)
-                console.log('senha: ', dadosUsuarios[0].senha)
-
-                console.log('Usuário encontrato... Login OK!!')
-
             } else {
-                console.log('Usuário Não encontrato!!')
+                setValidacao('Usuário ou senha inválidos!')
             }
         }).catch(erro => {
-            console.log('Erro no Fetch....', erro)
+            alert('sem conexão com o banco de dados!')
         })
 
     }
@@ -54,6 +51,7 @@ export default function Login() {
                 onChange={(e) => setUsuarios({ ...usuarios, usuario: e.target.value })} />
             <input type="password" id="txtSenha" placeholder='Senha'
                 onChange={(e) => setUsuarios({ ...usuarios, senha: e.target.value })} />
+            <span className="spanValidacao">{validacao}</span>
             <br />
 
             <input type="button" value="Login" id='btLogin'

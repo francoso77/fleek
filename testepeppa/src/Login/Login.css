@@ -22,3 +22,11 @@
 #btLogin{
     margin-left: 20%;
 }
+.spanValidacao{
+    margin-top: 5px;
+    margin-left: 20%;
+    display: block;
+    text-align: left;
+    font-size: 9px;
+    color: red;
+}

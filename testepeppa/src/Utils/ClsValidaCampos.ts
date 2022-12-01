@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import axios from "axios"
-import exp from "constants"
 
 interface dadosCepInterface {
     cep: string,

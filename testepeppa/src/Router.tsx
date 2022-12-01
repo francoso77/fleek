@@ -2,8 +2,9 @@ import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 import CadastroProduto from './Cadastros/CadastroProduto'
 import ListagemProduto from './Cadastros/ListagemProduto'
-import Erro404 from './Layout/Erro404'
+import Erro404 from './Pages/Erro404'
 import Layout from './Layout/Layout'
+import Mensagem from './Pages/Mensagem'
 import Login from './Login/Login'
 
 export const router = createBrowserRouter([
@@ -22,10 +23,11 @@ export const router = createBrowserRouter([
                 errorElement: <Login />
             },
             {
-                path: "/login",
-                element: <Login />,
+                path: "/mensagem",
+                element: <Mensagem />,
                 errorElement: <Login />
             },
+            
         ],
     },
     {
