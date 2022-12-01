@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { URL_SERVIDOR } from '../Config/Setup'
 import { LoginInterface } from '../Interfaces/LoginInterface'
 import { LoginContexto } from '../Layout/Layout'
@@ -6,6 +6,8 @@ import './Login.css'
 
 export default function Login() {
 
+    const focuLogin= useRef<React.MutableRefObject<null>>(null)
+    
     const [validacao, setValidacao] = useState('')
     
     const [usuarios, setUsuarios] = useState<LoginInterface>({
@@ -15,7 +17,8 @@ export default function Login() {
     })
 
     const updateLogin = useContext(LoginContexto).updateLogin
-
+    
+    
     const logar = () => {
 
         let urlPesquisa: string = URL_SERVIDOR.concat('/usuarios?usuario=')
@@ -32,6 +35,7 @@ export default function Login() {
 
             } else {
                 setValidacao('Usuário ou senha inválidos!')
+                focuLogin.current.focus()
             }
         }).catch(erro => {
             alert('sem conexão com o banco de dados!')
@@ -47,7 +51,7 @@ export default function Login() {
 
             </div>
 
-            <input type="text" id="txtLogin" placeholder='Login' autoFocus
+            <input type="text" id="txtLogin" placeholder='Login' ref={focuLogin}  autoFocus
                 onChange={(e) => setUsuarios({ ...usuarios, usuario: e.target.value })} />
             <input type="password" id="txtSenha" placeholder='Senha'
                 onChange={(e) => setUsuarios({ ...usuarios, senha: e.target.value })} />
