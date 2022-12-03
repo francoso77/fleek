@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import './Header.css'
 import { NavLink } from 'react-router-dom'
-import { LoginContexto } from './Layout'
+import { ContextoGlobal } from '../Contexto/ContextoGlobal'
+import { ContextoGlobalInterface } from '../Interfaces/ContextoGlobalInterface'
 
 export default function Header() {
 
-    const isLogado = useContext(LoginContexto).logado
-    const usuario = useContext(LoginContexto).nome
+    const Login = (useContext(ContextoGlobal) as ContextoGlobalInterface).loginState
+    
     return (
         <>
-            {isLogado ?
+            {Login.logado ?
                 <>
                     <div className='topnav'>
                         <img src="logo.png" alt="asdfafasdfasdf" width={210} />
-                        <span className='usuario'>{usuario}</span>
+                        <span className='usuario'>{Login.usuario}</span>
                     </div>
                     <div className='lateralnav '>
                         <NavLink to="/" end>Home</NavLink>
@@ -27,7 +28,7 @@ export default function Header() {
                 :
                 <>
                     <div className='topnav'>
-                        <img src="logo.png" alt="asdfafasdfasdf" width={210} />
+                        <img src="logo.png" alt="lototipo Elanto" width={210} />
                         
                     </div>
                     <div className='lateralnav '>

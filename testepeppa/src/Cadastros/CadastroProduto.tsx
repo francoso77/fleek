@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useContext, useEffect, useState } from 'react'
 import InputText from '../Components/InputText'
 import { URL_SERVIDOR } from '../Config/Setup'
+import { ContextoGlobal } from '../Contexto/ContextoGlobal'
+import { ContextoGlobalInterface } from '../Interfaces/ContextoGlobalInterface'
 import { ProdutosInterface } from '../Interfaces/ProdutosInterface'
-import { LoginContexto } from '../Layout/Layout'
 
 export default function CadastroProduto() {
 
@@ -14,8 +14,13 @@ export default function CadastroProduto() {
         valor: ''
     })
 
-    const isLogado = useContext(LoginContexto).logado
-    const irpara = useNavigate()
+    const globalContexto = (useContext(ContextoGlobal) as ContextoGlobalInterface)
+
+    
+
+    const x = useEffect( ()=>{
+        document.getElementById('txtNome')?.focus()
+    },[setRsProdutos])
 
     const btSalvar = () => {
 
@@ -24,6 +29,11 @@ export default function CadastroProduto() {
             rsProdutos.categoria &&
             rsProdutos.valor) {
 
+            globalContexto.setMensagemModalState({
+                exibir: true,
+                mensagem: "incluindo produto ...",
+                tipo: 'processo'
+            })
 
             fetch(URL_SERVIDOR.concat('/produtos'), {
                 body: JSON.stringify(rsProdutos),
@@ -33,27 +43,43 @@ export default function CadastroProduto() {
                 method: 'POST'
             }).then(rs => {
                 if (rs.status === 201) {
-                    
+
                     setRsProdutos({
                         nome: '',
                         descricao: '',
                         categoria: '',
                         valor: ''
                     })
-                    irpara("/Mensagem")
-                }
-            })
-        } else {
-            alert('Os campos não podem ser vázio')
-        }
 
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Produto cadastrado com sucesso!",
+                        tipo: 'aviso'
+                    })
+                    
+                } else {
+
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Erro ao incluir o produto",
+                        tipo: 'erro'
+                    })
+                }
+            }).catch(() => {
+                globalContexto.setMensagemModalState({
+                    exibir: true,
+                    mensagem: "Erro no servidor. Não foi possível fazer a inclusão!",
+                    tipo: 'erro'
+                })
+            })
+        }
     }
 
     return (
 
         <>
             <h1>Cadastro de Produto</h1>
-            {!isLogado ?
+            {!globalContexto.loginState.logado ?
                 <>
                     <h1>Faça login</h1>
                 </> :

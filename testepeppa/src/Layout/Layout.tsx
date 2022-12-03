@@ -1,51 +1,55 @@
 import React, { useState } from 'react'
 import { Outlet } from 'react-router-dom'
+import { ContextoGlobal } from '../Contexto/ContextoGlobal'
 import Login from '../Login/Login'
+import MensagemModal from '../Pages/MensagemModal'
+import useLayoutState from '../States/LayoutState'
+import useLoginState from '../States/LoginState'
+import useMensagemModalState from '../States/MensagemState'
 
 import Footer from './Footer'
 import Header from './Header'
 
 import './Layout.css'
 
-const loginContextoPadrao = {
-    logado: false,
-    nome: '',
-    updateLogin: (logado: boolean, nome: string) => { }
-}
-
-
-export const LoginContexto = React.createContext({ ...loginContextoPadrao })
 
 export default function Layout() {
 
-    const [login, setLogin] = useState({ logado: false, nome: '' })
-
-    const updateLogin = (logado: boolean, nome: string) => {
-        setLogin({ logado: logado, nome: nome })
-    }
-
+    const {loginState, setLoginState} = useLoginState()
+    const {layouteState, setLayoutState} = useLayoutState()
+    const {mensagemModalState, setMensagemModalState} = useMensagemModalState()
+    
     return (
         <>
-            <LoginContexto.Provider value={{ ...login, updateLogin: updateLogin }}>
+            <ContextoGlobal.Provider value= {{
+                loginState: loginState,
+                setLoginState: setLoginState,
+                layoutState: layouteState,
+                setLayoutState: setLayoutState,
+                mensagemModalState: mensagemModalState,
+                setMensagemModalState: setMensagemModalState
+            }}>
 
                 <>
-                    {!login.logado ?
+                    {!loginState.logado ?
                         <>
                             <Login />
 
                         </>
                         :
                         <>
+                            
                             <Header />
                             <main>
                                 <Outlet />
+                                <MensagemModal />
 
                             </main>
 
                             <Footer />
                         </>}
                 </>
-            </LoginContexto.Provider>
+            </ContextoGlobal.Provider>
         </>
     )
 }

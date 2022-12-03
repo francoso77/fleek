@@ -1,16 +1,20 @@
-import React from 'react'
-import { LoginContexto } from './Layout'
+import React, { useContext } from 'react'
+import { ContextoGlobal } from '../Contexto/ContextoGlobal'
+import { ContextoGlobalInterface } from '../Interfaces/ContextoGlobalInterface'
 import "./Footer.css"
 
 export default function Footer() {
+
+    const globalContexto = (useContext(ContextoGlobal) as ContextoGlobalInterface)
+
     return (
         <>
-            <LoginContexto.Consumer>
-                {(dadosLogin) => <>
+            
+                {(globalContexto.loginState.logado) &&
 
-                    <span className='footer'>{dadosLogin.nome}</span>
-                </>}
-            </LoginContexto.Consumer>
+                    <span className='footer'>{globalContexto.mensagemModalState.mensagem}</span>
+                }
+            
         </>
     )
 }
