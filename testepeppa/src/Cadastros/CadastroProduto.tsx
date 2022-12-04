@@ -15,23 +15,57 @@ export default function CadastroProduto() {
     })
 
     const globalContexto = (useContext(ContextoGlobal) as ContextoGlobalInterface)
-
     
+    if (globalContexto.temProdutosState.temProduto) {
+        
+        fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id?.toString()), {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            method: 'GET'
+        }).then(rs => {
+            if (rs.ok) {
+                
+                return rs.json()
 
-    const x = useEffect( ()=>{
-        document.getElementById('txtNome')?.focus()
-    },[setRsProdutos])
+            } else {
+
+                globalContexto.setMensagemModalState({
+                    exibir: true,
+                    mensagem: "Erro ao encontrar o produto",
+                    tipo: 'erro'
+                })
+            }
+        }).then ( dadosProdutos => {
+            
+            
+            setRsProdutos(dadosProdutos)            
+
+        }).catch(() => {
+            globalContexto.setMensagemModalState({
+                exibir: true,
+                mensagem: "Erro no servidor. Não foi possível encontrar o produto!",
+                tipo: 'erro'
+            })
+        })
+        
+    }
+
+    //const x = useEffect(() => {
+    //    document.getElementById('txtNome')?.focus()
+    //}, [setRsProdutos])
 
     const btSalvar = () => {
 
         if (rsProdutos.nome &&
             rsProdutos.descricao &&
             rsProdutos.categoria &&
-            rsProdutos.valor) {
+            rsProdutos.valor &&
+            !globalContexto.temProdutosState.temProduto) {
 
             globalContexto.setMensagemModalState({
                 exibir: true,
-                mensagem: "incluindo produto ...",
+                mensagem: "Incluindo o produto ...",
                 tipo: 'processo'
             })
 
@@ -42,7 +76,7 @@ export default function CadastroProduto() {
                 },
                 method: 'POST'
             }).then(rs => {
-                if (rs.status === 201) {
+                if (rs.ok) {
 
                     setRsProdutos({
                         nome: '',
@@ -56,7 +90,7 @@ export default function CadastroProduto() {
                         mensagem: "Produto cadastrado com sucesso!",
                         tipo: 'aviso'
                     })
-                    
+
                 } else {
 
                     globalContexto.setMensagemModalState({
@@ -72,7 +106,69 @@ export default function CadastroProduto() {
                     tipo: 'erro'
                 })
             })
-        }
+        }else if(rsProdutos.nome &&
+            rsProdutos.descricao &&
+            rsProdutos.categoria &&
+            rsProdutos.valor &&
+            globalContexto.temProdutosState.temProduto) {
+
+                globalContexto.setMensagemModalState({
+                    exibir: true,
+                    mensagem: "Alterando o produto ...",
+                    tipo: 'processo'
+                })
+    
+                fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id.toString()), {
+                    body: JSON.stringify(rsProdutos),
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    method: 'PUT'
+                }).then(rs => {
+                    setRsProdutos({
+                        nome: '',
+                        descricao: '',
+                        categoria: '',
+                        valor: ''
+                    })
+                    if (rs.ok) {
+                        console.log('rsProdutos antes: ', rsProdutos)
+                        setRsProdutos({
+                            nome: '',
+                            descricao: '',
+                            categoria: '',
+                            valor: ''
+                        })
+                        globalContexto.setMensagemModalState({
+                            exibir: true,
+                            mensagem: "Produto alterado com sucesso!",
+                            tipo: 'aviso'
+                        })
+
+                        globalContexto.setTemProdutosState({temProduto: false, id: -1})
+                        setRsProdutos({
+                            nome: '',
+                            descricao: '',
+                            categoria: '',
+                            valor: ''
+                        })
+                        console.log('rsProdutos antes: ', rsProdutos)
+                    } else {
+                        globalContexto.setMensagemModalState({
+                            exibir: true,
+                            mensagem: "Erro ao alterar o produto",
+                            tipo: 'erro'
+                        })
+                    }
+                }).catch(() => {
+                
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Erro no servidor. Não foi possível fazer a alteração!",
+                        tipo: 'erro'
+                    })
+                })
+            }
     }
 
     return (
@@ -133,7 +229,7 @@ export default function CadastroProduto() {
                     <input
                         id='btSalvar'
                         type='Button'
-                        value='Salvar'
+                        value={globalContexto.temProdutosState.temProduto ? 'Alterar' : 'Incluir'}
                         onClick={btSalvar}
 
                     />

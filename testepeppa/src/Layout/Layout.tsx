@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { ContextoGlobal } from '../Contexto/ContextoGlobal'
 import Login from '../Login/Login'
@@ -6,6 +6,7 @@ import MensagemModal from '../Pages/MensagemModal'
 import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemModalState from '../States/MensagemState'
+import useTemProdutosState from '../States/TemProdutosState'
 
 import Footer from './Footer'
 import Header from './Header'
@@ -18,7 +19,8 @@ export default function Layout() {
     const {loginState, setLoginState} = useLoginState()
     const {layouteState, setLayoutState} = useLayoutState()
     const {mensagemModalState, setMensagemModalState} = useMensagemModalState()
-    
+    const {temProdutosState, setTemProdutosState}= useTemProdutosState()
+
     return (
         <>
             <ContextoGlobal.Provider value= {{
@@ -27,7 +29,9 @@ export default function Layout() {
                 layoutState: layouteState,
                 setLayoutState: setLayoutState,
                 mensagemModalState: mensagemModalState,
-                setMensagemModalState: setMensagemModalState
+                setMensagemModalState: setMensagemModalState,
+                temProdutosState: temProdutosState,
+                setTemProdutosState: setTemProdutosState
             }}>
 
                 <>

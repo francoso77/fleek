@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import { isJSDocReadonlyTag } from 'typescript'
+import { useNavigate } from 'react-router-dom'
 import InputText from '../Components/InputText'
 import { URL_SERVIDOR } from '../Config/Setup'
 import { ContextoGlobal } from '../Contexto/ContextoGlobal'
@@ -10,6 +10,8 @@ import { ProdutosInterface } from '../Interfaces/ProdutosInterface'
 import './ListagemProduto.css'
 
 export default function ListagemProdutos() {
+
+    const irPara = useNavigate()
 
     const [rsPesquisa, setRsPesquisa] = useState<Array<ProdutosInterface>>([])
 
@@ -27,14 +29,14 @@ export default function ListagemProdutos() {
                 tipo: 'processo'
             })
 
-            fetch(URL_SERVIDOR.concat('/produtos?nome=').concat(pesquisa.nome), {
+            fetch(URL_SERVIDOR.concat('/produtos?nome_like=').concat(pesquisa.nome), {
 
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 method: 'GET'
             }).then(rs => {
-                if (rs.status === 200) {
+                if (rs.ok) {
 
                     setPesquisa({ nome: '' })
 
@@ -65,52 +67,50 @@ export default function ListagemProdutos() {
             })
         }
     }
-    const btExcluir = (i: any) =>{
-                        
+    const btExcluir = (i: any) => {
+
         globalContexto.setMensagemModalState({
             exibir: true,
             mensagem: "Excluindo produto ...",
             tipo: 'processo'
         })
-        console.log(URL_SERVIDOR.concat('/produtos?id=').concat(i))
+        fetch(URL_SERVIDOR.concat('/produtos/').concat(i), { method: 'DELETE' })
+            .then(rs => {
 
-        fetch(URL_SERVIDOR.concat('/produtos?id=').concat(i), {
-            body: null,
-            headers: {
-                'Accept': 'application/json',
-            },
-            method: 'DELETE'
-        }).then(rs => {
-            console.log ('status ',rs )
-            if (rs.ok) {
+                if (rs.ok) {
+                    setPesquisa({ nome: '' })
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Produto excluído com sucesso!",
+                        tipo: 'aviso'
+                    })
+                    setRsPesquisa([])
 
-                setPesquisa({ nome: '' })
-
-                globalContexto.setMensagemModalState({
-                    exibir: false,
-                    mensagem: "",
-                    tipo: 'aviso'
-                })
-                return rs.json()
-            } else {
-
+                } else {
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Erro na exclusão do produto",
+                        tipo: 'erro'
+                    })
+                }
+            }).catch(() => {
                 globalContexto.setMensagemModalState({
                     exibir: true,
-                    mensagem: "Erro na exclusão do produto",
+                    mensagem: "Erro no servidor. Não foi possível excluir o produto!",
                     tipo: 'erro'
                 })
-            }
-        }).then(rsProdutos => {
-
-            setRsPesquisa(rsProdutos)
-
-        }).catch(() => {
-            globalContexto.setMensagemModalState({
-                exibir: true,
-                mensagem: "Erro no servidor. Não foi possível excluir o produto!",
-                tipo: 'erro'
             })
+    }
+
+    const btEditar = (i: any) => {
+
+        globalContexto.setTemProdutosState({
+            temProduto: true,
+            id: i
         })
+
+        irPara("/CadastroProduto")
+
     }
     return (
         <>
@@ -154,8 +154,8 @@ export default function ListagemProdutos() {
                                         <td>{dadosProdutos.categoria}</td>
                                         <td>{dadosProdutos.valor}</td>
                                         <td>
-                                        <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.id)}>close</i>
-                                        <i className="material-icons botaoAcao" >edit</i>
+                                            <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.id)}>close</i>
+                                            <i className="material-icons botaoAcao" onClick={() => btEditar(dadosProdutos.id)}>edit</i>
                                         </td>
                                     </tr>)
                             })}

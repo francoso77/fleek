@@ -1,24 +1,10 @@
 {
   "produtos": [
     {
-      "id": 1,
-      "nome": "A",
-      "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
-      "categoria": "TIPO A",
-      "valor": "100"
-    },
-    {
       "id": 2,
       "nome": "B",
       "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
       "categoria": "TIPO B",
-      "valor": "100"
-    },
-    {
-      "id": 3,
-      "nome": "C",
-      "descricao": "ADSJFHAJKSDFHKJADHKJHGFJKFGJFGJHGFJHDGFJKGFJKFGJGGSD",
-      "categoria": "TIPO A",
       "valor": "100"
     },
     {
@@ -27,13 +13,6 @@
       "categoria": "TIPO A",
       "valor": "200",
       "id": 4
-    },
-    {
-      "nome": "TESTE",
-      "descricao": "TESTE",
-      "categoria": "TESTE",
-      "valor": "TESTE",
-      "id": 5
     },
     {
       "nome": "FDFADFD",
@@ -62,20 +41,6 @@
       "categoria": "DHGFG",
       "valor": "DFGHFGH",
       "id": 9
-    },
-    {
-      "nome": "TESTE",
-      "descricao": "TESTE",
-      "categoria": "TESTE",
-      "valor": "TESTE",
-      "id": 10
-    },
-    {
-      "nome": "AFSDFASDF",
-      "descricao": "AFSDF",
-      "categoria": "ADFSDF",
-      "valor": "ADFSDF",
-      "id": 11
     },
     {
       "nome": "SFGSFDG",
@@ -223,6 +188,27 @@
       "categoria": "SDFGSDFGFDG",
       "valor": "SDFGSDFG",
       "id": 32
+    },
+    {
+      "nome": "TESTE",
+      "descricao": "GSDGSGFD",
+      "categoria": "SDFGDFG",
+      "valor": "SDFGDFG",
+      "id": 33
+    },
+    {
+      "nome": "FRANK",
+      "descricao": "GFGSDFG",
+      "categoria": "GSFGSFD",
+      "valor": "GFDGSDFG",
+      "id": 34
+    },
+    {
+      "nome": "FFFFF",
+      "descricao": "FFFF",
+      "categoria": "FFFF",
+      "valor": "FFF",
+      "id": 35
     }
   ],
   "usuarios": [
