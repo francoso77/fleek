@@ -138,28 +138,32 @@ export default function ListagemProdutos() {
 
                     <div className='tabela'>
                         <table>
-                            <tr>
-                                <th>Id</th>
-                                <th>Nome</th>
-                                <th>Descrição</th>
-                                <th>Categoria</th>
-                                <th>Valor</th>
-                                <th>Ações</th>
-                            </tr>
-                            {rsPesquisa.map((dadosProdutos) => {
-                                return (
-                                    <tr key={dadosProdutos.idProduto}>
-                                        <td>{dadosProdutos.idProduto}</td>
-                                        <td>{dadosProdutos.nome}</td>
-                                        <td>{dadosProdutos.descricao}</td>
-                                        <td>{dadosProdutos.categoria}</td>
-                                        <td>{dadosProdutos.valor}</td>
-                                        <td>
-                                            <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.idProduto)}>close</i>
-                                            <i className="material-icons botaoAcao" onClick={() => btEditar(dadosProdutos.idProduto)}>edit</i>
-                                        </td>
-                                    </tr>)
-                            })}
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Categoria</th>
+                                    <th>Valor</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {rsPesquisa.map((dadosProdutos) => {
+                                    return (
+                                        <tr key={dadosProdutos.idProduto}>
+                                            <td>{dadosProdutos.idProduto}</td>
+                                            <td>{dadosProdutos.nome}</td>
+                                            <td>{dadosProdutos.descricao}</td>
+                                            <td>{dadosProdutos.categoria}</td>
+                                            <td>{dadosProdutos.valor}</td>
+                                            <td>
+                                                <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.idProduto)}>close</i>
+                                                <i className="material-icons botaoAcao" onClick={() => btEditar(dadosProdutos.idProduto)}>edit</i>
+                                            </td>
+                                        </tr>)
+                                })}
+                            </tbody>
                         </table>
                     </div>
                 </>}

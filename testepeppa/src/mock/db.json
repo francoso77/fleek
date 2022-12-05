@@ -9,10 +9,31 @@
     },
     {
       "idProduto": 2,
-      "nome": "TESTE",
-      "descricao": "TESTE",
-      "categoria": "TESTE",
+      "nome": "TESTE SSS",
+      "descricao": "TESTE SSS",
+      "categoria": "TESTE SSS",
       "valor": "TESTE"
+    },
+    {
+      "idProduto": 3,
+      "nome": "FRANK ALVES",
+      "descricao": "AFSDFSDFAFDS",
+      "categoria": "ASDFSDFASD",
+      "valor": "AAAAA"
+    },
+    {
+      "idProduto": 4,
+      "nome": "PANELA DE PRESSÃO",
+      "descricao": "KASDFD",
+      "categoria": "FASDFSDFAD",
+      "valor": "FASFSDF ASDFSDSDF"
+    },
+    {
+      "idProduto": 6,
+      "nome": "FAGFGAAGFAG",
+      "descricao": "ASDFASDFSDFASD",
+      "categoria": "AAAAAAAAAAA",
+      "valor": "BBBBBBBBBBB"
     }
   ],
   "usuarios": [

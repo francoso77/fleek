@@ -16,45 +16,44 @@ export default function CadastroProduto() {
     })
 
     const globalContexto = (useContext(ContextoGlobal) as ContextoGlobalInterface)
-    
-    if (globalContexto.temProdutosState.temProduto) {
-        
-        fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id?.toString()), {
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            method: 'GET'
-        }).then(rs => {
-            if (rs.ok) {
-                
-                return rs.json()
 
-            } else {
+    useEffect(() => {
 
+        if (globalContexto.temProdutosState.temProduto) {
+
+            fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id?.toString()), {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'GET'
+            }).then(rs => {
+                if (rs.ok) {
+
+                    return rs.json()
+
+                } else {
+
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Erro ao encontrar o produto",
+                        tipo: 'erro'
+                    })
+                }
+            }).then(dadosProdutos => {
+
+
+                setRsProdutos(dadosProdutos)
+
+            }).catch(() => {
                 globalContexto.setMensagemModalState({
                     exibir: true,
-                    mensagem: "Erro ao encontrar o produto",
+                    mensagem: "Erro no servidor. Não foi possível encontrar o produto!",
                     tipo: 'erro'
                 })
-            }
-        }).then ( dadosProdutos => {
-            
-            
-            setRsProdutos(dadosProdutos)            
-
-        }).catch(() => {
-            globalContexto.setMensagemModalState({
-                exibir: true,
-                mensagem: "Erro no servidor. Não foi possível encontrar o produto!",
-                tipo: 'erro'
             })
-        })
-        
-    }
 
-    //const x = useEffect(() => {
-    //    document.getElementById('txtNome')?.focus()
-    //}, [setRsProdutos])
+        }
+    },[])
 
     const btSalvar = () => {
 
@@ -108,57 +107,57 @@ export default function CadastroProduto() {
                     tipo: 'erro'
                 })
             })
-        }else if(rsProdutos.nome &&
+        } else if (rsProdutos.nome &&
             rsProdutos.descricao &&
             rsProdutos.categoria &&
             rsProdutos.valor &&
             globalContexto.temProdutosState.temProduto) {
 
-                globalContexto.setMensagemModalState({
-                    exibir: true,
-                    mensagem: "Alterando o produto ...",
-                    tipo: 'processo'
-                })
-    
-                fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id.toString()), {
-                    body: JSON.stringify(rsProdutos),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    method: 'PATCH'
-                }).then(rs => {
-                    setRsProdutos({
-                        idProduto:0,
-                        nome: '',
-                        descricao: '',
-                        categoria: '',
-                        valor: ''
-                    })
-                    if (rs.ok) {
-                        globalContexto.setMensagemModalState({
-                            exibir: true,
-                            mensagem: "Produto alterado com sucesso!",
-                            tipo: 'aviso'
-                        })
+            globalContexto.setMensagemModalState({
+                exibir: true,
+                mensagem: "Alterando o produto ...",
+                tipo: 'processo'
+            })
 
-                        globalContexto.setTemProdutosState({temProduto: false, id: 0})
-                        
-                    } else {
-                        globalContexto.setMensagemModalState({
-                            exibir: true,
-                            mensagem: "Erro ao alterar o produto",
-                            tipo: 'erro'
-                        })
-                    }
-                }).catch(() => {
-                
+            fetch(URL_SERVIDOR.concat('/produtos/').concat(globalContexto.temProdutosState.id.toString()), {
+                body: JSON.stringify(rsProdutos),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'PATCH'
+            }).then(rs => {
+                setRsProdutos({
+                    idProduto: 0,
+                    nome: '',
+                    descricao: '',
+                    categoria: '',
+                    valor: ''
+                })
+                if (rs.ok) {
                     globalContexto.setMensagemModalState({
                         exibir: true,
-                        mensagem: "Erro no servidor. Não foi possível fazer a alteração!",
+                        mensagem: "Produto alterado com sucesso!",
+                        tipo: 'aviso'
+                    })
+
+                    globalContexto.setTemProdutosState({ temProduto: false, id: 0 })
+
+                } else {
+                    globalContexto.setMensagemModalState({
+                        exibir: true,
+                        mensagem: "Erro ao alterar o produto",
                         tipo: 'erro'
                     })
+                }
+            }).catch(() => {
+
+                globalContexto.setMensagemModalState({
+                    exibir: true,
+                    mensagem: "Erro no servidor. Não foi possível fazer a alteração!",
+                    tipo: 'erro'
                 })
-            }
+            })
+        }
     }
 
     return (
