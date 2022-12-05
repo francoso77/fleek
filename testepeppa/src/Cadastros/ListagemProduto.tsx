@@ -118,6 +118,7 @@ export default function ListagemProdutos() {
             {globalContexto.loginState.logado &&
                 <>
                     <InputText
+                        autofocus
                         label='Pesquisa: '
                         tipo='text'
                         valor={pesquisa.nome}
@@ -145,17 +146,17 @@ export default function ListagemProdutos() {
                                 <th>Valor</th>
                                 <th>Ações</th>
                             </tr>
-                            {rsPesquisa.map((dadosProdutos, i) => {
+                            {rsPesquisa.map((dadosProdutos) => {
                                 return (
-                                    <tr key={i}>
-                                        <td>{dadosProdutos.id}</td>
+                                    <tr key={dadosProdutos.idProduto}>
+                                        <td>{dadosProdutos.idProduto}</td>
                                         <td>{dadosProdutos.nome}</td>
                                         <td>{dadosProdutos.descricao}</td>
                                         <td>{dadosProdutos.categoria}</td>
                                         <td>{dadosProdutos.valor}</td>
                                         <td>
-                                            <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.id)}>close</i>
-                                            <i className="material-icons botaoAcao" onClick={() => btEditar(dadosProdutos.id)}>edit</i>
+                                            <i className="material-icons botaoAcao" onClick={() => btExcluir(dadosProdutos.idProduto)}>close</i>
+                                            <i className="material-icons botaoAcao" onClick={() => btEditar(dadosProdutos.idProduto)}>edit</i>
                                         </td>
                                     </tr>)
                             })}

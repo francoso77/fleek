@@ -8,6 +8,7 @@ import { ProdutosInterface } from '../Interfaces/ProdutosInterface'
 export default function CadastroProduto() {
 
     const [rsProdutos, setRsProdutos] = useState<ProdutosInterface>({
+        idProduto: 0,
         nome: '',
         descricao: '',
         categoria: '',
@@ -79,6 +80,7 @@ export default function CadastroProduto() {
                 if (rs.ok) {
 
                     setRsProdutos({
+                        idProduto: 0,
                         nome: '',
                         descricao: '',
                         categoria: '',
@@ -123,36 +125,24 @@ export default function CadastroProduto() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    method: 'PUT'
+                    method: 'PATCH'
                 }).then(rs => {
                     setRsProdutos({
+                        idProduto:0,
                         nome: '',
                         descricao: '',
                         categoria: '',
                         valor: ''
                     })
                     if (rs.ok) {
-                        console.log('rsProdutos antes: ', rsProdutos)
-                        setRsProdutos({
-                            nome: '',
-                            descricao: '',
-                            categoria: '',
-                            valor: ''
-                        })
                         globalContexto.setMensagemModalState({
                             exibir: true,
                             mensagem: "Produto alterado com sucesso!",
                             tipo: 'aviso'
                         })
 
-                        globalContexto.setTemProdutosState({temProduto: false, id: -1})
-                        setRsProdutos({
-                            nome: '',
-                            descricao: '',
-                            categoria: '',
-                            valor: ''
-                        })
-                        console.log('rsProdutos antes: ', rsProdutos)
+                        globalContexto.setTemProdutosState({temProduto: false, id: 0})
+                        
                     } else {
                         globalContexto.setMensagemModalState({
                             exibir: true,
@@ -181,6 +171,7 @@ export default function CadastroProduto() {
                 </> :
                 <>
                     <InputText
+                        autofocus
                         label='Nome: '
                         tipo='text'
                         valor={rsProdutos.nome}

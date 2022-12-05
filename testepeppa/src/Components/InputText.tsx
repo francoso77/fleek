@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ClsValidaCampo from "../Utils/ClsValidaCampos";
 import './InputText.css'
 
 export default function InputText({
+    autofocus,
+    disabled,
     label,
     id,
     tipo,
@@ -14,8 +16,10 @@ export default function InputText({
     valida
 
 }: {
+    autofocus?: boolean | undefined
+    disabled?: boolean | undefined
     label: string,
-    id: string,
+    id?: string | undefined,
     tipo: string,
     valor: string,
     placeholder: string,
@@ -70,10 +74,20 @@ export default function InputText({
         }
     }
 
+    const inputRef = useRef<HTMLInputElement>(null)
+
+    useEffect(() => {
+      if (autofocus && inputRef.current) {
+        inputRef.current.focus()
+      }
+    }, [])
+    
     return (
         <>
             <label className="labelInputText">{label}</label>
             <input className="InputText"
+                ref={inputRef}
+                disabled={disabled}
                 type={tipo}
                 id={id}
                 value={valor}
