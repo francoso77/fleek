@@ -1,0 +1,24 @@
+#txtLogin, #txtSenha{
+    margin-top: 5px;
+    margin-left: 20%;
+    display: block;
+    text-align: left;
+}
+#btLogin, #btLogout{
+    margin-top: 5px;
+    display: flexbox;
+    text-align: left;
+    width: 100px;
+    height: 45px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 15px;
+    text-align: center;
+    background-color: #007bff;
+    border-radius: 8px;
+    color: white;
+    border-color: white;
+}
+
+#btLogin{
+    margin-left: 20%;
+}
