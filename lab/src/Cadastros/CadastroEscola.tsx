@@ -263,14 +263,23 @@ export default function CadastroEscola() {
             
         }, TEMPO_PADRAO_DELAY)
 
-        //// parei aqui
+        const listRsPesquisa = !rsPesquisa ? <></> : rsPesquisa.map((escola) =>
+            <tr key = {escola.idEscola}>
+                <td>{escola.escola}</td>
+                <td>{escola.cnpj}</td>
+                <td>{escola.email}</td>
+                <td><input type="button" value="Editar" onClick={(e)=> btEditarExcluir(escola.idEscola, 'editando')}/></td>
+                <td><input type="button" value="Excluir" onClick={(e)=> btEditarExcluir(escola.idEscola, 'excluindo')}/></td>
+            </tr>
+        )
     }
     return (
         <>
 
             <h1>Cadastro Escolas</h1>
 
-            {isAutorizado && isLogado ?
+            {
+                acaoState.acao === 'pesquisando' ?
 
                 <div className='escola'>
                     <InputText
