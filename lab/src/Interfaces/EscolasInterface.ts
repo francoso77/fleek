@@ -1,5 +1,5 @@
 export interface EscolasInterface {
-    id: string,
+    idEscola: number,
     escola: string,
     cnpj: string,
     email: string
