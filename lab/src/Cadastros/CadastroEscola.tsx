@@ -1,9 +1,7 @@
-import { resolve } from 'path';
 import React, { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
 import { URL_SERVIDOR } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
-import { AcaoStateInterface } from '../Interfaces/AcaoStateInterface';
 import { EscolasInterface } from '../Interfaces/EscolasInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
 
@@ -168,7 +166,7 @@ export default function CadastroEscola() {
         }, TEMPO_PADRAO_DELAY);
     }
 
-    const btConfirmarExclusao = () =>{
+    const btConfirmarExclusao = () => {
 
         globalContexto.setMensagemState({
             exibir: true,
@@ -219,7 +217,7 @@ export default function CadastroEscola() {
     }
 
     const aposAtualizarDados = () => {
-        setAcaoState({acao: 'pesquisando'})
+        setAcaoState({ acao: 'pesquisando' })
         btPesquisar()
     }
 
@@ -228,50 +226,52 @@ export default function CadastroEscola() {
             exibir: true,
             mensagem: 'Pesquisando Escola ...',
             tipo: 'processando'
-        })        
+        })
 
-        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escola?nome_like=').concat(pesquisa.nome) 
+        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escola?nome_like=').concat(pesquisa.nome)
 
         setTimeout(() => {
 
-            fetch(URL_PESQUISA, { 
-            headers: { 'content-Type': 'application/json',},
-            method: 'GET'}).then(rs =>{
-                if(rs.ok){
+            fetch(URL_PESQUISA, {
+                headers: { 'content-Type': 'application/json', },
+                method: 'GET'
+            }).then(rs => {
+                if (rs.ok) {
                     globalContexto.setMensagemState({
                         exibir: false,
                         mensagem: '',
                         tipo: 'aviso'
                     })
-                    return rs.json()          
-                }else{
+                    return rs.json()
+                } else {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao pesquisar Escola!!! ',
                         tipo: 'erro'
-                    })  
+                    })
                 }
-            }).then((DadosEscolas: Array<EscolasInterface>)=>{
+            }).then((DadosEscolas: Array<EscolasInterface>) => {
                 setRsPesquisa(DadosEscolas)
-            }).catch ((e) =>{
+            }).catch((e) => {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Escola!!!',
                     tipo: 'erro'
-                })  
+                })
             })
-            
+
         }, TEMPO_PADRAO_DELAY)
 
-        const listRsPesquisa = !rsPesquisa ? <></> : rsPesquisa.map((escola) =>
-            <tr key = {escola.idEscola}>
+        const listRsPesquisa = (!rsPesquisa) ? <></> : (rsPesquisa.map((escola) =>
+            <tr key={escola.idEscola}>
                 <td>{escola.escola}</td>
                 <td>{escola.cnpj}</td>
                 <td>{escola.email}</td>
-                <td><input type="button" value="Editar" onClick={(e)=> btEditarExcluir(escola.idEscola, 'editando')}/></td>
-                <td><input type="button" value="Excluir" onClick={(e)=> btEditarExcluir(escola.idEscola, 'excluindo')}/></td>
+                <td><input type="button" value="Editar" onClick={(e) => btEditarExcluir(escola.idEscola, 'editando')} /></td>
+                <td><input type="button" value="Excluir" onClick={(e) => btEditarExcluir(escola.idEscola, 'excluindo')} /></td>
             </tr>
-        )
+        ))
+
     }
     return (
         <>
@@ -281,65 +281,128 @@ export default function CadastroEscola() {
             {
                 acaoState.acao === 'pesquisando' ?
 
-                <div className='escola'>
-                    <InputText
-                        label='Escola: '
-                        tipo='text'
-                        valor={rsEscolas.escola}
-                        id='txtEscola'
-                        placeholder=''
-                        dados={rsEscolas}
-                        campo='escola'
-                        setState={setRsEscolas}
-                        valida='txt'
-                    />
-                    <InputText
-                        label='CNPJ: '
-                        tipo='text'
-                        valor={rsEscolas.cnpj}
-                        id='txtCNPJ'
-                        placeholder=''
-                        dados={rsEscolas}
-                        campo='cnpj'
-                        setState={setRsEscolas}
-                        valida='cnpj'
+                    <>
+                        <p>
+                            <InputText
+                                autofocus
+                                id='txtPesquisa'
+                                label='Pesquisa'
+                                tipo='text'
+                                dados={rsEscolas}
+                                campo='escola'
+                                setState={setPesquisa}
+                                valida='txt'
+                            />
+                            <input
+                                type="button"
+                                value="Pesquisar"
+                                onClick={btPesquisar}
+                            />
+                        </p>
+                        <input
+                            type="button"
+                            value="+"
+                            onClick={btNovaEscola}
+                        />
+                    </>
+                    : null
+            }
+            {
+                acaoState.acao !== 'pesquisando' ?
 
-                    />
-                    <InputText
-                        label='E-mail: '
-                        tipo='text'
-                        valor={rsEscolas.email}
-                        id='txtEMAIL'
-                        placeholder=''
-                        dados={rsEscolas}
-                        campo='email'
-                        setState={setRsEscolas}
-                        valida='email'
+                    <div className='escola'>
+                        <InputText
+                            autofocus
+                            disabled={acaoState.acao === 'excluindo'}
+                            label='Escola: '
+                            tipo='text'
+                            valor={rsEscolas.escola}
+                            id='txtEscola'
+                            dados={rsEscolas}
+                            campo='escola'
+                            setState={setRsEscolas}
+                            valida='txt'
+                        />
+                        <InputText
+                            disabled={acaoState.acao === 'excluindo'}
+                            label='CNPJ: '
+                            tipo='text'
+                            valor={rsEscolas.cnpj}
+                            id='txtCNPJ'
+                            dados={rsEscolas}
+                            campo='cnpj'
+                            setState={setRsEscolas}
+                            valida='cnpj'
 
-                    />
-                    <br />
+                        />
+                        <InputText
+                            disabled={acaoState.acao === 'excluindo'}
+                            label='E-mail: '
+                            tipo='text'
+                            valor={rsEscolas.email}
+                            id='txtEMAIL'
+                            dados={rsEscolas}
+                            campo='email'
+                            setState={setRsEscolas}
+                            valida='email'
 
+                        />
+                        <br />
+
+                        <input
+                            id='btCancelar'
+                            type='Button'
+                            value='Cancelar'
+                            onClick={btCancelar}
+                        />
+                    </div> : null
+            }
+            {
+                acaoState.acao === 'excluindo' ?
                     <input
-                        id='btConfirmar'
-                        type='Button'
-                        value='Incluir'
+                        type="button"
+                        value="Confirmar Exclusão"
+                        onClick={btConfirmarExclusao}
+                    />
+                    : null
+            }
+            {
+                acaoState.acao === 'editando' ?
+                    <input
+                        type="button"
+                        value="Confirmar Edição"
+                        onClick={btConfirmarEdicao}
+                    />
+                    : null
+            }
+            {
+                acaoState.acao === 'incluindo' ?
+                    <input
+                        type="button"
+                        value="Confirmar Inclusão"
                         onClick={btIncluir}
-
                     />
-
-                    <input
-                        id='btEditar'
-                        type='Button'
-                        value='Editar'
-                        onClick={btEditar}
-
-                    />
-                </div> :
-                <>
-                </>
+                    : null
+            }
+            {
+                acaoState.acao === 'pesquisando' ?
+                    <>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Escola</td>
+                                    <td>CNPJ</td>
+                                    <td>E-mail</td>
+                                    <td colSpan={2}>Ações</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {listRsPesquisa}
+                            </tbody>
+                        </table>
+                    </>
+                    : null
             }
         </>
-
     )
-
 }

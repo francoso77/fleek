@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
+import { InputTextInterface } from "../Interfaces/InputTextInterface";
 import ClsValidaCampo from "../Utils/ClsValidaCampos";
 import './InputText.css'
 
-export default function InputText({
-    label,
-    id,
-    tipo,
-    valor,
-    placeholder,
-    dados,
-    campo,
-    setState,
-    valida
+export default function InputText<T>(
+    {
+        autofocus = false,
+        disabled = false,
+        label,
+        tipo,
+        dados,
+        campo,
+        setState,
+        valida,
+        placeholder,
+        valor,
+        id = undefined
+    }: InputTextInterface
+) {
 
-}: {
-    label: string,
-    id: string,
-    tipo: string,
-    valor: string,
-    placeholder: string,
-    dados: any,
-    campo: string,
-    setState: React.Dispatch<React.SetStateAction<any>>,
-    valida: string
+    const inputRef = useRef<HTMLInputElement> (null)
 
-}) {
-
+    useEffect(() => {
+        if (autofocus && inputRef.current) {
+            inputRef.current.focus()
+        }
+    }, [autofocus])
 
     const validaCampo: ClsValidaCampo = new ClsValidaCampo()
 
@@ -75,6 +75,8 @@ export default function InputText({
             <label className="labelInputText">{label}</label>
             <input className="InputText"
                 type={tipo}
+                ref={inputRef}
+                disabled={disabled}
                 id={id}
                 value={valor}
                 placeholder={placeholder}

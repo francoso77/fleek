@@ -11,6 +11,12 @@
       "escola": "FLEEK",
       "cnpj": "20278531000158",
       "email": "fleek@bol.com.br"
+    },
+    {
+      "idEscola": 3,
+      "escola": "TESTE",
+      "cnpj": "20278531000158",
+      "email": "sdfgdsfg@bol.com.br"
     }
   ],
   "usuarios": [
