@@ -228,7 +228,7 @@ export default function CadastroEscola() {
             tipo: 'processando'
         })
 
-        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escola?nome_like=').concat(pesquisa.nome)
+        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escolas?nome_like=').concat(pesquisa.nome)
 
         setTimeout(() => {
 
@@ -262,17 +262,18 @@ export default function CadastroEscola() {
 
         }, TEMPO_PADRAO_DELAY)
 
-        const listRsPesquisa = (!rsPesquisa) ? <></> : (rsPesquisa.map((escola) =>
-            <tr key={escola.idEscola}>
-                <td>{escola.escola}</td>
-                <td>{escola.cnpj}</td>
-                <td>{escola.email}</td>
-                <td><input type="button" value="Editar" onClick={(e) => btEditarExcluir(escola.idEscola, 'editando')} /></td>
-                <td><input type="button" value="Excluir" onClick={(e) => btEditarExcluir(escola.idEscola, 'excluindo')} /></td>
-            </tr>
-        ))
-
+        
     }
+    const listRsPesquisa = !rsPesquisa ? <></> : rsPesquisa.map((escola) =>
+        <tr key={escola.idEscola}>
+            <td>{escola.escola}</td>
+            <td>{escola.cnpj}</td>
+            <td>{escola.email}</td>
+            <td><input type="button" value="Editar" onClick={(e) => btEditarExcluir(escola.idEscola, 'editando')} /></td>
+            <td><input type="button" value="Excluir" onClick={(e) => btEditarExcluir(escola.idEscola, 'excluindo')} /></td>
+        </tr>
+    )
+
     return (
         <>
 
@@ -286,7 +287,7 @@ export default function CadastroEscola() {
                             <InputText
                                 autofocus
                                 id='txtPesquisa'
-                                label='Pesquisa'
+                                label='Pesquisar'
                                 tipo='text'
                                 dados={rsEscolas}
                                 campo='escola'

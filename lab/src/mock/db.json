@@ -17,6 +17,12 @@
       "escola": "TESTE",
       "cnpj": "20278531000158",
       "email": "sdfgdsfg@bol.com.br"
+    },
+    {
+      "idEscola": 4,
+      "escola": "TESTE",
+      "cnpj": "20278531000158",
+      "email": "dsgfsdg@bol.com.br"
     }
   ],
   "usuarios": [
