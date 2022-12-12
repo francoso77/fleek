@@ -1,18 +1,6 @@
 {
   "escolas": [
     {
-      "idEscola": 1,
-      "escola": "FLEEK",
-      "cnpj": "20278531000158",
-      "email": "fleek@bol.com.br"
-    },
-    {
-      "idEscola": 2,
-      "escola": "FLEEK",
-      "cnpj": "20278531000158",
-      "email": "fleek@bol.com.br"
-    },
-    {
       "idEscola": 3,
       "escola": "TESTE",
       "cnpj": "20278531000158",
@@ -23,6 +11,12 @@
       "escola": "TESTE",
       "cnpj": "20278531000158",
       "email": "dsgfsdg@bol.com.br"
+    },
+    {
+      "escola": "FRANCOSO ADFA ASDFASDF",
+      "cnpj": "20278531000158",
+      "email": "adsfasdfs@bol.com.br",
+      "idEscola": 5
     }
   ],
   "usuarios": [

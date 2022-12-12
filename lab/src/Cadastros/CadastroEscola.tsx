@@ -228,14 +228,15 @@ export default function CadastroEscola() {
             tipo: 'processando'
         })
 
-        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escolas?nome_like=').concat(pesquisa.nome)
-
+        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escolas?escola_like='.concat(pesquisa.nome))
+                
         setTimeout(() => {
 
             fetch(URL_PESQUISA, {
                 headers: { 'content-Type': 'application/json', },
                 method: 'GET'
             }).then(rs => {
+                                
                 if (rs.ok) {
                     globalContexto.setMensagemState({
                         exibir: false,
@@ -252,6 +253,7 @@ export default function CadastroEscola() {
                 }
             }).then((DadosEscolas: Array<EscolasInterface>) => {
                 setRsPesquisa(DadosEscolas)
+        
             }).catch((e) => {
                 globalContexto.setMensagemState({
                     exibir: true,
@@ -265,7 +267,9 @@ export default function CadastroEscola() {
         
     }
     const listRsPesquisa = !rsPesquisa ? <></> : rsPesquisa.map((escola) =>
+        
         <tr key={escola.idEscola}>
+            <td>{escola.idEscola}</td>
             <td>{escola.escola}</td>
             <td>{escola.cnpj}</td>
             <td>{escola.email}</td>
@@ -276,12 +280,9 @@ export default function CadastroEscola() {
 
     return (
         <>
-
             <h1>Cadastro Escolas</h1>
-
             {
                 acaoState.acao === 'pesquisando' ?
-
                     <>
                         <p>
                             <InputText
@@ -289,8 +290,8 @@ export default function CadastroEscola() {
                                 id='txtPesquisa'
                                 label='Pesquisar'
                                 tipo='text'
-                                dados={rsEscolas}
-                                campo='escola'
+                                dados={pesquisa}
+                                campo='nome'
                                 setState={setPesquisa}
                                 valida='txt'
                             />
@@ -310,7 +311,6 @@ export default function CadastroEscola() {
             }
             {
                 acaoState.acao !== 'pesquisando' ?
-
                     <div className='escola'>
                         <InputText
                             autofocus
@@ -334,7 +334,6 @@ export default function CadastroEscola() {
                             campo='cnpj'
                             setState={setRsEscolas}
                             valida='cnpj'
-
                         />
                         <InputText
                             disabled={acaoState.acao === 'excluindo'}
@@ -346,10 +345,8 @@ export default function CadastroEscola() {
                             campo='email'
                             setState={setRsEscolas}
                             valida='email'
-
                         />
                         <br />
-
                         <input
                             id='btCancelar'
                             type='Button'
@@ -391,6 +388,7 @@ export default function CadastroEscola() {
                         <table>
                             <thead>
                                 <tr>
+                                    <td>id</td>
                                     <td>Escola</td>
                                     <td>CNPJ</td>
                                     <td>E-mail</td>
