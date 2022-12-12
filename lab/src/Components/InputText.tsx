@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { InputTextInterface } from "../Interfaces/InputTextInterface";
 import ClsValidaCampo from "../Utils/ClsValidaCampos";
 import './InputText.css'
