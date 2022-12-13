@@ -64,7 +64,7 @@ export default function ClsFetch<T>({
 
     return (
         <>
-            setTimeout(() =>{
+            setTimeout(() {
 
                 fetch(caminho, {
                     body: corpo,

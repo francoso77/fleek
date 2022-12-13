@@ -1,4 +1,11 @@
 {
+  "clientes": [
+    {
+      "idCliente": 1,
+      "cliente": "JOAO",
+      "cpf": "00732302609"
+    }
+  ],
   "escolas": [
     {
       "idEscola": 3,

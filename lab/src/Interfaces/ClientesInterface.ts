@@ -1,5 +1,5 @@
 export interface ClientesInterface {
-    id: string,
+    idCliente: number,
     cliente: string,
     cpf: string
 }

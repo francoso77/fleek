@@ -4,8 +4,6 @@ import { URL_SERVIDOR } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import { EscolasInterface } from '../Interfaces/EscolasInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
-import ClsFetch from '../Utils/ClsFetch';
-
 
 
 const TEMPO_PADRAO_DELAY: number = 500
@@ -15,14 +13,11 @@ interface PesquisaInterface { nome: string }
 
 export default function CadastroEscola() {
 
-    
-    const globalContexto = (useContext(ContextoGlobal) as GlobalStateInterface)
-    
     const [rsPesquisa, setRsPesquisa] = useState<Array<EscolasInterface>>([])
 
-    const [acaoState, setAcaoState] = useState({ acao: 'pesquisando' })
+    const globalContexto = (useContext(ContextoGlobal) as GlobalStateInterface)
 
-    const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
+    const [acaoState, setAcaoState] = useState({ acao: 'pesquisando' })
 
     const [rsEscolas, setRsEscolas] = useState<EscolasInterface>({
         idEscola: 0,
@@ -30,6 +25,8 @@ export default function CadastroEscola() {
         cnpj: '',
         email: ''
     })
+
+    const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
 
     const pesquisarEscola = (idEscola: number): Promise<EscolasInterface> => {
 
@@ -51,7 +48,7 @@ export default function CadastroEscola() {
             }, TEMPO_PADRAO_DELAY)
         })
     }
-    
+
     const btNovaEscola = () => {
         setAcaoState({ acao: 'incluindo' })
     }
@@ -63,15 +60,59 @@ export default function CadastroEscola() {
     const btEditarExcluir = (idEscola: number, qualAcao: string) => {
 
         pesquisarEscola(idEscola).then(rs => {
-            globalContexto.setEscolaState(rs)
+            setRsEscolas(rs)
             setAcaoState({ acao: qualAcao })
         })
     }
 
     const btIncluir = () => {
 
-        //ClsFetch ({acao: 'incluindo', idEscola:0, nome:''})
-        <ClsFetch />
+        globalContexto.setMensagemState({
+            exibir: true,
+            mensagem: 'Incluindo escola ...',
+            tipo: 'processando'
+        })
+
+        setTimeout(() => {
+
+            fetch(URL_SERVIDOR.concat('/escolas'), {
+                body: JSON.stringify(rsEscolas),
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                method: 'POST'
+            }).then(rs => {
+                if (rs.ok) {
+                    setRsEscolas({
+                        escola: '',
+                        cnpj: '',
+                        email: '',
+                        idEscola: 0
+                    })
+                    globalContexto.setMensagemState({
+                        exibir: true,
+                        mensagem: 'Escola cadastrada com sucesso.',
+                        tipo: 'aviso'
+                    })
+                } else {
+
+                    globalContexto.setMensagemState({
+                        exibir: true,
+                        mensagem: 'Erro ao incluir Escola !!!',
+                        tipo: 'erro'
+                    })
+                }
+
+            }).catch(() => {
+                globalContexto.setMensagemState({
+                    exibir: true,
+                    mensagem: 'Erro no Servidor. Não foi possível incluir Escola!!!',
+                    tipo: 'erro'
+                })
+            })
+
+        }, TEMPO_PADRAO_DELAY);
+
     }
 
     const btConfirmarEdicao = () => {
