@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
-import { URL_SERVIDOR } from '../Config/Setup';
+import { URL_SERVIDOR3002 } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import { EscolasInterface } from '../Interfaces/EscolasInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
@@ -42,7 +42,7 @@ export default function CadastroEscola() {
         return new Promise((resolve, _reject) => {
             setTimeout(() => {
 
-                fetch(URL_SERVIDOR.concat('/escolas/'.concat(idEscola.toString())))
+                fetch(URL_SERVIDOR3002.concat('/escolas/'.concat(idEscola.toString())))
                     .then(rs => {
                         globalContexto.clearMessage()
                         resolve(rs.json())
@@ -84,7 +84,7 @@ export default function CadastroEscola() {
 
         setTimeout(() => {
 
-            fetch(URL_SERVIDOR.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
+            fetch(URL_SERVIDOR3002.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
                 body: JSON.stringify(rsEscolas),
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -135,7 +135,7 @@ export default function CadastroEscola() {
 
         setTimeout(() => {
 
-            fetch(URL_SERVIDOR.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
+            fetch(URL_SERVIDOR3002.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
                 },
@@ -187,7 +187,7 @@ export default function CadastroEscola() {
             tipo: 'processando'
         })
 
-        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escolas?escola_like='.concat(pesquisa.nome))
+        const URL_PESQUISA: string = URL_SERVIDOR3002.concat('/escolas?escola_like='.concat(pesquisa.nome))
                 
         setTimeout(() => {
 

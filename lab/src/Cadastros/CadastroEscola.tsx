@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
-import { URL_SERVIDOR } from '../Config/Setup';
+import { URL_SERVIDOR3002 } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import { EscolasInterface } from '../Interfaces/EscolasInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
@@ -39,7 +39,7 @@ export default function CadastroEscola() {
         return new Promise((resolve, _reject) => {
             setTimeout(() => {
 
-                fetch(URL_SERVIDOR.concat('/escolas/'.concat(idEscola.toString())))
+                fetch(URL_SERVIDOR3002.concat('/escolas/'.concat(idEscola.toString())))
                     .then(rs => {
                         globalContexto.clearMessage()
                         resolve(rs.json())
@@ -75,7 +75,7 @@ export default function CadastroEscola() {
 
         setTimeout(() => {
 
-            fetch(URL_SERVIDOR.concat('/escolas'), {
+            fetch(URL_SERVIDOR3002.concat('/escolas'), {
                 body: JSON.stringify(rsEscolas),
                 headers: {
                     'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ export default function CadastroEscola() {
 
         setTimeout(() => {
 
-            fetch(URL_SERVIDOR.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
+            fetch(URL_SERVIDOR3002.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
                 body: JSON.stringify(rsEscolas),
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
@@ -134,6 +134,7 @@ export default function CadastroEscola() {
             }).then(rs => {
 
                 if (rs.ok) {
+                    aposAtualizarDados()
                     setRsEscolas({
                         escola: '',
                         cnpj: '',
@@ -145,7 +146,6 @@ export default function CadastroEscola() {
                         mensagem: 'Escola editada com sucesso.',
                         tipo: 'aviso'
                     })
-                    aposAtualizarDados()
 
                 } else {
                     globalContexto.setMensagemState({
@@ -176,7 +176,7 @@ export default function CadastroEscola() {
 
         setTimeout(() => {
 
-            fetch(URL_SERVIDOR.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
+            fetch(URL_SERVIDOR3002.concat('/escolas/').concat(rsEscolas.idEscola.toString()), {
                 headers: {
                     'Content-Type': 'application/json; charset=UTF-8'
                 },
@@ -228,15 +228,15 @@ export default function CadastroEscola() {
             tipo: 'processando'
         })
 
-        const URL_PESQUISA: string = URL_SERVIDOR.concat('/escolas?escola_like='.concat(pesquisa.nome))
-                
+        const URL_PESQUISA: string = URL_SERVIDOR3002.concat('/escolas?escola_like='.concat(pesquisa.nome))
+
         setTimeout(() => {
 
             fetch(URL_PESQUISA, {
                 headers: { 'content-Type': 'application/json', },
                 method: 'GET'
             }).then(rs => {
-                                
+
                 if (rs.ok) {
                     globalContexto.setMensagemState({
                         exibir: false,
@@ -253,7 +253,7 @@ export default function CadastroEscola() {
                 }
             }).then((DadosEscolas: Array<EscolasInterface>) => {
                 setRsPesquisa(DadosEscolas)
-        
+
             }).catch((e) => {
                 globalContexto.setMensagemState({
                     exibir: true,
@@ -264,10 +264,10 @@ export default function CadastroEscola() {
 
         }, TEMPO_PADRAO_DELAY)
 
-        
+
     }
     const listRsPesquisa = !rsPesquisa ? <></> : rsPesquisa.map((escola) =>
-        
+
         <tr key={escola.idEscola}>
             <td>{escola.idEscola}</td>
             <td>{escola.escola}</td>
@@ -284,23 +284,23 @@ export default function CadastroEscola() {
             {
                 acaoState.acao === 'pesquisando' ?
                     <>
-                        <p>
-                            <InputText
-                                autofocus
-                                id='txtPesquisa'
-                                label='Pesquisar'
-                                tipo='text'
-                                dados={pesquisa}
-                                campo='nome'
-                                setState={setPesquisa}
-                                valida='txt'
-                            />
-                            <input
-                                type="button"
-                                value="Pesquisar"
-                                onClick={btPesquisar}
-                            />
-                        </p>
+                        <InputText
+                            autofocus
+                            id='txtPesquisa'
+                            label='Pesquisar'
+                            tipo='text'
+                            dados={pesquisa}
+                            campo='nome'
+                            setState={setPesquisa}
+                            valida='txt'
+                        />
+                        <input
+                            type="button"
+                            value="Pesquisar"
+                            onClick={btPesquisar}
+                        />
+                        <br />
+
                         <input
                             type="button"
                             value="+"

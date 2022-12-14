@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { URL_SERVIDOR } from '../Config/Setup'
+import { URL_SERVIDOR3002 } from '../Config/Setup'
 import { ContextoGlobal } from '../Contextos/ContextoGlobal'
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface'
 import { FetchInterface } from '../Interfaces/FecthInterface'
@@ -31,14 +31,14 @@ export default function ClsFetch<T>({
         metodo = 'PATCH'
         msg2 = 'editados'
         msg3 = 'editar'
-        caminho = URL_SERVIDOR.concat('/escolas/').concat(idEscola.toString())
+        caminho = URL_SERVIDOR3002.concat('/escolas/').concat(idEscola.toString())
     } else if (acao === 'excluindo') {
         msg1 = 'Excluindo'
         corpo = ''
         metodo = 'DELETE'
         msg2 = 'excluidos'
         msg3 = 'excluir'
-        caminho = URL_SERVIDOR.concat('/escolas/').concat(idEscola.toString())
+        caminho = URL_SERVIDOR3002.concat('/escolas/').concat(idEscola.toString())
     } else if (acao === 'incluindo') {
 
         msg1 = 'Incluindo'
@@ -46,14 +46,14 @@ export default function ClsFetch<T>({
         metodo = 'POST'
         msg2 = 'incluidos'
         msg3 = 'incluir'
-        caminho = URL_SERVIDOR.concat('/escolas')
+        caminho = URL_SERVIDOR3002.concat('/escolas')
     } else {
         msg1 = 'Pesquisando'
         corpo = ''
         metodo = 'GET'
         msg2 = 'pesquisados'
         msg3 = 'pesquisar'
-        caminho = URL_SERVIDOR.concat('/escolas?escola_like='.concat(nome))
+        caminho = URL_SERVIDOR3002.concat('/escolas?escola_like='.concat(nome))
     }
 
     globalContexto.setMensagemState({

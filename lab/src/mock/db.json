@@ -1,21 +1,26 @@
 {
   "clientes": [
     {
-      "idCliente": 1,
-      "cliente": "JOAO",
+      "idCliente": 3,
+      "cliente": "JOAO BATISTA  FDGDFG",
       "cpf": "00732302609"
+    },
+    {
+      "cliente": "FRANK ALVES",
+      "cpf": "00732302609",
+      "idCliente": 4
     }
   ],
   "escolas": [
     {
       "idEscola": 3,
-      "escola": "TESTE",
+      "escola": "LAB CAO",
       "cnpj": "20278531000158",
       "email": "sdfgdsfg@bol.com.br"
     },
     {
       "idEscola": 4,
-      "escola": "TESTE",
+      "escola": "TESTE 777",
       "cnpj": "20278531000158",
       "email": "dsgfsdg@bol.com.br"
     },
