@@ -2,13 +2,10 @@ import React, { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
 import { URL_SERVIDOR3004 } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
+import { AcaoStateInterface } from '../Interfaces/AcaoStateInterface';
 import { ClientesInterface } from '../Interfaces/ClientesInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
-
-interface PesquisaInterface { nome: string }
-interface LocalStateInterface {
-    acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando' | string
-  }
+import { PesquisaInterface } from '../Interfaces/PesquisaInterface';
 
 const TEMPO_PADRAO_DELAY: number = 500
 
@@ -16,7 +13,7 @@ export default function CadastroCliente() {
 
     const [pesquisa, setPesquisa] = useState<PesquisaInterface>({ nome: '' })
 
-    const [acaoState, setAcaoState] = useState<LocalStateInterface>({ acao: 'pesquisando' })
+    const [acaoState, setAcaoState] = useState<AcaoStateInterface>({ acao: 'pesquisando' })
 
     const [rsPesquisa, setRsPesquisa] = useState<Array<ClientesInterface>>([])
 
@@ -98,18 +95,10 @@ export default function CadastroCliente() {
             }).then(rs => {
 
                 if (rs.ok) {
-                    globalContexto.setMensagemState({
-                        exibir: false,
-                        mensagem: '',
-                        tipo: 'aviso'
-                    })
+                    globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
                     return rs.json()
                 } else {
-                    globalContexto.setMensagemState({
-                        exibir: true,
-                        mensagem: 'Erro ao pesquisar Cliente!!! ',
-                        tipo: 'erro'
-                    })
+                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao pesquisar Cliente!!! ', tipo: 'erro' })
                 }
             }).then((DadosClientes) => {
 
@@ -117,11 +106,7 @@ export default function CadastroCliente() {
                 setAcaoState({ acao: acao })
 
             }).catch((e) => {
-                globalContexto.setMensagemState({
-                    exibir: true,
-                    mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!',
-                    tipo: 'erro'
-                })
+                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!', tipo: 'erro' })
             })
 
         }, TEMPO_PADRAO_DELAY)

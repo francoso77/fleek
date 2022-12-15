@@ -1,4 +1,16 @@
 {
+  "fornecedores": [
+    {
+      "idFornecedor": 1,
+      "fornecedor": "JOAO BATISTA  FDGDFG",
+      "cnpj": "20278531000158"
+    },
+    {
+      "fornecedor": "NOVA SERRANA COUROS",
+      "cnpj": "20278531000158",
+      "idFornecedor": 2
+    }
+  ],
   "clientes": [
     {
       "idCliente": 3,

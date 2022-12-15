@@ -1,3 +1,3 @@
 export interface AcaoStateInterface{
-    acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando'
+    acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando' | string
 }

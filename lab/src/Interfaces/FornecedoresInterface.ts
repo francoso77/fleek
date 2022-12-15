@@ -1,5 +1,5 @@
 export interface FornecedoresInterface {
-    id: string,
+    idFornecedor: number,
     fornecedor: string,
     cnpj: string
 }
