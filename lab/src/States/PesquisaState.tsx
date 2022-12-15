@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { EscolasInterface } from "../Interfaces/EscolasInterface";
 
 export default function usePesquisaState(){

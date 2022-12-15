@@ -2,13 +2,18 @@
   "fornecedores": [
     {
       "idFornecedor": 1,
-      "fornecedor": "JOAO BATISTA  FDGDFG",
+      "fornecedor": "JOAO BATISTA K",
       "cnpj": "20278531000158"
     },
     {
-      "fornecedor": "NOVA SERRANA COUROS",
-      "cnpj": "20278531000158",
-      "idFornecedor": 2
+      "idFornecedor": 2,
+      "fornecedor": "ANABIO VALFRIDO",
+      "cnpj": "20278531000158"
+    },
+    {
+      "idFornecedor": 3,
+      "fornecedor": "TESTE",
+      "cnpj": "20278531000158"
     }
   ],
   "clientes": [

@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 import axios from "axios"
-import exp from "constants"
 
 interface dadosCepInterface {
     cep: string,
@@ -12,10 +10,6 @@ interface dadosCepInterface {
 }
 const expCEP: RegExp = new RegExp(/^[0-9]{2}.[0-9]{3}-[0-9]{3}$/)
 const expUF: RegExp = new RegExp(/^([A-Z]){2}$/)
-
-const expCPF: RegExp = new RegExp('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$', 'gm')
-
-const expCNPJ: RegExp = new RegExp(/^[0-9]{2}.[0-9]{3}.[0-9]{3}\/[0-9]{4}-[0-9]{2}$/)
 const expSEXO: RegExp = new RegExp(/[a-z]{1}$/)
 const expEMAIL: RegExp = new RegExp(/^\b\S+@\w+\.[a-z0-9]{1,3}\.[a-z]{2}$|^\b\S+@\w+\.[a-z0-9]{1,3}$/, 'gim')
 const expINTEIRO: RegExp = new RegExp(/^\d+(,\d{1,3})?$/)
@@ -346,7 +340,7 @@ export default class ClsValidaCampo {
     public verificaCEP(_eCEP: string): Promise<boolean> {
 
 
-        _eCEP = _eCEP.replace(/\-|\./g, '')
+        _eCEP = _eCEP.replace(/-|\./g, '')
         const tmpURL = 'https://viacep.com.br/ws/'.concat(_eCEP).concat('/json/')
 
         return axios.get(tmpURL).then(dados => {

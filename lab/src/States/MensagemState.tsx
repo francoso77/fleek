@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { MensagemStateInterface } from '../Interfaces/MensagemStateInterface'
 
 export default function useMensagemState() {

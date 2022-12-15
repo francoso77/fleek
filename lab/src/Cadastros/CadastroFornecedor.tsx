@@ -12,7 +12,7 @@ const TEMPO_PADRAO_DELAY: number = 500
 
 export default function CadastroFornecedor() {
 
-    const [rsFornecedor, setRsFornecedor] = useState<FornecedoresInterface>({
+    const [rsFornecedores, setRsFornecedores] = useState<FornecedoresInterface>({
         idFornecedor: 0,
         fornecedor: '',
         cnpj: ''
@@ -27,71 +27,80 @@ export default function CadastroFornecedor() {
     const [acaoState, setAcaoState] = useState<AcaoStateInterface>({ acao: 'pesquisando' })
 
     const btPesquisar = (item: number | string, acao: string) => {
-        
-        let URL_PESQUISA: string = ''
-        let MSG1: string = ''
-        let MSG2: string = ''
 
-        if (acao === 'pesquisando'){
+        let URL_PESQUISA: string = URL_SERVIDOR3006.concat('/fornecedores/'.concat(item.toString()))
+        let MSG1: string = 'Pesquisando fornecedor ...'
+        let MSG2: string = 'pesquisar'
+        let MSG3: string = ''
+        let corpo: string | null = null
+        let metodo: string = 'GET'
+
+        if (acao === 'pesquisando') {
+
             URL_PESQUISA = URL_SERVIDOR3006.concat('/fornecedores?fornecedor_like='.concat(pesquisa.nome))
-            MSG1 = 'Pesquisando Fornecedor ...'
-            MSG2 = 'pesquisar'
 
-        } else if (acao === 'editando'){
-
-            URL_PESQUISA = URL_SERVIDOR3006.concat('/fornecedores/'.concat(item.toString()))    
-            MSG1 = 'Editando Fornecedor ...'
+        } else if (acao === 'ConfirmarEdicao') {
+            
+            MSG1 = 'Editando fornecedor ...'
             MSG2 = 'editar'
+            MSG3 = 'editado'
+            corpo = JSON.stringify(rsFornecedores)
+            metodo = 'PATCH'
+        } else if (acao === 'ConfirmarExclusao') {
+            
+            MSG1 = 'Excluindo fornecedor ...'
+            MSG2 = 'excluir'
+            MSG3 = 'excluído'
+            metodo = 'DELETE'
+        }else if (acao === 'ConfirmarInclusao') {
+            
+            URL_PESQUISA = URL_SERVIDOR3006.concat('/fornecedores')
+            MSG1 = 'Incluindo fornecedor ...'
+            MSG2 = 'incluir'
+            MSG3 = 'incluído'
+            corpo = JSON.stringify(rsFornecedores)
+            metodo = 'POST'
         }
-        
+
         globalContexto.setMensagemState({ exibir: true, mensagem: MSG1, tipo: 'processando' })
 
         setTimeout(() => {
             fetch(URL_PESQUISA, {
+                body: corpo,
                 headers: { 'content-Type': 'application/json', },
-                method: 'GET'
+                method: metodo
             }).then(rs => {
                 if (rs.ok) {
-                    globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
-                    return rs.json()
+                    
+                    if (acao === 'ConfirmarExclusao' || acao === 'ConfirmarEdicao' || acao === 'ConfirmarInclusao') {
+                        
+                        btPesquisar(0, 'pesquisando')
+                        setAcaoState ({acao:'pesquisando'})
+                        setRsFornecedores({
+                            idFornecedor:0,
+                            fornecedor: '',
+                            cnpj: ''
+                        })
+                        globalContexto.setMensagemState({ exibir: true, mensagem: 'Fornecedor '.concat(MSG3).concat(' com sucesso!!!'), tipo: 'aviso' })
+                        
+                    } else {
+                        globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
+                        return rs.json()
+                    }
                 } else {
-                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao'.concat(MSG2).concat(' Fornecedor!!! '), tipo: 'erro' })
+                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao '.concat(MSG2).concat(' Fornecedor!!! '), tipo: 'erro' })
                 }
             }).then((DadosFornecedor) => {
-                if (acao === 'pesquisando'){
-                setRsPesquisa(DadosFornecedor)
-                } else if (acao === 'editando'){
-                    setRsFornecedor(DadosFornecedor)
-                    setAcaoState({acao: 'editando'})
+                
+                if (acao === 'pesquisando') {
+                    setRsPesquisa(DadosFornecedor)
+                } else if (acao === 'excluindo' || acao === 'editando') {
+                    setRsFornecedores(DadosFornecedor)
+                    setAcaoState({ acao: acao })
                 }
+                
             }).catch((e) => {
-                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível'.concat(MSG2).concat(' Fornecedor!!!'), tipo: 'erro' })
-            })
-        }, TEMPO_PADRAO_DELAY)
-    }
-
-    const btEditar = (idFornecedor: number) => {
-        globalContexto.setMensagemState({ exibir: true, mensagem: 'Editando Fornecedor ...', tipo: 'processando' })
-
-        const URL_PESQUISA: string = URL_SERVIDOR3006.concat('/fornecedores/'.concat(idFornecedor.toString()))
-
-        setTimeout(() => {
-            console.log(URL_PESQUISA)
-            fetch(URL_PESQUISA, {
-                headers: { 'content-Type': 'application/json', },
-                method: 'GET'
-            }).then(rs => {
-                if (rs.ok) {
-                    globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
-                    return rs.json()
-                } else {
-                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao etidar Fornecedor!!! ', tipo: 'erro' })
-                }
-            }).then((DadosFornecedor) => {
-                setRsFornecedor(DadosFornecedor)
-                setAcaoState({ acao: 'editando' })
-            }).catch((e) => {
-                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível editar Fornecedor!!!', tipo: 'erro' })
+                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível '.concat(MSG2).concat(' Fornecedor!!!'), tipo: 'erro' })
             })
         }, TEMPO_PADRAO_DELAY)
     }
@@ -103,13 +112,9 @@ export default function CadastroFornecedor() {
             <td>{fornecedores.fornecedor}</td>
             <td>{fornecedores.cnpj}</td>
             <td><input type="button" value="Editar" onClick={(e) => btPesquisar(fornecedores.idFornecedor, 'editando')} /></td>
-            <td><input type="button" value="Excluir" onClick={(e) => btEditar(fornecedores.idFornecedor)} /></td>
+            <td><input type="button" value="Excluir" onClick={(e) => btPesquisar(fornecedores.idFornecedor, 'excluindo')} /></td>
         </tr>
     )
-
-    const btConfirmarEdicao = () => {
-
-    }
 
     const btCancelar = () => {
 
@@ -134,24 +139,26 @@ export default function CadastroFornecedor() {
                             <InputText
                                 label='Fornecedor: '
                                 tipo='text'
-                                valor={rsFornecedor.fornecedor}
+                                valor={rsFornecedores.fornecedor}
                                 id='txtFornecedor'
                                 placeholder=''
-                                dados={rsFornecedor}
+                                dados={rsFornecedores}
                                 campo='fornecedor'
-                                setState={setRsFornecedor}
+                                setState={setRsFornecedores}
                                 valida='txt'
+                                disabled={acaoState.acao === 'excluindo' ? true : false}
                             />
                             <InputText
                                 label='CNPJ: '
                                 tipo='text'
-                                valor={rsFornecedor.cnpj}
+                                valor={rsFornecedores.cnpj}
                                 id='txtCNPJ'
                                 placeholder=''
-                                dados={rsFornecedor}
+                                dados={rsFornecedores}
                                 campo='cnpj'
-                                setState={setRsFornecedor}
+                                setState={setRsFornecedores}
                                 valida='cnpj'
+                                disabled={acaoState.acao === 'excluindo' ? true : false}
                             />
                             <br />
                             <input
@@ -176,7 +183,7 @@ export default function CadastroFornecedor() {
                             <input
                                 type="button"
                                 value="Pesquisar"
-                                onClick={(e) =>btPesquisar(pesquisa.nome, 'pesquisando')}
+                                onClick={(e) => btPesquisar(pesquisa.nome, 'pesquisando')}
                             />
                             <br />
                             <input
@@ -206,7 +213,25 @@ export default function CadastroFornecedor() {
                             <input
                                 type="button"
                                 value="Confirmar Edição"
-                                onClick={btConfirmarEdicao}
+                                onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarEdicao')}
+                            />
+                        </>
+                    }
+                    {acaoState.acao === 'excluindo' &&
+                        <>
+                            <input
+                                type="button"
+                                value="Confirmar Exclusão"
+                                onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarExclusao')}
+                            />
+                        </>
+                    }
+                    {acaoState.acao === 'incluindo' &&
+                        <>
+                            <input
+                                type="button"
+                                value="Confirmar inclusão"
+                                onClick={(e) => btPesquisar(0, 'ConfirmarInclusao')}
                             />
                         </>
                     }

@@ -1,18 +1,18 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { URL_SERVIDOR3002 } from '../Config/Setup'
 import { ContextoGlobal } from '../Contextos/ContextoGlobal'
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface'
 import { FetchInterface } from '../Interfaces/FecthInterface'
 import { EscolasInterface } from '../Interfaces/EscolasInterface'
 
+const TEMPO_PADRAO_DELAY: number = 500
 
-export default function ClsFetch<T>({
+export default function ClsFetch({
     acao,
     idEscola,
     nome,
 }: FetchInterface) {
     
-    const TEMPO_PADRAO_DELAY: number = 500
     
     var msg1: string = ''
     var corpo: string = ''

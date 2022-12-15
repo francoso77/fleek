@@ -3,7 +3,7 @@ import { InputTextInterface } from "../Interfaces/InputTextInterface";
 import ClsValidaCampo from "../Utils/ClsValidaCampos";
 import './InputText.css'
 
-export default function InputText<T>(
+export default function InputText(
     {
         autofocus = false,
         disabled = false,
