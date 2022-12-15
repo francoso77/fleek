@@ -26,10 +26,25 @@ export default function CadastroFornecedor() {
 
     const [acaoState, setAcaoState] = useState<AcaoStateInterface>({ acao: 'pesquisando' })
 
-    const btPesquisar = () => {
-        globalContexto.setMensagemState({ exibir: true, mensagem: 'Pesquisando Fornecedor ...', tipo: 'processando' })
+    const btPesquisar = (item: number | string, acao: string) => {
+        
+        let URL_PESQUISA: string = ''
+        let MSG1: string = ''
+        let MSG2: string = ''
 
-        const URL_PESQUISA: string = URL_SERVIDOR3006.concat('/fornecedores?fornecedor_like='.concat(pesquisa.nome))
+        if (acao === 'pesquisando'){
+            URL_PESQUISA = URL_SERVIDOR3006.concat('/fornecedores?fornecedor_like='.concat(pesquisa.nome))
+            MSG1 = 'Pesquisando Fornecedor ...'
+            MSG2 = 'pesquisar'
+
+        } else if (acao === 'editando'){
+
+            URL_PESQUISA = URL_SERVIDOR3006.concat('/fornecedores/'.concat(item.toString()))    
+            MSG1 = 'Editando Fornecedor ...'
+            MSG2 = 'editar'
+        }
+        
+        globalContexto.setMensagemState({ exibir: true, mensagem: MSG1, tipo: 'processando' })
 
         setTimeout(() => {
             fetch(URL_PESQUISA, {
@@ -40,12 +55,17 @@ export default function CadastroFornecedor() {
                     globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
                     return rs.json()
                 } else {
-                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao pesquisar Fornecedor!!! ', tipo: 'erro' })
+                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao'.concat(MSG2).concat(' Fornecedor!!! '), tipo: 'erro' })
                 }
             }).then((DadosFornecedor) => {
+                if (acao === 'pesquisando'){
                 setRsPesquisa(DadosFornecedor)
+                } else if (acao === 'editando'){
+                    setRsFornecedor(DadosFornecedor)
+                    setAcaoState({acao: 'editando'})
+                }
             }).catch((e) => {
-                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível pesquisar Fornecedor!!!', tipo: 'erro' })
+                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível'.concat(MSG2).concat(' Fornecedor!!!'), tipo: 'erro' })
             })
         }, TEMPO_PADRAO_DELAY)
     }
@@ -82,7 +102,7 @@ export default function CadastroFornecedor() {
             <td>{fornecedores.idFornecedor}</td>
             <td>{fornecedores.fornecedor}</td>
             <td>{fornecedores.cnpj}</td>
-            <td><input type="button" value="Editar" onClick={(e) => btEditar(fornecedores.idFornecedor)} /></td>
+            <td><input type="button" value="Editar" onClick={(e) => btPesquisar(fornecedores.idFornecedor, 'editando')} /></td>
             <td><input type="button" value="Excluir" onClick={(e) => btEditar(fornecedores.idFornecedor)} /></td>
         </tr>
     )
@@ -156,7 +176,7 @@ export default function CadastroFornecedor() {
                             <input
                                 type="button"
                                 value="Pesquisar"
-                                onClick={btPesquisar}
+                                onClick={(e) =>btPesquisar(pesquisa.nome, 'pesquisando')}
                             />
                             <br />
                             <input
