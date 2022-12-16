@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
 import { URL_SERVIDOR3002 } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
