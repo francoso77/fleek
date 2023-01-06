@@ -84,3 +84,10 @@ O navlink é a diretiva para criar os link das rotas.
 <NavLink to="/cadastrofornecedor">Fornecedor</NavLink>
 geralmente utilizado para a criação do MENU
 
+
+UseNavegate ()
+Para criar link
+
+Para criar projetos PWA
+npx create-react-app my-app --template cra-template-pwa-typescript
+

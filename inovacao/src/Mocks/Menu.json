@@ -1,0 +1,24 @@
+{
+    "MenuDto": [
+        {
+            "id": "Cadastros",
+            "parentId": "Principal",
+            "descricao": "Cadastros",
+            "icon": "grid_view",
+            "path": ""
+        },
+        {
+            "id": "Bairros",
+            "parentId": "Cadastros",
+            "descricao": "Bairros",
+            "icon": "location_on",
+            "path": "/Perfil"
+        },
+        {
+            "id": "Cidades",
+            "parentId": "Cadastros",
+            "descricao": "Cidades",
+            "icon": "apartment",
+            "path": "/"
+        }   ]
+}
