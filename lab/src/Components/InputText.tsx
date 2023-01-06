@@ -1,3 +1,4 @@
+import TextField from "@mui/material/TextField";
 import React, { useEffect, useRef, useState } from "react";
 import { InputTextInterface } from "../Interfaces/InputTextInterface";
 import ClsValidaCampo from "../Utils/ClsValidaCampos";
@@ -13,13 +14,12 @@ export default function InputText(
         campo,
         setState,
         valida,
-        placeholder,
         valor,
         id = undefined
     }: InputTextInterface
 ) {
 
-    const inputRef = useRef<HTMLInputElement> (null)
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (autofocus && inputRef.current) {
@@ -48,7 +48,7 @@ export default function InputText(
     const validarNaoVazio = (evento: any) => {
 
         let vr: any = evento.target.value
-     
+
         if (valida === 'txt' && validaCampo.campoVazio(vr)) {
             setValidacao("Campo não pode ser vázio!")
         } else if (valida === 'cpf' && !validaCampo.eCPF(vr)) {
@@ -72,7 +72,19 @@ export default function InputText(
 
     return (
         <>
-            <label className="labelInputText">{label}</label>
+            <TextField
+                id={id}
+                label={label}
+                variant="outlined"
+                ref={inputRef}
+                value={valor}
+                disabled={disabled}
+                onBlur={validarNaoVazio}
+                onChange={(evento) => { setState({ ...dados, [campo]: valida !== 'email' ? evento.target.value.toUpperCase() : evento.target.value }) }}
+            />
+
+
+            {/*<label className="labelInputText">{label}</label>
             <input className="InputText"
                 type={tipo}
                 ref={inputRef}
@@ -81,9 +93,13 @@ export default function InputText(
                 value={valor}
                 placeholder={placeholder}
                 onBlur={validarNaoVazio}
-                onChange={(evento) => { setState({ ...dados, [campo]: 
-                    valida !=='email'? evento.target.value.toUpperCase() : evento.target.value}) }}
-            />
+                onChange={(evento) => {
+                    setState({
+                        ...dados, [campo]:
+                            valida !== 'email' ? evento.target.value.toUpperCase() : evento.target.value
+                    })
+                }}
+            />*/}
             <span className="spanValidacao">{validacao}</span>
         </>
     )

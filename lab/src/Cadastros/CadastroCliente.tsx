@@ -310,7 +310,6 @@ export default function CadastroCliente() {
                                 tipo='text'
                                 valor={rsClientes.cliente}
                                 id='txtCliente'
-                                placeholder=''
                                 dados={rsClientes}
                                 campo='cliente'
                                 setState={setRsClientes}
@@ -322,7 +321,6 @@ export default function CadastroCliente() {
                                 tipo='text'
                                 valor={rsClientes.cpf}
                                 id='txtCPF'
-                                placeholder=''
                                 dados={rsClientes}
                                 campo='cpf'
                                 setState={setRsClientes}
