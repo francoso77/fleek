@@ -1,14 +1,15 @@
+import { ThemeProvider } from '@mui/system'
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Mensagem from '../Components/Mensagem'
+import { THEME } from '../Config/Theme'
 import { ContextoGlobal } from '../Contextos/ContextoGlobal'
 import Login from '../Login/Login'
 import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemState from '../States/MensagemState'
-import Footer from './Footer'
-import Header from './Header'
 import './Layout.css'
+import TopAppBar from './TopAppBar'
 
 
 export default function Layout() {
@@ -17,7 +18,7 @@ export default function Layout() {
     const { layoutState, setLayoutState } = useLayoutState()
     const { mensagemState, setMensagemState } = useMensagemState()
     const clearMensagem = () => {
-        setMensagemState({...mensagemState, exibir: false})
+        setMensagemState({ ...mensagemState, exibir: false })
     }
 
     return (
@@ -33,18 +34,19 @@ export default function Layout() {
             }}>
 
                 <>
-                    {loginState.logado ?
-                        <>
-                            <Mensagem />
-                            <Header />
-                            <Outlet />
-                            <Footer />
-                        </> :
-                        <>
-                            <Login />
-                        </>
-                    }
+                    <ThemeProvider theme={THEME}>
+                        {loginState.logado ?
+                            <>
+                                <Mensagem />
+                                <TopAppBar />
+                                <Outlet />
 
+                            </> :
+                            <>
+                                <Login />
+                            </>
+                        }
+                    </ThemeProvider>
                 </>
             </ContextoGlobal.Provider>
         </>
