@@ -10,6 +10,5 @@ export interface InputTextInterface {
     dados: {[key: string]: string | number | readonly string[] | undefined | any}
     setState: React.Dispatch<React.SetStateAction<any>>
     valida: string
-    placeholder?: string | undefined
     valor?: string | undefined
 }

@@ -1,3 +1,4 @@
+import { Icon } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useContext, useState } from 'react';
 import InputText from '../Components/InputText';
@@ -30,7 +31,7 @@ export default function CadastroFornecedor() {
         const verificarDados: ClsFetch = new ClsFetch()
 
         verificarDados.pesquisar(
-            item, 
+            item,
             acao,
             pesquisa,
             rsFornecedores,
@@ -46,6 +47,10 @@ export default function CadastroFornecedor() {
             <td>{fornecedores.idFornecedor}</td>
             <td>{fornecedores.fornecedor}</td>
             <td>{fornecedores.cnpj}</td>
+
+            <td>
+            <Icon>star</Icon>
+            </td>
             <td><input type="button" value="Editar" onClick={(e) => btPesquisar(fornecedores.idFornecedor, 'editando')} /></td>
             <td><input type="button" value="Excluir" onClick={(e) => btPesquisar(fornecedores.idFornecedor, 'excluindo')} /></td>
         </tr>
@@ -76,7 +81,6 @@ export default function CadastroFornecedor() {
                                 tipo='text'
                                 valor={rsFornecedores.fornecedor}
                                 id='txtFornecedor'
-                                placeholder=''
                                 dados={rsFornecedores}
                                 campo='fornecedor'
                                 setState={setRsFornecedores}
@@ -88,7 +92,6 @@ export default function CadastroFornecedor() {
                                 tipo='text'
                                 valor={rsFornecedores.cnpj}
                                 id='txtCNPJ'
-                                placeholder=''
                                 dados={rsFornecedores}
                                 campo='cnpj'
                                 setState={setRsFornecedores}
@@ -96,8 +99,8 @@ export default function CadastroFornecedor() {
                                 disabled={acaoState.acao === 'excluindo' ? true : false}
                             />
                             <br />
-                            <Button 
-                                variant="outlined" 
+                            <Button
+                                variant="outlined"
                                 onClick={btCancelar}
                             >Cancelar</Button>
                             <br />
@@ -114,15 +117,15 @@ export default function CadastroFornecedor() {
                                 setState={setPesquisa}
                                 valida='txt'
                             />
-                            <Button 
-                                variant="outlined" 
+                            <Button
+                                variant="outlined"
                                 onClick={(e) => btPesquisar(pesquisa.nome, 'pesquisando')}
                             >Pesquisar</Button>
                             <br />
-                            <Button 
-                                variant="outlined" 
+                            <Button
+                                variant="outlined"
                                 onClick={btNovoFornecedor}
-                            >+</Button> 
+                            >+</Button>
                             <br />
                             <br />
                             <table>
@@ -141,35 +144,25 @@ export default function CadastroFornecedor() {
                         </>
                     }
                     {acaoState.acao === 'editando' &&
-                        <>
-                            <input
-                                type="button"
-                                value="Confirmar Edição"
-                                onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarEdicao')}
-                            />
-                        </>
+                        <Button
+                            variant="outlined"
+                            onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarEdicao')}
+                        >Confirmar Edição</Button>
                     }
                     {acaoState.acao === 'excluindo' &&
-                        <>
-                            <input
-                                type="button"
-                                value="Confirmar Exclusão"
-                                onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarExclusao')}
-                            />
-                        </>
+                        <Button
+                            variant="outlined"
+                            onClick={(e) => btPesquisar(rsFornecedores.idFornecedor, 'ConfirmarExclusao')}
+                        >Confirmar Exclusão</Button>
                     }
                     {acaoState.acao === 'incluindo' &&
-                        <>
-                            <input
-                                type="button"
-                                value="Confirmar inclusão"
-                                onClick={(e) => btPesquisar(0, 'ConfirmarInclusao')}
-                            />
-                        </>
+                        <Button
+                            variant="outlined"
+                            onClick={(e) => btPesquisar(0, 'ConfirmarInclusao')}
+                        >Confirmar Inclusão</Button>
                     }
                 </>
             }
         </>
-
     )
 }
