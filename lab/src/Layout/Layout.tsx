@@ -9,6 +9,7 @@ import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemState from '../States/MensagemState'
 import './Layout.css'
+import Menu from './Menu'
 import TopAppBar from './TopAppBar'
 
 
@@ -40,6 +41,7 @@ export default function Layout() {
                                 <Mensagem />
                                 <TopAppBar />
                                 <Outlet />
+                                <Menu />
 
                             </> :
                             <>
