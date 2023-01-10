@@ -1,10 +1,23 @@
-import { useState } from "react";
-import { LayoutStateInterface } from "../Interfaces/LayoutStateInterface";
+import React, { useState } from 'react'
 
 
-export default function useLayoutState(){
+export interface LayoutStateInterface {
+  aliasDB: string
+  versaoCompleta: string
+  exibirMenu: boolean
+  //opcoesMenu: Array<EstruturaMenuInterface>
+}
 
-    const [layoutState, setLayoutState] = useState<LayoutStateInterface>({ titulaPagina:'' })
+export default function useLayoutState () {
 
-    return { layoutState, setLayoutState}
+  const [layoutState, setLayoutState] =
+    useState<LayoutStateInterface>( {
+      aliasDB: '',
+      versaoCompleta: '',
+      exibirMenu: false,
+      //opcoesMenu: []
+    } )
+
+  return { layoutState, setLayoutState }
+
 }

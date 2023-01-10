@@ -1,5 +1,5 @@
 import React from 'react'
-import { LayoutStateInterface } from './LayoutStateInterface'
+import { LayoutStateInterface } from '../States/LayoutState'
 import { LoginStateInterface } from './LoginStateInterface'
 import { MensagemStateInterface } from './MensagemStateInterface'
 
