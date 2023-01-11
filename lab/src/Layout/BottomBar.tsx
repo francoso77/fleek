@@ -10,7 +10,7 @@ const Offset = styled( 'div' )( ( { theme } ) => theme.mixins.toolbar );
 
 export default function BottomBar () {
 
-  const {layoutState, setLayoutState} = useContext(ContextoGlobal) as GlobalStateInterface
+  const {layoutState} = useContext(ContextoGlobal) as GlobalStateInterface
 
   return (
     <>
