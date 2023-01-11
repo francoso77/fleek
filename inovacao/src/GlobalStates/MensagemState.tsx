@@ -1,24 +1,33 @@
 import React, { useState } from 'react'
+import { AlertColor } from '@mui/material'
 
 export enum MensagemTipo {
-  Aviso = 1,
-  Erro = 2
+  Warning = 'warning',
+  Error = 'error',
+  Info = 'info',
+  ok = 'success'
 }
 
 export interface MensagemStateInterface {
-  mensagem: string
-  tipo: number
   exibir: boolean
+  titulo: string
+  mensagem: string
+  tipo: AlertColor
+  modal: boolean
+}
+
+export const MensagemStatePadrao: MensagemStateInterface = {
+  exibir: false,
+  titulo: '',
+  mensagem: 'MENSAGEM A SER EXIBIDA',
+  tipo: MensagemTipo.Info,
+  modal: false
 }
 
 export default function useMensagemState () {
 
   const [mensagemState, setMensagemState] =
-    useState<MensagemStateInterface>( {
-      mensagem: '',
-      tipo: MensagemTipo.Aviso,
-      exibir: false
-    } )
+    useState<MensagemStateInterface>( MensagemStatePadrao )
 
   return { mensagemState, setMensagemState }
 

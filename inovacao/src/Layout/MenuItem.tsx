@@ -11,7 +11,8 @@ import { ContextoGlobal, ContextoGlobalInterface } from '../GlobalStates/Context
 
 import Icon from '@mui/material/Icon';
 import { EstruturaMenuInterface } from './MenuCls';
-import MenuItemFilhos from './MenuItemFilhos';
+import Collapse from '@mui/material/Collapse';
+import List from '@mui/material/List';
 
 interface PropsInterface {
   menu: EstruturaMenuInterface
@@ -26,7 +27,7 @@ export default function MenuItem ( { menu }: PropsInterface ) {
   const [openSubMenu, setOpenSubMenu] = useState( false )
 
   const handleClickSubMenu = ( oque: any ) => {
-    console.log( 'handleClickSubMenu MenuItem' )
+    // console.log( 'handleClickSubMenu MenuItem' )
     setOpenSubMenu( !openSubMenu )
   }
 
@@ -58,8 +59,14 @@ export default function MenuItem ( { menu }: PropsInterface ) {
 
         {
           menu.filhos.map( ( menu, index ) =>
-            <MenuItemFilhos openSubMenu={openSubMenu} setOpenSubMenu={setOpenSubMenu} key={index} menu={menu} /> )
-        }
+
+            <Collapse in={openSubMenu} timeout="auto" unmountOnExit key={index}>
+              <List component="div" disablePadding>
+                <MenuItem menu={menu} />
+              </List>
+            </Collapse>
+
+          )}
 
       </>
     )

@@ -1,15 +1,16 @@
-import React from 'react'
 import { CssBaseline, ThemeProvider } from '@mui/material'
+import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { THEME } from '../Config/Theme'
 import { ContextoGlobal } from '../GlobalStates/ContextoGlobal'
 import useLayoutState from '../GlobalStates/LayoutState'
-import Mensagem from '../InovaComponents/xMensagem'
+import Mensagem from '../InovaComponents/Mensagem'
 import BottomBar from './BottomBar'
 import TopAppBar from './TopAppBar'
+
 import Menu from './Menu'
 import Condicional from './Condicional'
-import Login from '../View/Controller/Login'
+import Login from '../View/Controller/LoginZ'
 import useMensagemState from '../GlobalStates/MensagemState'
 import useLoginState from '../GlobalStates/LoginState'
 
@@ -38,8 +39,9 @@ export default function Layout () {
 
             <TopAppBar />
             <Outlet />
-            <BottomBar/>
-            <Menu />
+            <BottomBar></BottomBar>
+
+            <Menu></Menu>
 
           </Condicional>
 

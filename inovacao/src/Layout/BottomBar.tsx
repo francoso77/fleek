@@ -1,12 +1,25 @@
 import React, { useContext } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
-import Typography from '@mui/material/Typography'
+import { Link, Typography } from '@mui/material'
 import { ContextoGlobal, ContextoGlobalInterface } from '../GlobalStates/ContextoGlobal'
 
 import { styled } from '@mui/material/styles';
 
 const Offset = styled( 'div' )( ( { theme } ) => theme.mixins.toolbar );
+
+const Copyright = ( props: any ) => {
+  return (
+    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+      {'Copyright © '}
+      <Link color="inherit" href="https://inovatec.com.br">
+        Inovacao Tecnologia
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 export default function BottomBar () {
 
@@ -20,6 +33,7 @@ export default function BottomBar () {
           <Typography variant="h6">
             {GlobalContexto.layoutState.aliasDB}
           </Typography>
+          <Copyright />
         </Toolbar>
       </AppBar>
     </>

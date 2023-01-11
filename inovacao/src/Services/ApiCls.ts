@@ -29,24 +29,24 @@ export default class ApiCls {
 
     // console.clear()
     console.log( url )
+    */
 
     return fetch( URL_API.concat( url ), parametros ).then( rs => {
       return rs.json() as Promise<T>
     } )
+
+    /*
+        return new Promise( ( resolve ) => {
     
+          console.log( parametros )
+          console.log( URL_API )
+    
+          setTimeout( () => {
+            console.log( 'Dentro do TimeOut....' )
+            resolve( require( '../Mocks/Menu.json' ) as T )
+          }, 2000 )
+    
+        } )
     */
-
-    return new Promise( ( resolve ) => {
-
-      console.log( parametros )
-      console.log( URL_API )
-
-      setTimeout( () => {
-        console.log( 'Dentro do TimeOut....' )
-        resolve( require( '../Mocks/Menu.json' ) as T )
-      }, 2000 )
-
-    } )
-
   }
 }

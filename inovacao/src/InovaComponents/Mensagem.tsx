@@ -1,37 +1,58 @@
 import React, { useContext } from 'react';
 import { ContextoGlobal, ContextoGlobalInterface } from '../GlobalStates/ContextoGlobal';
-import { MensagemTipo } from '../GlobalStates/MensagemState';
 import Condicional from '../Layout/Condicional';
 
-import './Mensagem.css'
+import { Box, Button, Grid, Modal, Typography } from '@mui/material'
+import Alert from '@mui/material/Alert'
+import { MensagemStatePadrao } from '../GlobalStates/MensagemState';
 
 export default function Mensagem () {
 
   const { mensagemState, setMensagemState } = ( useContext( ContextoGlobal ) as ContextoGlobalInterface )
 
   const fecharJanela = () => {
-    setMensagemState( { exibir: false, mensagem: '', tipo: MensagemTipo.Aviso } )
+    setMensagemState( MensagemStatePadrao )
   }
 
-  if ( mensagemState.exibir ) {
+  const MensagemNoModal = () =>
+    <Grid
+      container
+      justifyContent='center'
+      alignItems='center'
+      height='100vh'
+      sx={{ margin: 'auto' }}
+    >
+      <Box>
+        <Alert
+          severity={mensagemState.tipo}
+          sx={{
+            '& .MuiAlert-icon': {
+              fontSize: 50
+            }
+          }}>
 
-    return (
-      <>
-        <div id="mensagem" className="modal">
-          <div className="modal-content">
-            <p>{mensagemState.mensagem}</p>
-            <Condicional condicao={mensagemState.tipo === MensagemTipo.Aviso || mensagemState.tipo === MensagemTipo.Erro}>
-              <>
-                <input type="button" onClick={fecharJanela} value="Fechar" />
-              </>
-            </Condicional>
-          </div>
-        </div>
-      </>
-    )
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {mensagemState.titulo}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {mensagemState.mensagem}
+          </Typography>
+          <Condicional condicao={mensagemState.modal}>
+            <Button variant='contained' onClick={() => fecharJanela()} sx={{ width: '100%' }}>Fechar</Button>
+          </Condicional>
+        </Alert>
+      </Box>
+    </Grid>
 
-  } else {
-    return ( <></> )
-  }
-
+  return (
+    <>
+      <Modal
+        open={mensagemState.exibir}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <><MensagemNoModal /></>
+      </Modal>
+    </>
+  )
 }

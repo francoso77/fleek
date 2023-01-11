@@ -1,24 +1,39 @@
 {
-    "MenuDto": [
-        {
-            "id": "Cadastros",
-            "parentId": "Principal",
-            "descricao": "Cadastros",
-            "icon": "grid_view",
-            "path": ""
-        },
-        {
-            "id": "Bairros",
-            "parentId": "Cadastros",
-            "descricao": "Bairros",
-            "icon": "location_on",
-            "path": "/Perfil"
-        },
-        {
-            "id": "Cidades",
-            "parentId": "Cadastros",
-            "descricao": "Cidades",
-            "icon": "apartment",
-            "path": "/"
-        }   ]
+  "MenuDto": [
+    {
+      "id": "Cadastros",
+      "parentId": "Principal",
+      "descricao": "Cadastros",
+      "icon": "grid_view",
+      "path": ""
+    },
+    {
+      "id": "Bairros",
+      "parentId": "Cadastros",
+      "descricao": "Bairros",
+      "icon": "location_on",
+      "path": "/Perfil"
+    },
+    {
+      "id": "Cidades",
+      "parentId": "Cadastros",
+      "descricao": "Cidades",
+      "icon": "apartment",
+      "path": "/"
+    },
+    {
+      "id": "MenuCad",
+      "parentId": "Cadastros",
+      "descricao": "Sub Cadastros",
+      "icon": "apartment",
+      "path": ""
+    },
+    {
+      "id": "MenuCad2",
+      "parentId": "MenuCad",
+      "descricao": "Perfil Sub",
+      "icon": "apartment",
+      "path": "/Perfil"
+    }
+  ]
 }
