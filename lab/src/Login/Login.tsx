@@ -4,8 +4,17 @@ import { LoginInterface } from '../Interfaces/LoginInterface'
 import { ContextoGlobal } from '../Contextos/ContextoGlobal'
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface'
 import { URL_SERVIDOR3002 } from '../Config/Setup'
+import ApiCls from '../Services/ApiCls'
+import MenuCls from '../Layout/MenuCls'
 
 export default function Login() {
+
+    const clsApi = new ApiCls()
+
+    const dados = {
+        "login": "master",
+        "senha": "1d8db7d7519ea9e08ab786ad2692fa29"
+    }
 
     const [usuarios, setUsuarios] = useState<LoginInterface>({
         usuario: '',
@@ -14,7 +23,7 @@ export default function Login() {
         autorizado: false
     })
 
-    const setLoginState = (useContext(ContextoGlobal) as GlobalStateInterface).setLoginState
+    const GlobalContexto = (useContext(ContextoGlobal) as GlobalStateInterface)
 
     const logar = () => {
 
@@ -27,17 +36,23 @@ export default function Login() {
             return rs.json()
         }).then((dadosUsuarios: Array<LoginInterface>) => {
             if (dadosUsuarios.length > 0) {
-                setLoginState({
+                GlobalContexto.setLoginState({
                     logado: true,
                     nome: dadosUsuarios[0].usuario,
                     token: dadosUsuarios[0].token,
                     autorizado: dadosUsuarios[0].autorizado
                 })
-                
+                clsApi.post<any>('/Usuario/AuthenticateUser', dados, 'Login', GlobalContexto.mensagemState, GlobalContexto.setMensagemState).then(rs => {
+
+                    const clsMenu = new MenuCls(rs.MenuDto)
+
+                    GlobalContexto.setLayoutState({ ...GlobalContexto.layoutState, opcoesMenu: clsMenu.Menu })
+
+                    console.log(JSON.stringify(clsMenu.Menu))
+                })
                 console.log('usuario: ', dadosUsuarios[0].usuario)
                 console.log('senha: ', dadosUsuarios[0].senha)
                 console.log('autorizado: ', dadosUsuarios[0].autorizado)
-                
                 console.log('Usuário encontrato... Login OK!!')
             } else {
                 console.log('Usuário Não encontrato!!')
@@ -45,7 +60,6 @@ export default function Login() {
         }).catch(erro => {
             console.log('Erro no Fetch....', erro)
         })
-
     }
 
     return (
@@ -61,7 +75,8 @@ export default function Login() {
             <input type="button" value="Login" id='btLogin'
                 onClick={logar} />
             <input type="button" value="Logout" id='btLogout'
-                onClick={() => setLoginState({ logado: false, nome: '', token: '', autorizado: false })} />
+                onClick={() => GlobalContexto.setLoginState({ logado: false, nome: '', token: '', autorizado: false })} />
         </>
     )
+
 }

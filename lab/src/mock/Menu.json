@@ -1,0 +1,235 @@
+{
+    "MenuDto": [
+        {
+            "id": "Inicio",
+            "parentId": "Principal",
+            "descricao": "Início",
+            "icon": "Home",
+            "path": ""
+        },
+        {
+            "id": "Parametros",
+            "parentId": "Principal",
+            "descricao": "Parâmetros",
+            "icon": "Settings",
+            "path": ""
+        },
+        {
+            "id": "Cadastros",
+            "parentId": "Principal",
+            "descricao": "Cadastros",
+            "icon": "GridView",
+            "path": ""
+        },
+        {
+            "id": "Bairros",
+            "parentId": "Cadastros",
+            "descricao": "Bairros",
+            "icon": "LocationOn",
+            "path": ""
+        },
+        {
+            "id": "Cidades",
+            "parentId": "Cadastros",
+            "descricao": "Cidades",
+            "icon": "Apartment",
+            "path": ""
+        },
+        {
+            "id": "Clientes",
+            "parentId": "Cadastros",
+            "descricao": "Clientes",
+            "icon": "HowToReg",
+            "path": ""
+        },
+        {
+            "id": "Categorias",
+            "parentId": "Cadastros",
+            "descricao": "Categorias",
+            "icon": "Category",
+            "path": ""
+        },
+        {
+            "id": "Sprints",
+            "parentId": "Cadastros",
+            "descricao": "Sprints",
+            "icon": "AddToQueue",
+            "path": ""
+        },
+        {
+            "id": "Sats",
+            "parentId": "Sprints",
+            "descricao": "Sats",
+            "icon": "DynamicFeed",
+            "path": ""
+        },
+        {
+            "id": "Historias",
+            "parentId": "Sprints",
+            "descricao": "Histórias",
+            "icon": "Layers",
+            "path": ""
+        },
+        {
+            "id": "PriorizarSats",
+            "parentId": "Sprints",
+            "descricao": "Priorizar Sats",
+            "icon": "FormatListNumbered",
+            "path": ""
+        },
+        {
+            "id": "Sprint",
+            "parentId": "Sprints",
+            "descricao": "Sprint",
+            "icon": "AddToQueue",
+            "path": ""
+        },
+        {
+            "id": "Etiquetas",
+            "parentId": "Sprints",
+            "descricao": "Etiquetas",
+            "icon": "Discount",
+            "path": ""
+        },
+        {
+            "id": "Desktop",
+            "parentId": "Sprints",
+            "descricao": "Área de Trabalho",
+            "icon": "WebAsset",
+            "path": ""
+        },
+        {
+            "id": "ColunasQuadro",
+            "parentId": "Sprints",
+            "descricao": "Colunas Quadro",
+            "icon": "VerticalSplit",
+            "path": ""
+        },
+        {
+            "id": "GerenciadorDiasNaoTrabalhados",
+            "parentId": "Cadastros",
+            "descricao": "Gerenciador de dias não trabalhados",
+            "icon": "CalendarToday",
+            "path": ""
+        },
+        {
+            "id": "SistemasAlterados",
+            "parentId": "Cadastros",
+            "descricao": "Sistemas alterados",
+            "icon": "BorderColor",
+            "path": ""
+        },
+        {
+            "id": "Relatorios",
+            "parentId": "Principal",
+            "descricao": "Relatórios",
+            "icon": "Assignment",
+            "path": ""
+        },
+        {
+            "id": "ImpressaoDocumentos",
+            "parentId": "Relatorios",
+            "descricao": "Impressão de documentos",
+            "icon": "ContentPaste",
+            "path": ""
+        },
+        {
+            "id": "GraficoSprints",
+            "parentId": "Relatorios",
+            "descricao": "Gráfico das Sprints",
+            "icon": "TrendingUp",
+            "path": ""
+        },
+        {
+            "id": "RelatorioAcompanhamentoSprints",
+            "parentId": "Relatorios",
+            "descricao": "Relatório de acompanhamento das Sprints",
+            "icon": "Inventory",
+            "path": ""
+        },
+        {
+            "id": "HistoriasReuniaoPlanejamento",
+            "parentId": "Relatorios",
+            "descricao": "Histórias para Reunião de Planejamento",
+            "icon": "Reorder",
+            "path": ""
+        },
+        {
+            "id": "ResumoHistorias",
+            "parentId": "Relatorios",
+            "descricao": "Resumo das Historias",
+            "icon": "ReceiptLong",
+            "path": ""
+        },
+        {
+            "id": "RelatorioApresentacaoSprint",
+            "parentId": "Relatorios",
+            "descricao": "Relatório de Apresentaçãao da Sprint",
+            "icon": "ListAlt",
+            "path": ""
+        },
+        {
+            "id": "Sistema",
+            "parentId": "Principal",
+            "descricao": "Sistema",
+            "icon": "PersonalVideo",
+            "path": ""
+        },
+        {
+            "id": "Acesso",
+            "parentId": "Sistema",
+            "descricao": "Acesso",
+            "icon": "Airplay",
+            "path": ""
+        },
+        {
+            "id": "Pessoa",
+            "parentId": "Acesso",
+            "descricao": "Pessoa",
+            "icon": "AccountBox",
+            "path": ""
+        },
+        {
+            "id": "PerfilUsuario",
+            "parentId": "Acesso",
+            "descricao": "Perfil do Usuário",
+            "icon": "PeopleAlt",
+            "path": ""
+        },
+        {
+            "id": "Usuario",
+            "parentId": "Acesso",
+            "descricao": "Usuário",
+            "icon": "ManageAccounts",
+            "path": ""
+        },
+        {
+            "id": "Permissoes",
+            "parentId": "Acesso",
+            "descricao": "Permissões",
+            "icon": "LockPerson",
+            "path": ""
+        },
+        {
+            "id": "AlterarSenha",
+            "parentId": "Principal",
+            "descricao": "Alterar Senha",
+            "icon": "Password",
+            "path": ""
+        },
+        {
+            "id": "Sobre",
+            "parentId": "Principal",
+            "descricao": "Sobre",
+            "icon": "Info",
+            "path": ""
+        },
+        {
+            "id": "Sair",
+            "parentId": "Principal",
+            "descricao": "Sair",
+            "icon": "Logout",
+            "path": ""
+        }
+    ]
+}

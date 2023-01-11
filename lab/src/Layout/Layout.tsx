@@ -1,5 +1,4 @@
 import { ThemeProvider } from '@mui/system'
-import React from 'react'
 import { Outlet } from 'react-router-dom'
 import Mensagem from '../Components/Mensagem'
 import { THEME } from '../Config/Theme'
@@ -8,7 +7,8 @@ import Login from '../Login/Login'
 import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemState from '../States/MensagemState'
-import './Layout.css'
+import BottomBar from './BottomBar'
+//import './Layout.css'
 import Menu from './Menu'
 import TopAppBar from './TopAppBar'
 
@@ -41,6 +41,7 @@ export default function Layout() {
                                 <Mensagem />
                                 <TopAppBar />
                                 <Outlet />
+                                <BottomBar />
                                 <Menu />
 
                             </> :
