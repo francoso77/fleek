@@ -8,7 +8,6 @@ import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemState from '../States/MensagemState'
 import BottomBar from './BottomBar'
-//import './Layout.css'
 import Menu from './Menu'
 import TopAppBar from './TopAppBar'
 

@@ -5,12 +5,13 @@ import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
+import Copyright from './Copyright';
 
-const Offset = styled( 'div' )( ( { theme } ) => theme.mixins.toolbar );
+const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
-export default function BottomBar () {
+export default function BottomBar() {
 
-  const {layoutState} = useContext(ContextoGlobal) as GlobalStateInterface
+  const { layoutState } = useContext(ContextoGlobal) as GlobalStateInterface
 
   return (
     <>
@@ -20,6 +21,7 @@ export default function BottomBar () {
           <Typography variant="h6">
             {layoutState.aliasDB}
           </Typography>
+          < Copyright sx={{ ml: '33%' }} />
         </Toolbar>
       </AppBar>
     </>

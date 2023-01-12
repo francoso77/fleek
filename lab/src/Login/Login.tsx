@@ -6,6 +6,7 @@ import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface'
 import { URL_SERVIDOR3002 } from '../Config/Setup'
 import ApiCls from '../Services/ApiCls'
 import MenuCls from '../Layout/MenuCls'
+import { MensagemTipo } from '../States/MensagemState'
 
 export default function Login() {
 
@@ -24,6 +25,7 @@ export default function Login() {
     })
 
     const GlobalContexto = (useContext(ContextoGlobal) as GlobalStateInterface)
+    const { mensagemState, setMensagemState } = useContext(ContextoGlobal) as GlobalStateInterface
 
     const logar = () => {
 
@@ -56,6 +58,16 @@ export default function Login() {
                 console.log('Usuário encontrato... Login OK!!')
             } else {
                 console.log('Usuário Não encontrato!!')
+
+                setMensagemState(
+                    {
+                        mensagem: 'Verifique Usuário / Senha',
+                        exibir: true,
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
+                    }
+                )
             }
         }).catch(erro => {
             console.log('Erro no Fetch....', erro)

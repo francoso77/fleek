@@ -31,7 +31,9 @@ export default class MenuCls {
       }
     } )
 
+    console.log(JSON.stringify(retorno))
     return retorno
+    
   }
 
   public get Menu (): Array<EstruturaMenuInterface> {

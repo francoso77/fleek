@@ -4,6 +4,7 @@ import { URL_SERVIDOR3002 } from '../Config/Setup';
 import { ContextoGlobal } from '../Contextos/ContextoGlobal';
 import { EscolasInterface } from '../Interfaces/EscolasInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
+import { MensagemTipo } from '../States/MensagemState';
 
 
 const TEMPO_PADRAO_DELAY: number = 500
@@ -33,7 +34,9 @@ export default function CadastroEscola() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Pesquisando dados da Escola...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Pesquisa',
+            modal: true
         })
 
         return new Promise((resolve, _reject) => {
@@ -70,7 +73,9 @@ export default function CadastroEscola() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Incluindo escola ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Inclusão',
+            modal: true
         })
 
         setTimeout(() => {
@@ -92,14 +97,18 @@ export default function CadastroEscola() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Escola cadastrada com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Cadastrado',
+                        modal: true
                     })
                 } else {
 
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao incluir Escola !!!',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
 
@@ -107,7 +116,9 @@ export default function CadastroEscola() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor. Não foi possível incluir Escola!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
 
@@ -120,7 +131,9 @@ export default function CadastroEscola() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Editando Escola ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Edição',
+            modal: true
         })
 
         setTimeout(() => {
@@ -144,14 +157,18 @@ export default function CadastroEscola() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Escola editada com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Editado',
+                        modal: true
                     })
 
                 } else {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao editar Escola !!!',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
 
@@ -160,7 +177,9 @@ export default function CadastroEscola() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível editar Escola!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -171,7 +190,9 @@ export default function CadastroEscola() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Excluindo Escola ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Exclusão',
+            modal: true
         })
 
         setTimeout(() => {
@@ -193,7 +214,9 @@ export default function CadastroEscola() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Escola excluída com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Excluído',
+                        modal: true
                     })
                     aposAtualizarDados()
 
@@ -201,7 +224,9 @@ export default function CadastroEscola() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao excluir Escola !!!',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
 
@@ -210,7 +235,9 @@ export default function CadastroEscola() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível excluir Escola!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -225,7 +252,9 @@ export default function CadastroEscola() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Pesquisando Escola ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Pesquisa',
+            modal: true
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3002.concat('/escolas?escola_like='.concat(pesquisa.nome))
@@ -241,14 +270,18 @@ export default function CadastroEscola() {
                     globalContexto.setMensagemState({
                         exibir: false,
                         mensagem: '',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.Warning,
+                        titulo: '',
+                        modal: false
                     })
                     return rs.json()
                 } else {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao pesquisar Escola!!! ',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
             }).then((DadosEscolas: Array<EscolasInterface>) => {
@@ -258,7 +291,9 @@ export default function CadastroEscola() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Escola!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
 

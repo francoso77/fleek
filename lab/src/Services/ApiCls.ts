@@ -1,6 +1,7 @@
 import React from "react";
 import { URL_API } from "../Config/Server";
-import { MensagemStateInterface } from "../Interfaces/MensagemStateInterface";
+import { MensagemStateInterface } from "../States/MensagemState";
+
 
 export default class ApiCls {
 

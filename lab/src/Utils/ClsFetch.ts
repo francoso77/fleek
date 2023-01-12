@@ -3,6 +3,7 @@ import { AcaoStateInterface } from "../Interfaces/AcaoStateInterface"
 import { FornecedoresInterface } from "../Interfaces/FornecedoresInterface"
 import { GlobalStateInterface } from "../Interfaces/GlobalStateInterface"
 import { PesquisaInterface } from "../Interfaces/PesquisaInterface"
+import { MensagemTipo } from "../States/MensagemState"
 
 const TEMPO_PADRAO_DELAY: number = 500
 
@@ -54,7 +55,13 @@ export default class ClsFetch {
             metodo = 'POST'
         }
 
-        globalContexto.setMensagemState({ exibir: true, mensagem: MSG1, tipo: 'processando' })
+        globalContexto.setMensagemState({ 
+            exibir: true, 
+            mensagem: MSG1, 
+            tipo: MensagemTipo.Warning,
+            titulo: 'Processando',
+            modal: true
+        })
 
         setTimeout(() => {
             fetch(URL_PESQUISA, {
@@ -82,14 +89,32 @@ export default class ClsFetch {
                             fornecedor: '',
                             cnpj: ''
                         })
-                        globalContexto.setMensagemState({ exibir: true, mensagem: 'Fornecedor '.concat(MSG3).concat(' com sucesso!!!'), tipo: 'aviso' })
+                        globalContexto.setMensagemState({ 
+                            exibir: true, 
+                            mensagem: 'Fornecedor '.concat(MSG3).concat(' com sucesso!!!'), 
+                            tipo: MensagemTipo.ok,
+                            titulo: 'Confirmação',
+                            modal: true
+                        })
                         
                     } else {
-                        globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
+                        globalContexto.setMensagemState({ 
+                            exibir: false, 
+                            mensagem: '', 
+                            tipo: MensagemTipo.Info,
+                            titulo: '',
+                            modal: false
+                        })
                         return rs.json()
                     }
                 } else {
-                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao '.concat(MSG2).concat(' Fornecedor!!! '), tipo: 'erro' })
+                    globalContexto.setMensagemState({ 
+                        exibir: true, 
+                        mensagem: 'Erro ao '.concat(MSG2).concat(' Fornecedor!!! '), 
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
+                    })
                 }
             }).then((DadosFornecedor) => {
                 
@@ -101,7 +126,13 @@ export default class ClsFetch {
                 }
                 
             }).catch((e) => {
-                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível '.concat(MSG2).concat(' Fornecedor!!!'), tipo: 'erro' })
+                globalContexto.setMensagemState({ 
+                    exibir: true, 
+                    mensagem: 'Erro no Servidor, Não foi possível '.concat(MSG2).concat(' Fornecedor!!!'), 
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
+                })
             })
         }, TEMPO_PADRAO_DELAY)
 

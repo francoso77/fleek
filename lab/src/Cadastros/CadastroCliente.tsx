@@ -6,6 +6,7 @@ import { AcaoStateInterface } from '../Interfaces/AcaoStateInterface';
 import { ClientesInterface } from '../Interfaces/ClientesInterface';
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface';
 import { PesquisaInterface } from '../Interfaces/PesquisaInterface';
+import { MensagemTipo } from '../States/MensagemState';
 
 const TEMPO_PADRAO_DELAY: number = 500
 
@@ -30,7 +31,9 @@ export default function CadastroCliente() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Pesquisando Cliente ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Pesquisa',
+            modal: true
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3004.concat('/clientes?cliente_like='.concat(pesquisa.nome))
@@ -45,14 +48,18 @@ export default function CadastroCliente() {
                     globalContexto.setMensagemState({
                         exibir: false,
                         mensagem: '',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.Info,
+                        titulo: '',
+                        modal: false
                     })
                     return rs.json()
                 } else {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao pesquisar Cliente!!! ',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
             }).then((DadosClientes: Array<ClientesInterface>) => {
@@ -62,7 +69,9 @@ export default function CadastroCliente() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
 
@@ -83,7 +92,9 @@ export default function CadastroCliente() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Pesquisando Cliente ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Pesquisa',
+            modal: true
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3004.concat('/clientes/'.concat(idCliente.toString()))
@@ -95,10 +106,22 @@ export default function CadastroCliente() {
             }).then(rs => {
 
                 if (rs.ok) {
-                    globalContexto.setMensagemState({ exibir: false, mensagem: '', tipo: 'aviso' })
+                    globalContexto.setMensagemState({
+                        exibir: false,
+                        mensagem: '',
+                        tipo: MensagemTipo.Info,
+                        titulo: '',
+                        modal: false
+                    })
                     return rs.json()
                 } else {
-                    globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro ao pesquisar Cliente!!! ', tipo: 'erro' })
+                    globalContexto.setMensagemState({
+                        exibir: true,
+                        mensagem: 'Erro ao pesquisar Cliente!!! ',
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
+                    })
                 }
             }).then((DadosClientes) => {
 
@@ -106,7 +129,13 @@ export default function CadastroCliente() {
                 setAcaoState({ acao: acao })
 
             }).catch((e) => {
-                globalContexto.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!', tipo: 'erro' })
+                globalContexto.setMensagemState({
+                    exibir: true,
+                    mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!',
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
+                })
             })
 
         }, TEMPO_PADRAO_DELAY)
@@ -116,7 +145,9 @@ export default function CadastroCliente() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Editando Cliente ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Editando',
+            modal: true
         })
 
         setTimeout(() => {
@@ -138,13 +169,17 @@ export default function CadastroCliente() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Cliente editado com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Editado',
+                        modal: true
                     })
                 } else {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao editar Cliente !!!',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
 
@@ -153,7 +188,9 @@ export default function CadastroCliente() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível editar Cliente!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -163,7 +200,9 @@ export default function CadastroCliente() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Excluindo Cliente ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Excluindo',
+            modal: true
         })
 
         setTimeout(() => {
@@ -184,15 +223,19 @@ export default function CadastroCliente() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Cliente excluído com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Excluído',
+                        modal: true
                     })
 
                 } else {
                     globalContexto.setMensagemState({
-                        exibir: true,
-                        mensagem: 'Erro ao excluir Cliente!!!',
-                        tipo: 'erro'
-                    })
+                         exibir: true,
+                         mensagem: 'Erro ao excluir Cliente!!!',
+                         tipo: MensagemTipo.Error,
+                         titulo: 'Erro',
+                         modal: true
+                     })
                 }
 
             }).catch(() => {
@@ -200,7 +243,10 @@ export default function CadastroCliente() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor, Não foi possível excluir Cliente!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
+                
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -210,7 +256,9 @@ export default function CadastroCliente() {
         globalContexto.setMensagemState({
             exibir: true,
             mensagem: 'Incluindo Cliente ...',
-            tipo: 'processando'
+            tipo: MensagemTipo.Warning,
+            titulo: 'Inclusão',
+            modal: true
         })
 
         setTimeout(() => {
@@ -231,14 +279,19 @@ export default function CadastroCliente() {
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Cliente cadastrado com sucesso.',
-                        tipo: 'aviso'
+                        tipo: MensagemTipo.ok,
+                        titulo: 'Incluído',
+                        modal: true
+                    
                     })
                 } else {
 
                     globalContexto.setMensagemState({
                         exibir: true,
                         mensagem: 'Erro ao incluir Cliente !!!',
-                        tipo: 'erro'
+                        tipo: MensagemTipo.Error,
+                        titulo: 'Erro',
+                        modal: true
                     })
                 }
 
@@ -246,7 +299,9 @@ export default function CadastroCliente() {
                 globalContexto.setMensagemState({
                     exibir: true,
                     mensagem: 'Erro no Servidor. Não foi possível incluir Cliente!!!',
-                    tipo: 'erro'
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true
                 })
             })
 
