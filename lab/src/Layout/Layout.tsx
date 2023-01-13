@@ -8,6 +8,7 @@ import useLayoutState from '../States/LayoutState'
 import useLoginState from '../States/LoginState'
 import useMensagemState from '../States/MensagemState'
 import BottomBar from './BottomBar'
+import Loading from './Loading'
 import Menu from './Menu'
 import TopAppBar from './TopAppBar'
 
@@ -20,7 +21,9 @@ export default function Layout() {
     const clearMensagem = () => {
         setMensagemState({ ...mensagemState, exibir: false })
     }
-
+    
+    
+    
     return (
         <>
             <ContextoGlobal.Provider value={{
@@ -36,16 +39,22 @@ export default function Layout() {
                 <>
                     <ThemeProvider theme={THEME}>
                         {loginState.logado ?
+                                                       
                             <>
                                 <Mensagem />
                                 <TopAppBar />
                                 <Outlet />
                                 <BottomBar />
                                 <Menu />
+                                <Loading/>
+                                
 
                             </> :
                             <>
+                                
+                                <Mensagem />
                                 <Login />
+                                <Loading/>
                             </>
                         }
                     </ThemeProvider>

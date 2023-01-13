@@ -24,6 +24,7 @@ export default class ApiCls {
         }
 
         setMensagemState({ ...mensagemState, mensagem: mensagem })
+        //setMensagemState({...mensagemState, loading: true, modal: true})
         /*
 // console.clear()
 console.log( url )

@@ -1,12 +1,19 @@
-import React, { useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import './Login.css'
-import { LoginInterface } from '../Interfaces/LoginInterface'
 import { ContextoGlobal } from '../Contextos/ContextoGlobal'
 import { GlobalStateInterface } from '../Interfaces/GlobalStateInterface'
 import { URL_SERVIDOR3002 } from '../Config/Setup'
 import ApiCls from '../Services/ApiCls'
 import MenuCls from '../Layout/MenuCls'
 import { MensagemTipo } from '../States/MensagemState'
+
+
+export interface LoginInterface {
+    usuario: string
+    senha: string
+    token: string
+    autorizado: boolean
+}
 
 export default function Login() {
 
@@ -24,8 +31,9 @@ export default function Login() {
         autorizado: false
     })
 
-    const GlobalContexto = (useContext(ContextoGlobal) as GlobalStateInterface)
     const { mensagemState, setMensagemState } = useContext(ContextoGlobal) as GlobalStateInterface
+    const { layoutState, setLayoutState } = useContext(ContextoGlobal) as GlobalStateInterface
+    const { setLoginState } = useContext(ContextoGlobal) as GlobalStateInterface
 
     const logar = () => {
 
@@ -34,43 +42,57 @@ export default function Login() {
         urlPesquisa = urlPesquisa.concat('&senha=')
         urlPesquisa = urlPesquisa.concat(usuarios.senha)
 
+       
+            setMensagemState({ ...mensagemState, loading: true })
+
+      
+
+
         fetch(urlPesquisa).then(rs => {
             return rs.json()
         }).then((dadosUsuarios: Array<LoginInterface>) => {
             if (dadosUsuarios.length > 0) {
-                GlobalContexto.setLoginState({
+                setLoginState({
                     logado: true,
                     nome: dadosUsuarios[0].usuario,
                     token: dadosUsuarios[0].token,
                     autorizado: dadosUsuarios[0].autorizado
                 })
-                clsApi.post<any>('/Usuario/AuthenticateUser', dados, 'Login', GlobalContexto.mensagemState, GlobalContexto.setMensagemState).then(rs => {
+
+
+                clsApi.post<any>('/Usuario/AuthenticateUser', dados, 'Login', mensagemState, setMensagemState).then(rs => {
 
                     const clsMenu = new MenuCls(rs.MenuDto)
 
-                    GlobalContexto.setLayoutState({ ...GlobalContexto.layoutState, opcoesMenu: clsMenu.Menu })
+                    setLayoutState({ ...layoutState, opcoesMenu: clsMenu.Menu })
 
                     console.log(JSON.stringify(clsMenu.Menu))
                 })
-                console.log('usuario: ', dadosUsuarios[0].usuario)
-                console.log('senha: ', dadosUsuarios[0].senha)
-                console.log('autorizado: ', dadosUsuarios[0].autorizado)
-                console.log('Usuário encontrato... Login OK!!')
+       
             } else {
-                console.log('Usuário Não encontrato!!')
-
                 setMensagemState(
                     {
                         mensagem: 'Verifique Usuário / Senha',
                         exibir: true,
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading: false
                     }
                 )
             }
         }).catch(erro => {
-            console.log('Erro no Fetch....', erro)
+  
+            setMensagemState(
+                {
+                    mensagem: 'Erro de conexão com o Servidor',
+                    exibir: true,
+                    tipo: MensagemTipo.Error,
+                    titulo: 'Erro Servidor',
+                    modal: true,
+                    loading: false
+                }
+            )
         })
     }
 
@@ -87,7 +109,13 @@ export default function Login() {
             <input type="button" value="Login" id='btLogin'
                 onClick={logar} />
             <input type="button" value="Logout" id='btLogout'
-                onClick={() => GlobalContexto.setLoginState({ logado: false, nome: '', token: '', autorizado: false })} />
+                onClick={() => setLoginState({
+                    logado: false,
+                    nome: '',
+                    token: '',
+                    autorizado: false
+                })} />
+
         </>
     )
 

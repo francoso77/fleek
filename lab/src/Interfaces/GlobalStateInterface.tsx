@@ -1,7 +1,8 @@
 import React from 'react'
 import { LayoutStateInterface } from '../States/LayoutState'
+import { LoginStateInterface } from '../States/LoginState'
 import { MensagemStateInterface } from '../States/MensagemState'
-import { LoginStateInterface } from './LoginStateInterface'
+
 
 
 export interface GlobalStateInterface {

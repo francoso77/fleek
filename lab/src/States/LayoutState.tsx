@@ -7,6 +7,7 @@ export interface LayoutStateInterface {
   versaoCompleta: string
   exibirMenu: boolean
   opcoesMenu: Array<EstruturaMenuInterface>
+  
 }
 
 export default function useLayoutState () {
@@ -16,7 +17,8 @@ export default function useLayoutState () {
       aliasDB: 'Mockado',
       versaoCompleta: '',
       exibirMenu: false,
-      opcoesMenu: []
+      opcoesMenu: [],
+      
     } )
 
   return { layoutState, setLayoutState }

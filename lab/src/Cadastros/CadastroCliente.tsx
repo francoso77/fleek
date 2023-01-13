@@ -33,7 +33,8 @@ export default function CadastroCliente() {
             mensagem: 'Pesquisando Cliente ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Pesquisa',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3004.concat('/clientes?cliente_like='.concat(pesquisa.nome))
@@ -50,7 +51,8 @@ export default function CadastroCliente() {
                         mensagem: '',
                         tipo: MensagemTipo.Info,
                         titulo: '',
-                        modal: false
+                        modal: false,
+                        loading:false
                     })
                     return rs.json()
                 } else {
@@ -59,7 +61,8 @@ export default function CadastroCliente() {
                         mensagem: 'Erro ao pesquisar Cliente!!! ',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
             }).then((DadosClientes: Array<ClientesInterface>) => {
@@ -71,7 +74,8 @@ export default function CadastroCliente() {
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
 
@@ -94,7 +98,8 @@ export default function CadastroCliente() {
             mensagem: 'Pesquisando Cliente ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Pesquisa',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3004.concat('/clientes/'.concat(idCliente.toString()))
@@ -111,7 +116,8 @@ export default function CadastroCliente() {
                         mensagem: '',
                         tipo: MensagemTipo.Info,
                         titulo: '',
-                        modal: false
+                        modal: false,
+                        loading:false
                     })
                     return rs.json()
                 } else {
@@ -120,7 +126,8 @@ export default function CadastroCliente() {
                         mensagem: 'Erro ao pesquisar Cliente!!! ',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
             }).then((DadosClientes) => {
@@ -134,7 +141,8 @@ export default function CadastroCliente() {
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Cliente!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
 
@@ -147,7 +155,8 @@ export default function CadastroCliente() {
             mensagem: 'Editando Cliente ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Editando',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -171,7 +180,8 @@ export default function CadastroCliente() {
                         mensagem: 'Cliente editado com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Editado',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 } else {
                     globalContexto.setMensagemState({
@@ -179,7 +189,8 @@ export default function CadastroCliente() {
                         mensagem: 'Erro ao editar Cliente !!!',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
 
@@ -190,7 +201,8 @@ export default function CadastroCliente() {
                     mensagem: 'Erro no Servidor, Não foi possível editar Cliente!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -202,7 +214,8 @@ export default function CadastroCliente() {
             mensagem: 'Excluindo Cliente ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Excluindo',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -225,7 +238,8 @@ export default function CadastroCliente() {
                         mensagem: 'Cliente excluído com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Excluído',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
 
                 } else {
@@ -234,7 +248,8 @@ export default function CadastroCliente() {
                          mensagem: 'Erro ao excluir Cliente!!!',
                          tipo: MensagemTipo.Error,
                          titulo: 'Erro',
-                         modal: true
+                         modal: true,
+                         loading:false
                      })
                 }
 
@@ -245,7 +260,8 @@ export default function CadastroCliente() {
                     mensagem: 'Erro no Servidor, Não foi possível excluir Cliente!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 
                 })
             })
@@ -258,7 +274,8 @@ export default function CadastroCliente() {
             mensagem: 'Incluindo Cliente ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Inclusão',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -281,7 +298,8 @@ export default function CadastroCliente() {
                         mensagem: 'Cliente cadastrado com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Incluído',
-                        modal: true
+                        modal: true,
+                        loading:false
                     
                     })
                 } else {
@@ -291,7 +309,8 @@ export default function CadastroCliente() {
                         mensagem: 'Erro ao incluir Cliente !!!',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
 
@@ -301,7 +320,8 @@ export default function CadastroCliente() {
                     mensagem: 'Erro no Servidor. Não foi possível incluir Cliente!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
 

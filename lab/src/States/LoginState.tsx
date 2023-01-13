@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { LoginStateInterface } from "../Interfaces/LoginStateInterface";
 
+export interface LoginStateInterface {
+    nome: string
+    logado: boolean
+    token: string
+    autorizado: boolean
+}
 const loginStatePadrao = {
     nome:'',
     logado: false,

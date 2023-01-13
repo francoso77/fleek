@@ -60,7 +60,8 @@ export default class ClsFetch {
             mensagem: MSG1, 
             tipo: MensagemTipo.Warning,
             titulo: 'Processando',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -94,7 +95,8 @@ export default class ClsFetch {
                             mensagem: 'Fornecedor '.concat(MSG3).concat(' com sucesso!!!'), 
                             tipo: MensagemTipo.ok,
                             titulo: 'Confirmação',
-                            modal: true
+                            modal: true,
+                            loading:false
                         })
                         
                     } else {
@@ -103,7 +105,8 @@ export default class ClsFetch {
                             mensagem: '', 
                             tipo: MensagemTipo.Info,
                             titulo: '',
-                            modal: false
+                            modal: false,
+                            loading:false
                         })
                         return rs.json()
                     }
@@ -113,7 +116,8 @@ export default class ClsFetch {
                         mensagem: 'Erro ao '.concat(MSG2).concat(' Fornecedor!!! '), 
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
             }).then((DadosFornecedor) => {
@@ -131,7 +135,8 @@ export default class ClsFetch {
                     mensagem: 'Erro no Servidor, Não foi possível '.concat(MSG2).concat(' Fornecedor!!!'), 
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
         }, TEMPO_PADRAO_DELAY)

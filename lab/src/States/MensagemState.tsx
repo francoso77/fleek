@@ -14,6 +14,7 @@ export interface MensagemStateInterface {
   mensagem: string
   tipo: AlertColor
   modal: boolean
+  loading: boolean
 }
 
 export const MensagemStatePadrao: MensagemStateInterface = {
@@ -21,7 +22,8 @@ export const MensagemStatePadrao: MensagemStateInterface = {
   titulo: '',
   mensagem: 'MENSAGEM A SER EXIBIDA',
   tipo: MensagemTipo.Info,
-  modal: false
+  modal: false,
+  loading: false
 }
 
 export default function useMensagemState () {

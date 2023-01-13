@@ -36,7 +36,8 @@ export default function CadastroEscola() {
             mensagem: 'Pesquisando dados da Escola...',
             tipo: MensagemTipo.Warning,
             titulo: 'Pesquisa',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         return new Promise((resolve, _reject) => {
@@ -75,7 +76,8 @@ export default function CadastroEscola() {
             mensagem: 'Incluindo escola ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Inclusão',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -99,7 +101,8 @@ export default function CadastroEscola() {
                         mensagem: 'Escola cadastrada com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Cadastrado',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 } else {
 
@@ -108,7 +111,8 @@ export default function CadastroEscola() {
                         mensagem: 'Erro ao incluir Escola !!!',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
 
@@ -118,7 +122,8 @@ export default function CadastroEscola() {
                     mensagem: 'Erro no Servidor. Não foi possível incluir Escola!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
 
@@ -133,7 +138,8 @@ export default function CadastroEscola() {
             mensagem: 'Editando Escola ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Edição',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -159,7 +165,8 @@ export default function CadastroEscola() {
                         mensagem: 'Escola editada com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Editado',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
 
                 } else {
@@ -168,7 +175,8 @@ export default function CadastroEscola() {
                         mensagem: 'Erro ao editar Escola !!!',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
 
@@ -179,7 +187,8 @@ export default function CadastroEscola() {
                     mensagem: 'Erro no Servidor, Não foi possível editar Escola!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -192,7 +201,8 @@ export default function CadastroEscola() {
             mensagem: 'Excluindo Escola ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Exclusão',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         setTimeout(() => {
@@ -216,7 +226,8 @@ export default function CadastroEscola() {
                         mensagem: 'Escola excluída com sucesso.',
                         tipo: MensagemTipo.ok,
                         titulo: 'Excluído',
-                        modal: true
+                        modal: false,
+                        loading:false
                     })
                     aposAtualizarDados()
 
@@ -226,7 +237,8 @@ export default function CadastroEscola() {
                         mensagem: 'Erro ao excluir Escola !!!',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
 
@@ -237,7 +249,8 @@ export default function CadastroEscola() {
                     mensagem: 'Erro no Servidor, Não foi possível excluir Escola!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
         }, TEMPO_PADRAO_DELAY);
@@ -254,7 +267,8 @@ export default function CadastroEscola() {
             mensagem: 'Pesquisando Escola ...',
             tipo: MensagemTipo.Warning,
             titulo: 'Pesquisa',
-            modal: true
+            modal: false,
+            loading:false
         })
 
         const URL_PESQUISA: string = URL_SERVIDOR3002.concat('/escolas?escola_like='.concat(pesquisa.nome))
@@ -272,7 +286,8 @@ export default function CadastroEscola() {
                         mensagem: '',
                         tipo: MensagemTipo.Warning,
                         titulo: '',
-                        modal: false
+                        modal: false,
+                        loading:false
                     })
                     return rs.json()
                 } else {
@@ -281,7 +296,8 @@ export default function CadastroEscola() {
                         mensagem: 'Erro ao pesquisar Escola!!! ',
                         tipo: MensagemTipo.Error,
                         titulo: 'Erro',
-                        modal: true
+                        modal: true,
+                        loading:false
                     })
                 }
             }).then((DadosEscolas: Array<EscolasInterface>) => {
@@ -293,7 +309,8 @@ export default function CadastroEscola() {
                     mensagem: 'Erro no Servidor, Não foi possível pesquisar Escola!!!',
                     tipo: MensagemTipo.Error,
                     titulo: 'Erro Servidor',
-                    modal: true
+                    modal: true,
+                    loading:false
                 })
             })
 
