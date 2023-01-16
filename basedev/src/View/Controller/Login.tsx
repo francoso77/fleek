@@ -8,7 +8,6 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Copyright from '../../Layout/Copyright';
-import { MensagemTipo } from '../../GlobalStates/MensagemState';
 import InputText from '../../Componentes/InputText';
 import { Paper, Switch } from '@mui/material';
 
@@ -46,7 +45,9 @@ export default function Login() {
             GlobalContexto.setLoginState({ ...GlobalContexto.loginState, logado: true })
             GlobalContexto.setLayoutState({ ...GlobalContexto.layoutState, opcoesMenu: clsMenu.Menu })
       
-            console.log(JSON.stringify(clsMenu.Menu))
+            //console.log(JSON.stringify(clsMenu.Menu))
+
+            
           })
         }
          /*   if (rs.token && rs.token.length > 0) {
