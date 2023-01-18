@@ -1,6 +1,5 @@
-import { MensagemStateInterface } from "../GlobalStates/MensagemState"
-
 import { URL_API } from '../Config/Server'
+import { MensagemStateInterface } from '../GlobalStates/MensagemState'
 
 export default class ApiCls {
 
@@ -23,7 +22,15 @@ export default class ApiCls {
       body: JSON.stringify( body )
     }
 
-    setMensagemState( { ...mensagemState, mensagem: mensagem } )
+    //setMensagemState( { ...mensagemState, mensagem: mensagem } )
+    setMensagemState({
+      ...mensagemState,
+      exibir: true,
+      mensagem: '',
+      tipo:'info' ,
+      modal: true,
+      loading: true
+  })
 
     /*
 

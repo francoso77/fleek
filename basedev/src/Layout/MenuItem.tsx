@@ -1,15 +1,16 @@
-import { Divider, Icon, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
+import { Collapse, Divider, Icon, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ContextoGlobal, ContextoGlobalInterface } from '../GlobalStates/ContextoGlobal'
 import { EstruturaMenuInterface } from './MenuCls'
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import MenuItemFilhos from './MenuItemFilhos'
+
 
 interface PropsInterface {
-    menu: EstruturaMenuInterface
+    menu: EstruturaMenuInterface,
 }
+
 
 export default function MenuItem({ menu }: PropsInterface) {
 
@@ -20,7 +21,6 @@ export default function MenuItem({ menu }: PropsInterface) {
     const [openSubMenu, setOpenSubMenu] = useState(false)
 
     const handleClickSubMenu = (oque: any) => {
-        console.log('handleClickSubMenu MenuItem')
         setOpenSubMenu(!openSubMenu)
     }
 
@@ -33,7 +33,7 @@ export default function MenuItem({ menu }: PropsInterface) {
         return (
             <ListItemButton onClick={() => irPara(menu.path)}>
                 <ListItemIcon>
-                    <Icon>{menu.icon}</Icon>
+                <Icon sx={openSubMenu ? { marginLeft: 3 }: { marginLeft: 0 }}>{menu.icon}</Icon>
                 </ListItemIcon>
                 <ListItemText primary={menu.descricao} />
             </ListItemButton>
@@ -42,8 +42,8 @@ export default function MenuItem({ menu }: PropsInterface) {
         return (
             <>
                 <ListItemButton onClick={handleClickSubMenu}>
-                    <ListItemIcon>
-                        <Icon>{menu.icon}</Icon>
+                    <ListItemIcon >
+                        <Icon sx={{ marginLeft: 3 }}>{menu.icon}</Icon>
                     </ListItemIcon>
                     <ListItemText primary={menu.descricao} />
                     {openSubMenu ? <ExpandLess /> : <ExpandMore />}
@@ -51,8 +51,14 @@ export default function MenuItem({ menu }: PropsInterface) {
 
                 {
                     menu.filhos.map((menu, index) =>
-                        <MenuItemFilhos openSubMenu={openSubMenu} setOpenSubMenu={setOpenSubMenu} key={index} menu={menu} />)
-                }
+                        
+                        <Collapse in={openSubMenu} timeout="auto" unmountOnExit key={index}>
+                            <List component="div" disablePadding>
+                                <MenuItem menu={menu} />
+                            </List>
+                        </Collapse>
+
+                    )}
                 <Divider />
             </>
         )

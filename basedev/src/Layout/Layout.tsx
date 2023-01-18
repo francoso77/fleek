@@ -18,7 +18,6 @@ export default function Layout() {
     const { loginState, setLoginState } = useLoginState()
     const { mensagemState, setMensagemState } = useMensagemState()
 
-
     return (
         <>
             <ContextoGlobal.Provider value={{

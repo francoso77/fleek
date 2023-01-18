@@ -19,25 +19,30 @@ const settings = ['Perfil', 'Conta', 'Dashboard', 'Logout'];
 
 
 export default function TopAppBar() {
+    
+    const { layoutState, setLayoutState } = React.useContext(ContextoGlobal) as ContextoGlobalInterface
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
+    const { mensagemState, setMensagemState } = React.useContext(ContextoGlobal) as ContextoGlobalInterface
+    
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElUser(event.currentTarget);
     };
-
+    
     const handleCloseUserMenu = () => {
         setAnchorElUser(null);
     };
-
-    const { layoutState, setLayoutState } = React.useContext(ContextoGlobal) as ContextoGlobalInterface
-
+    
     const toggleDrawer = () => {
         setLayoutState({ ...layoutState, exibirMenu: !layoutState.exibirMenu })
     };
 
+    const fecharLoading= () =>{
+        setMensagemState({...mensagemState, exibir: false })
+    }
+    
     return (
         <>
-            <AppBar>
+            <AppBar onLoad={fecharLoading}>
                 <Toolbar>
                     <IconButton
                         color="secondary"

@@ -21,6 +21,9 @@ export default function Login() {
 
     const GlobalContexto = (useContext(ContextoGlobal) as ContextoGlobalInterface)
 
+
+    const {mensagemState, setMensagemState} = useContext(ContextoGlobal) as ContextoGlobalInterface
+
     const [usuarioState, setUsuarioState] = useState<LoginInterface>({ login: '', senha: '' })
 
     const [exibirSenhaState, setExibirSenhaState] = useState(false)
@@ -38,6 +41,7 @@ export default function Login() {
 
     const logar = () => {
 
+
         clsApi.post<any>('/Usuario/AuthenticateUser', dados, 'Login', GlobalContexto.mensagemState, GlobalContexto.setMensagemState).then(rs => {
 
             const clsMenu = new MenuCls(rs.MenuDto)
@@ -45,8 +49,6 @@ export default function Login() {
             GlobalContexto.setLoginState({ ...GlobalContexto.loginState, logado: true })
             GlobalContexto.setLayoutState({ ...GlobalContexto.layoutState, opcoesMenu: clsMenu.Menu })
       
-            //console.log(JSON.stringify(clsMenu.Menu))
-
             
           })
         }

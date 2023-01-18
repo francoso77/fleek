@@ -51,7 +51,7 @@
         },
         {
             "id": "Sprints",
-            "parentId": "Principal",
+            "parentId": "Cadastros",
             "descricao": "Sprints",
             "icon": "add_to_queue",
             "path": ""
