@@ -9,10 +9,11 @@ import ExpandMore from '@mui/icons-material/ExpandMore';
 
 interface PropsInterface {
     menu: EstruturaMenuInterface,
-}
+    deslocamento: number
+}   
 
 
-export default function MenuItem({ menu }: PropsInterface) {
+export default function MenuItem({ menu, deslocamento }: PropsInterface) {
 
     const navigate = useNavigate()
 
@@ -33,9 +34,9 @@ export default function MenuItem({ menu }: PropsInterface) {
         return (
             <ListItemButton onClick={() => irPara(menu.path)}>
                 <ListItemIcon>
-                <Icon sx={openSubMenu ? { marginLeft: 3 }: { marginLeft: 0 }}>{menu.icon}</Icon>
+                <Icon sx={{ textAlign: 'center', marginLeft: deslocamento }}>{menu.icon}</Icon>
                 </ListItemIcon>
-                <ListItemText primary={menu.descricao} />
+                <ListItemText sx={{marginLeft: deslocamento -2}} primary={menu.descricao} />
             </ListItemButton>
         )
     } else {
@@ -43,9 +44,9 @@ export default function MenuItem({ menu }: PropsInterface) {
             <>
                 <ListItemButton onClick={handleClickSubMenu}>
                     <ListItemIcon >
-                        <Icon sx={{ marginLeft: 3 }}>{menu.icon}</Icon>
+                        <Icon sx={{marginLeft: deslocamento }}>{menu.icon}</Icon>
                     </ListItemIcon>
-                    <ListItemText primary={menu.descricao} />
+                    <ListItemText sx={{marginLeft: deslocamento -2}} primary={menu.descricao} />
                     {openSubMenu ? <ExpandLess /> : <ExpandMore />}
                 </ListItemButton>
 
@@ -54,7 +55,7 @@ export default function MenuItem({ menu }: PropsInterface) {
                         
                         <Collapse in={openSubMenu} timeout="auto" unmountOnExit key={index}>
                             <List component="div" disablePadding>
-                                <MenuItem menu={menu} />
+                                <MenuItem menu={menu} deslocamento={deslocamento + 2}/>
                             </List>
                         </Collapse>
 

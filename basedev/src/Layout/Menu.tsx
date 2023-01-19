@@ -4,7 +4,7 @@ import { ContextoGlobal, ContextoGlobalInterface } from '../GlobalStates/Context
 import { Box, Drawer, List, Toolbar } from '@mui/material';
 import { EstruturaMenuInterface } from "./MenuCls";
 import MenuItem from './MenuItem';
-import React from "react";
+
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
@@ -34,7 +34,7 @@ export default function Menu() {
                         aria-labelledby="nested-list-subheader"
                     >
                         {layoutState.opcoesMenu.map((menu: EstruturaMenuInterface, indice: number) =>
-                            <MenuItem key={indice} menu={menu}/>
+                            <MenuItem key={indice} menu={menu} deslocamento={0}/>
                         )}
                     </List>
                     <Offset />
