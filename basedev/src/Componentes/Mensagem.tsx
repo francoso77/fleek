@@ -30,7 +30,7 @@ export default function Mensagem() {
               severity={mensagemState.tipo}
               sx={{
                 '& .MuiAlert-icon': {
-                  fontSize: 50
+                  fontSize: 35
                 }
               }}>
 
