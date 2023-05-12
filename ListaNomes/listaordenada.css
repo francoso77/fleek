@@ -1,0 +1,12 @@
+.quebraDeLinha {
+    display: block;
+    margin: 5px 5px 5px 5px;
+}
+
+.btn-incluir {
+    padding: 10px;
+    margin: 5px 5px 5px 5px;
+    background-color: blue;
+    color: aliceblue;
+    border-radius: 5px;
+}
