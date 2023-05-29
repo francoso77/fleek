@@ -6,6 +6,6 @@ cliente = {
     nome: 'Frank Alves dos Santos',
     endereco: 'Minas Gerais',
     profissao: 'Full Stack Developer',
-    idade: 21
+    idade: 46
 }
 console.log(cliente)

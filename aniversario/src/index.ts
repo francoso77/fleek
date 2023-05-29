@@ -38,14 +38,12 @@ console.log('dt1 é uma data válida: ', dt1.setLocale('pt-br').toFormat(" dd 'D
 console.log('diferença entre dt2: ', dt2.year + ' e dt1', dt1.year + ' é de: ',(dt1.diff(dt2, 'year').years.toLocaleString('pt-br')))
 console.log('data 2 usando o diffnow: ', dt2.diffNow())*/
 
-try
-{
-    let dtAniversario: DateTime = DateTime.local(2022, 4, 7)
+try {
+    let dtAniversario: DateTime = DateTime.local(2023, 4, 7)
     let apuraTempos: ClsDatasExtenso = new ClsDatasExtenso
     apuraTempos.calcularIdade(dtAniversario)
     apuraTempos.dataExtenso(dtAniversario)
 
-} catch (Erro)
-{
-    console.log ('Erro na exucução do programa', Erro)
+} catch (Erro) {
+    console.log('Erro na exucução do programa', Erro)
 }

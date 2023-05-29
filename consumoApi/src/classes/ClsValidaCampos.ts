@@ -57,9 +57,9 @@ export default class ClsValidaCampo {
             return false
         }
         else {
-            _eCEP ? this.verificaCEP (_eCEP) : false
+            _eCEP ? this.verificaCEP(_eCEP) : false
             return expCEP.test(_eCEP) ? true : false
-        
+
         }
     }
 
@@ -69,12 +69,10 @@ export default class ClsValidaCampo {
      * @returns Retorna se o campo UF está correto
      */
     public eUF(_eUF: string): boolean {
-        if (this.campoVazio(_eUF) == true)
-        {
+        if (this.campoVazio(_eUF) == true) {
             return false
         }
-        else
-        {
+        else {
             let aux_uf: string = _eUF.toUpperCase()
             if (!arrUF.includes(aux_uf) || expUF.test(_eUF) == false) {
                 return false
@@ -91,12 +89,10 @@ export default class ClsValidaCampo {
      * @returns Retorna se o campo CPF está correto
      */
     public eCPF(_eCPF: string): boolean {
-        if (this.campoVazio(_eCPF) == true)
-        {
+        if (this.campoVazio(_eCPF) == true) {
             return false
         }
-        else
-        {
+        else {
             return this.validaCPF(_eCPF) && expCPF.test(_eCPF) ? true : false
         }
     }
@@ -107,12 +103,10 @@ export default class ClsValidaCampo {
      * @returns Retorna se o campo CNPJ está correto
      */
     public eCNPJ(_eCNPJ: string): boolean {
-        if (this.campoVazio(_eCNPJ) == true)
-        {
+        if (this.campoVazio(_eCNPJ) == true) {
             return false
         }
-        else
-        {
+        else {
             return this.validarCNPJ(_eCNPJ) && expCNPJ.test(_eCNPJ) ? true : false
         }
     }
@@ -123,12 +117,10 @@ export default class ClsValidaCampo {
      * @returns Retorna se o campo SEXO está correto
      */
     public eSEXO(_eSEXO: string): boolean {
-        if (this.campoVazio(_eSEXO) == true)
-        {
+        if (this.campoVazio(_eSEXO) == true) {
             return false
         }
-        else
-        {
+        else {
             if (!arrSEXO.includes(_eSEXO) || expSEXO.test(_eSEXO) == false) {
                 return false
             }
@@ -145,12 +137,10 @@ export default class ClsValidaCampo {
      */
     public eEMAIL(_eEMAIL: string): boolean {
 
-        if (this.campoVazio(_eEMAIL) == true)
-        {
+        if (this.campoVazio(_eEMAIL) == true) {
             return false
         }
-        else
-        {
+        else {
             return expEMAIL.test(_eEMAIL) ? true : false
         }
     }
@@ -161,12 +151,10 @@ export default class ClsValidaCampo {
      * @returns Retorna se é um número inteiro ou decimal correto
      */
     public eINTEIRO(_eINTEIRO: string): boolean {
-        if (this.campoVazio(_eINTEIRO) == true)
-        {
+        if (this.campoVazio(_eINTEIRO) == true) {
             return false
         }
-        else
-        {
+        else {
             return expINTEIRO.test(_eINTEIRO) ? true : false
         }
 
@@ -179,12 +167,10 @@ export default class ClsValidaCampo {
      */
     public ePERCENTUAL(_ePERCENTUAL: string): boolean {
 
-        if (this.campoVazio(_ePERCENTUAL) == true)
-        {
+        if (this.campoVazio(_ePERCENTUAL) == true) {
             return false
         }
-        else
-        {
+        else {
             return expPERCENTUAL.test(_ePERCENTUAL) ? true : false
         }
     }
@@ -297,35 +283,31 @@ export default class ClsValidaCampo {
     }
 
     private verificaCEP(_eCEP: string): void {
-        
+
         _eCEP = _eCEP.replace(/\-|\./g, '')
         let tmpURL = 'https://viacep.com.br/ws/'.concat(_eCEP).concat('/json/')
-               
-        axios.get(tmpURL).then(dados =>{
-            
-            if (dados.statusText == 'OK')
-            {
-                if (!dados.data.erro)
-                {
+
+        axios.get(tmpURL).then(dados => {
+
+            if (dados.statusText == 'OK') {
+                if (!dados.data.erro) {
                     console.log('O cep', dados.data.cep + ' está correto!')
 
                     let auxDADOS: string = JSON.stringify(dados.data)
-                    let mapDados = new Map<number, string> ()
+                    let mapDados = new Map<number, string>()
                     mapDados.set(1, auxDADOS)
                     console.log(auxDADOS)
                     console.log(mapDados.entries())
                 }
-                else
-                {
+                else {
                     console.log('A conexão é feita, mas o CEP é Invalido')
                 }
             }
-            else
-            {
+            else {
                 console.log('sem conexão')
             }
-            
-        }).catch (err => {
+
+        }).catch(err => {
             console.log('Erro na requisição do CEP: ', err.code)
         })
     }
