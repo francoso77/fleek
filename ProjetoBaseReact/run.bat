@@ -1,7 +1,7 @@
 @echo off
 cls
 
-cd C:\aulas\fsd0019\ProjetoBaseReact
+cd C:\dev\fleek\ProjetoBaseReact
 
 start cmd /k npm run start
 

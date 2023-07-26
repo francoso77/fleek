@@ -1,7 +1,8 @@
 import { validarCNPJ } from "./Utils/rotinas";
 
-function btValidar(id: string): number {
-    let idCNPJ: string = document.getElementById('id').value
+function btValidar(id: string) {
+    var idCNPJ: any = document.querySelector('#' + id)
+
 
     if (!validarCNPJ(idCNPJ)) {
         console.log('CNPJ incorreto!')

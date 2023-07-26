@@ -13,13 +13,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import SearchIcon from '@mui/icons-material/Search';
 import React from 'react';
 import StarIcon from '@mui/icons-material/Star';
+import { AcaoInterface } from '../../Interfaces/AcaoInterfaces';
 
 
 const TEMPO_REFRESH_TEMPORARIO = 500
-
-interface LocalStateInterface {
-  acao: 'incluindo' | 'excluindo' | 'pesquisando' | 'editando'
-}
 
 interface PesquisaInterface {
   nome: string
@@ -40,7 +37,7 @@ export default function Escola() {
 
   const globalContext = (useContext(ContextoGlobal) as ContextoGlobalInterface)
 
-  const [localState, setLocalState] = useState({ acao: 'pesquisando' })
+  const [localState, setLocalState] = useState<AcaoInterface>({ acao: 'pesquisando' })
 
   const [escola, setEscola] = useState<EscolaInterface>({
     cnpj: '',
@@ -385,7 +382,7 @@ export default function Escola() {
                   <InputText label="CNPJ" type="text" dados={escola} field="cnpj" setState={setEscola} disabled={localState.acao == 'excluindo' ? true : false} />
                 </Grid>
 
-                <Grid item xs={12} sm={2} mt={3} ml={10} sx={{ pl: { sm: 2 } }} borderRadius={3} border={1} borderColor={'lightgray'}>
+                <Grid item xs={12} sm={2} mt={3} ml={10} sx={{ padding: 1 }} borderRadius={3} border={1} borderColor={'lightgray'}>
                   <FormControl>
                     <FormLabel id="demo-controlled-radio-buttons-group">Tipo</FormLabel>
                     <RadioGroup
@@ -452,11 +449,11 @@ export default function Escola() {
                 <Grid item xs={12} sm={2} mt={3} ml={5} mb={3}>
 
                   <FormControlLabel control={
-                  <Switch 
-                  checked={veterinario} 
-                  onChange={handleChangeVeterinario}
-                  />} 
-                  label="Tem Veterinário?" />
+                    <Switch
+                      checked={veterinario}
+                      onChange={handleChangeVeterinario}
+                    />}
+                    label="Tem Veterinário?" />
                 </Grid>
               </>
             }

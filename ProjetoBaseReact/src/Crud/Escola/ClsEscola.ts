@@ -1,6 +1,6 @@
 import { URL_SERVIDOR } from "../../Config/Setup"
 import { ContextoGlobalInterface } from "../../Contextos/ContextoGlobal"
-import { EscolaInterface } from "../../Interfaces/EscolaInterfaces"
+import { AcaoInterface } from '../../Interfaces/AcaoInterfaces'
 
 const TEMPO_REFRESH_TEMPORARIO = 500
 
@@ -10,7 +10,7 @@ export default class ClsEscola {
     globalContext: ContextoGlobalInterface,
     idEscola: number,
     setEscola: React.Dispatch<React.SetStateAction<T>>,
-    setLocalState: React.Dispatch<React.SetStateAction<{ acao: string; }>>,
+    setLocalState: React.Dispatch<React.SetStateAction<AcaoInterface>>,
     acao: string
   ) {
     globalContext.setMensagemState({ exibir: true, mensagem: 'Pesquisando Escola', tipo: 'processando' })
@@ -38,7 +38,7 @@ export default class ClsEscola {
       }).then(rsEscola => {
 
         setEscola(rsEscola)
-        setLocalState({ acao: acao })
+        setLocalState(({ acao: 'pesquisando' }))
 
       }).catch(() => {
         globalContext.setMensagemState({ exibir: true, mensagem: 'Erro no Servidor. Não foi possível pesquisar Escola!!!', tipo: 'erro' })

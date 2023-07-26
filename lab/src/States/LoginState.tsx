@@ -7,16 +7,16 @@ export interface LoginStateInterface {
     autorizado: boolean
 }
 const loginStatePadrao = {
-    nome:'',
-    logado: false,
+    nome: 'Frank',
+    logado: true,
     token: '',
-    autorizado: false
+    autorizado: true
 }
 
-export default function useLoginState(){
+export default function useLoginState() {
 
-    const [loginState, setLoginState] = useState<LoginStateInterface>({...loginStatePadrao})
+    const [loginState, setLoginState] = useState<LoginStateInterface>({ ...loginStatePadrao })
 
 
-    return { loginState, setLoginState}
+    return { loginState, setLoginState }
 }
